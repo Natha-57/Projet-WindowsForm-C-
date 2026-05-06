@@ -4,7 +4,7 @@ dadadaddadadadadaadda
 
 ## Pour commencer : comment utiliser Git ?
 
-### - Ajouter les fichiers sur sa machine locale
+### 1] Ajouter les fichiers sur sa machine locale
 
 ```
 cd nom_dossier
