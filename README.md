@@ -4,12 +4,60 @@ dadadaddadadadadaadda
 
 ## Pour commencer : comment utiliser Git ?
 
-### 1] Ajouter les fichiers sur sa machine locale
+### Comment installer Git et clôner le dépôt sur sa machine locale ?
+
+1] Installer Git sur sa machine puis taper dans l'invite de commande :
 
 ```
-cd nom_dossier
+sudo apt install git
+```
+
+2] Configurer vos informations d'utilisateur :
+
+```
+git config --global user.name "[Prenom] [Nom]"
+git config --global user.email "[login]@unistra.fr"
+```
+
+3] Côner le dépôt SAE_2.4 sur sa machine locale :
+
+```
 git clone https://git.unistra.fr/nathan.weiss/sae_2.4.git
 ```
+
+Si toutes les étapes ont été respectées, vous avez maintenant un dossier `sae_2.4` sur votre machine qui contient tous les éléments du dépôt Git.
+
+### Comment envoyer son travail ?
+
+1] Ajouter tous les fichiers modifiés à la zone de préparation :
+
+```
+cd sae_2.4
+git add .
+```
+
+2] Crée un commit (une sauvegarde de son travail à un instant donné) : 
+
+```
+git commit -m "nom_commit"
+```
+
+`-m "nom_commit"` permet d’ajouter un message pour décrire ce qui a été modifié, il n'est pas obligatoire.
+
+3] Envoyer ses commits vers le dépôt distant pour le partager :
+
+```
+git push
+```
+
+###  Comment mettre à jour son clône ?
+
+```
+cd sae_2.4
+git pull origin main
+```
+
+Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite modifier un fichier dans celui-ci pour obtenir les mises à jours des autres commits.
 
 ### Integrate with your tools
 
