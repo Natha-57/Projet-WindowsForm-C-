@@ -2,21 +2,16 @@
 
 dadadaddadadadadaadda
 
-## Getting started
+## Pour commencer : comment utiliser Git ?
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Ajouter les fichiers sur sa machine locale
-
+### Ajouter les fichiers sur sa machine locale
 
 ```
 cd nom_dossier
 git clone https://git.unistra.fr/nathan.weiss/sae_2.4.git
 ```
 
-## Integrate with your tools
+### Integrate with your tools
 
 - [ ] [Set up project integrations](https://git.unistra.fr/nathan.weiss/sae_2.4/-/settings/integrations)
 
