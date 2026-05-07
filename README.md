@@ -1,26 +1,69 @@
 # SAE_2.4
-/////////////////////////////////////////////////////////ezjfhezufyhaeufheufhe_fedu_fheufhrufhezufhf
 
+## Pour commencer : comment utiliser Git ?
 
-## Getting started
+### Comment installer Git et clôner le dépôt sur sa machine locale ?
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+1] Installer Git sur sa machine puis taper dans l'invite de commande :
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.unistra.fr/nathan.weiss/sae_2.4.git
-git branch -M main
-git push -uf origin main
+```sh
+sudo apt install git
 ```
 
-## Integrate with your tools
+2] Configurer vos informations d'utilisateur :
+
+```sh
+git config --global user.name "[Prenom] [Nom]"
+git config --global user.email "[login]@unistra.fr"
+```
+
+3] Côner le dépôt SAE_2.4 sur sa machine locale :
+
+```sh
+git clone https://git.unistra.fr/nathan.weiss/sae_2.4.git
+```
+
+Si toutes les étapes ont été respectées, vous avez maintenant un dossier `sae_2.4` sur votre machine qui contient tous les éléments du dépôt Git.
+
+### Comment envoyer son travail ?
+
+1] Ajouter tous les fichiers modifiés à la zone de préparation :
+
+```sh
+cd sae_2.4
+git add .
+```
+
+On peut vérifier les dossiers/fichiers modifiés/ajoutés avec :
+
+```sh
+git status
+```
+
+2] Crée un commit (une sauvegarde de son travail à un instant donné) : 
+
+```sh
+git commit -m "nom_commit"
+```
+
+`-m "nom_commit"` permet d’ajouter un message pour décrire ce qui a été modifié, il n'est pas obligatoire.
+
+3] Envoyer ses commits vers le dépôt distant pour le partager :
+
+```sh
+git push
+```
+
+###  Comment mettre à jour son clône ?
+
+```sh
+cd sae_2.4
+git pull origin main
+```
+
+Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite modifier un fichier dans celui-ci pour obtenir les mises à jours des autres commits.
+
+### Integrate with your tools
 
 - [ ] [Set up project integrations](https://git.unistra.fr/nathan.weiss/sae_2.4/-/settings/integrations)
 
