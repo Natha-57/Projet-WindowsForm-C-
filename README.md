@@ -27,7 +27,27 @@ Si toutes les étapes ont été respectées, vous avez maintenant un dossier `sa
 
 ### Comment envoyer son travail ?
 
-1] Ajouter tous les fichiers modifiés à la zone de préparation :
+1] Pour commencer, il faut créer un fichier `.gitignore`
+
+Un fichier `.gitignor`e sert à indiquer à Git quels fichiers ou dossiers il ne doit pas prendre en compte.
+
+Dans un projet Visual Studio, le dossier `.vs` contient des fichiers temporaires et des paramètres locaux qui ne doivent pas être envoyés sur GitHub.
+
+On crée donc un fichier `.gitignore` pour éviter les erreurs et garder le dépôt propre :
+
+```sh
+echo .vs/ > .gitignore
+echo bin/ >> .gitignore
+echo obj/ >> .gitignore
+echo *.user >> .gitignore
+```
+On peut ensuite regarder le contenu du fichier `.gitignore` avec :
+
+```sh
+type .gitignore
+```
+
+2] Ajouter tous les fichiers modifiés à la zone de préparation :
 
 ```sh
 cd sae_2.4
@@ -40,7 +60,7 @@ On peut vérifier les dossiers/fichiers modifiés/ajoutés avec :
 git status
 ```
 
-2] Crée un commit (une sauvegarde de son travail à un instant donné) : 
+3] Crée un commit (une sauvegarde de son travail à un instant donné) : 
 
 ```sh
 git commit -m "nom_commit"
@@ -48,7 +68,7 @@ git commit -m "nom_commit"
 
 `-m "nom_commit"` permet d’ajouter un message pour décrire ce qui a été modifié, il n'est pas obligatoire.
 
-3] Envoyer ses commits vers le dépôt distant pour le partager :
+4] Envoyer ses commits vers le dépôt distant pour le partager :
 
 ```sh
 git push
@@ -134,5 +154,3 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
-
-OUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH
