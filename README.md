@@ -34,6 +34,12 @@ cd sae_2.4
 git add .
 ```
 
+On peut vérifier les dossiers/fichiers modifiés/ajoutés avec :
+
+```sh
+git status
+```
+
 2] Crée un commit (une sauvegarde de son travail à un instant donné) : 
 
 ```sh
