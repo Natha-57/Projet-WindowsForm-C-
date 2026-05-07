@@ -1,6 +1,6 @@
-﻿namespace TEST
+﻿namespace test2
 {
-    partial class Form1
+    partial class Form2
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Form2
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "Form2";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
