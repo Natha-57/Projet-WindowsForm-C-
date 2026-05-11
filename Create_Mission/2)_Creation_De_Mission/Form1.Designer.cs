@@ -29,6 +29,17 @@
         private void InitializeComponent()
         {
             this.grpNouvelleMission = new System.Windows.Forms.GroupBox();
+            this.lstMembres = new System.Windows.Forms.ListBox();
+            this.lstObj = new System.Windows.Forms.ListBox();
+            this.btValiderObjCapture = new System.Windows.Forms.Button();
+            this.btAjtObjCapture = new System.Windows.Forms.Button();
+            this.txtNbAliens = new System.Windows.Forms.TextBox();
+            this.cboAliens = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btValdierMembres = new System.Windows.Forms.Button();
+            this.btAjtMembres = new System.Windows.Forms.Button();
+            this.cboAjtMembre = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.lblNomMission = new System.Windows.Forms.Label();
             this.btValiderLaMission = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -53,22 +64,12 @@
             this.btValiderPlanete = new System.Windows.Forms.Button();
             this.cboNomPlanete = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.cboAjtMembre = new System.Windows.Forms.ComboBox();
-            this.btAjtMembres = new System.Windows.Forms.Button();
-            this.txtListeMembres = new System.Windows.Forms.TextBox();
-            this.btValdierMembres = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.cboAliens = new System.Windows.Forms.ComboBox();
-            this.txtNbAliens = new System.Windows.Forms.TextBox();
-            this.btAjtObjCapture = new System.Windows.Forms.Button();
-            this.btValiderObjCapture = new System.Windows.Forms.Button();
-            this.lstObj = new System.Windows.Forms.ListBox();
             this.grpNouvelleMission.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpNouvelleMission
             // 
+            this.grpNouvelleMission.Controls.Add(this.lstMembres);
             this.grpNouvelleMission.Controls.Add(this.lstObj);
             this.grpNouvelleMission.Controls.Add(this.btValiderObjCapture);
             this.grpNouvelleMission.Controls.Add(this.btAjtObjCapture);
@@ -76,7 +77,6 @@
             this.grpNouvelleMission.Controls.Add(this.cboAliens);
             this.grpNouvelleMission.Controls.Add(this.label15);
             this.grpNouvelleMission.Controls.Add(this.btValdierMembres);
-            this.grpNouvelleMission.Controls.Add(this.txtListeMembres);
             this.grpNouvelleMission.Controls.Add(this.btAjtMembres);
             this.grpNouvelleMission.Controls.Add(this.cboAjtMembre);
             this.grpNouvelleMission.Controls.Add(this.label14);
@@ -113,6 +113,118 @@
             this.grpNouvelleMission.TabIndex = 0;
             this.grpNouvelleMission.TabStop = false;
             this.grpNouvelleMission.Text = "Nouvelle mission";
+            // 
+            // lstMembres
+            // 
+            this.lstMembres.FormattingEnabled = true;
+            this.lstMembres.ItemHeight = 15;
+            this.lstMembres.Location = new System.Drawing.Point(34, 611);
+            this.lstMembres.Name = "lstMembres";
+            this.lstMembres.Size = new System.Drawing.Size(426, 94);
+            this.lstMembres.TabIndex = 36;
+            this.lstMembres.SelectedIndexChanged += new System.EventHandler(this.lstMembres_SelectedIndexChanged);
+            // 
+            // lstObj
+            // 
+            this.lstObj.FormattingEnabled = true;
+            this.lstObj.ItemHeight = 15;
+            this.lstObj.Location = new System.Drawing.Point(34, 771);
+            this.lstObj.Name = "lstObj";
+            this.lstObj.Size = new System.Drawing.Size(426, 94);
+            this.lstObj.TabIndex = 35;
+            this.lstObj.SelectedIndexChanged += new System.EventHandler(this.lstObj_SelectedIndexChanged);
+            // 
+            // btValiderObjCapture
+            // 
+            this.btValiderObjCapture.Location = new System.Drawing.Point(485, 799);
+            this.btValiderObjCapture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btValiderObjCapture.Name = "btValiderObjCapture";
+            this.btValiderObjCapture.Size = new System.Drawing.Size(126, 66);
+            this.btValiderObjCapture.TabIndex = 34;
+            this.btValiderObjCapture.Text = "Valider objectifs";
+            this.btValiderObjCapture.UseVisualStyleBackColor = true;
+            this.btValiderObjCapture.Click += new System.EventHandler(this.btValiderObjCapture_Click);
+            // 
+            // btAjtObjCapture
+            // 
+            this.btAjtObjCapture.Location = new System.Drawing.Point(485, 735);
+            this.btAjtObjCapture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btAjtObjCapture.Name = "btAjtObjCapture";
+            this.btAjtObjCapture.Size = new System.Drawing.Size(126, 34);
+            this.btAjtObjCapture.TabIndex = 32;
+            this.btAjtObjCapture.Text = "Ajouter";
+            this.btAjtObjCapture.UseVisualStyleBackColor = true;
+            this.btAjtObjCapture.Click += new System.EventHandler(this.btAjtObjCapture_Click);
+            // 
+            // txtNbAliens
+            // 
+            this.txtNbAliens.Location = new System.Drawing.Point(186, 742);
+            this.txtNbAliens.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNbAliens.Name = "txtNbAliens";
+            this.txtNbAliens.Size = new System.Drawing.Size(54, 21);
+            this.txtNbAliens.TabIndex = 31;
+            this.txtNbAliens.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNbAliens_KeyPress);
+            // 
+            // cboAliens
+            // 
+            this.cboAliens.FormattingEnabled = true;
+            this.cboAliens.Location = new System.Drawing.Point(36, 742);
+            this.cboAliens.Name = "cboAliens";
+            this.cboAliens.Size = new System.Drawing.Size(121, 23);
+            this.cboAliens.TabIndex = 30;
+            this.cboAliens.SelectedIndexChanged += new System.EventHandler(this.cboAliens_SelectedIndexChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(17, 708);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(138, 15);
+            this.label15.TabIndex = 29;
+            this.label15.Text = "5 - Objectifs de captures";
+            this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
+            // btValdierMembres
+            // 
+            this.btValdierMembres.Location = new System.Drawing.Point(485, 672);
+            this.btValdierMembres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btValdierMembres.Name = "btValdierMembres";
+            this.btValdierMembres.Size = new System.Drawing.Size(126, 26);
+            this.btValdierMembres.TabIndex = 28;
+            this.btValdierMembres.Text = "Valider membres";
+            this.btValdierMembres.UseVisualStyleBackColor = true;
+            this.btValdierMembres.Click += new System.EventHandler(this.btValdierMembres_Click);
+            // 
+            // btAjtMembres
+            // 
+            this.btAjtMembres.Location = new System.Drawing.Point(485, 571);
+            this.btAjtMembres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btAjtMembres.Name = "btAjtMembres";
+            this.btAjtMembres.Size = new System.Drawing.Size(126, 34);
+            this.btAjtMembres.TabIndex = 26;
+            this.btAjtMembres.Text = "Ajouter";
+            this.btAjtMembres.UseVisualStyleBackColor = true;
+            this.btAjtMembres.Click += new System.EventHandler(this.btAjtMembres_Click);
+            // 
+            // cboAjtMembre
+            // 
+            this.cboAjtMembre.FormattingEnabled = true;
+            this.cboAjtMembre.Location = new System.Drawing.Point(36, 578);
+            this.cboAjtMembre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboAjtMembre.Name = "cboAjtMembre";
+            this.cboAjtMembre.Size = new System.Drawing.Size(361, 23);
+            this.cboAjtMembre.TabIndex = 25;
+            this.cboAjtMembre.SelectedIndexChanged += new System.EventHandler(this.cboAjtMembre_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(17, 539);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(159, 15);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "4 - Affectation des membres";
+            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // lblNomMission
             // 
@@ -331,113 +443,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "1- Choix de la planète";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(17, 539);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(159, 15);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "4 - Affectation des membres";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
-            // 
-            // cboAjtMembre
-            // 
-            this.cboAjtMembre.FormattingEnabled = true;
-            this.cboAjtMembre.Location = new System.Drawing.Point(36, 578);
-            this.cboAjtMembre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboAjtMembre.Name = "cboAjtMembre";
-            this.cboAjtMembre.Size = new System.Drawing.Size(361, 23);
-            this.cboAjtMembre.TabIndex = 25;
-            this.cboAjtMembre.SelectedIndexChanged += new System.EventHandler(this.cboAjtMembre_SelectedIndexChanged);
-            // 
-            // btAjtMembres
-            // 
-            this.btAjtMembres.Location = new System.Drawing.Point(485, 571);
-            this.btAjtMembres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btAjtMembres.Name = "btAjtMembres";
-            this.btAjtMembres.Size = new System.Drawing.Size(126, 34);
-            this.btAjtMembres.TabIndex = 26;
-            this.btAjtMembres.Text = "Ajouter";
-            this.btAjtMembres.UseVisualStyleBackColor = true;
-            // 
-            // txtListeMembres
-            // 
-            this.txtListeMembres.Location = new System.Drawing.Point(36, 638);
-            this.txtListeMembres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtListeMembres.Name = "txtListeMembres";
-            this.txtListeMembres.Size = new System.Drawing.Size(575, 21);
-            this.txtListeMembres.TabIndex = 27;
-            // 
-            // btValdierMembres
-            // 
-            this.btValdierMembres.Location = new System.Drawing.Point(485, 672);
-            this.btValdierMembres.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btValdierMembres.Name = "btValdierMembres";
-            this.btValdierMembres.Size = new System.Drawing.Size(126, 26);
-            this.btValdierMembres.TabIndex = 28;
-            this.btValdierMembres.Text = "Valider membres";
-            this.btValdierMembres.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(17, 708);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(138, 15);
-            this.label15.TabIndex = 29;
-            this.label15.Text = "5 - Objectifs de captures";
-            this.label15.Click += new System.EventHandler(this.label15_Click);
-            // 
-            // cboAliens
-            // 
-            this.cboAliens.FormattingEnabled = true;
-            this.cboAliens.Location = new System.Drawing.Point(36, 742);
-            this.cboAliens.Name = "cboAliens";
-            this.cboAliens.Size = new System.Drawing.Size(121, 23);
-            this.cboAliens.TabIndex = 30;
-            this.cboAliens.SelectedIndexChanged += new System.EventHandler(this.cboAliens_SelectedIndexChanged);
-            // 
-            // txtNbAliens
-            // 
-            this.txtNbAliens.Location = new System.Drawing.Point(186, 742);
-            this.txtNbAliens.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtNbAliens.Name = "txtNbAliens";
-            this.txtNbAliens.Size = new System.Drawing.Size(54, 21);
-            this.txtNbAliens.TabIndex = 31;
-            this.txtNbAliens.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNbAliens_KeyPress);
-            // 
-            // btAjtObjCapture
-            // 
-            this.btAjtObjCapture.Location = new System.Drawing.Point(485, 735);
-            this.btAjtObjCapture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btAjtObjCapture.Name = "btAjtObjCapture";
-            this.btAjtObjCapture.Size = new System.Drawing.Size(126, 34);
-            this.btAjtObjCapture.TabIndex = 32;
-            this.btAjtObjCapture.Text = "Ajouter";
-            this.btAjtObjCapture.UseVisualStyleBackColor = true;
-            this.btAjtObjCapture.Click += new System.EventHandler(this.btAjtObjCapture_Click);
-            // 
-            // btValiderObjCapture
-            // 
-            this.btValiderObjCapture.Location = new System.Drawing.Point(485, 799);
-            this.btValiderObjCapture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btValiderObjCapture.Name = "btValiderObjCapture";
-            this.btValiderObjCapture.Size = new System.Drawing.Size(126, 66);
-            this.btValiderObjCapture.TabIndex = 34;
-            this.btValiderObjCapture.Text = "Valider objectifs";
-            this.btValiderObjCapture.UseVisualStyleBackColor = true;
-            this.btValiderObjCapture.Click += new System.EventHandler(this.btValiderObjCapture_Click);
-            // 
-            // lstObj
-            // 
-            this.lstObj.FormattingEnabled = true;
-            this.lstObj.ItemHeight = 15;
-            this.lstObj.Location = new System.Drawing.Point(34, 771);
-            this.lstObj.Name = "lstObj";
-            this.lstObj.Size = new System.Drawing.Size(426, 94);
-            this.lstObj.TabIndex = 35;
-            // 
             // FormCreationMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -476,7 +481,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtFeuilleDeRoute;
         private System.Windows.Forms.Button btValiderLaMission;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
@@ -485,7 +489,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cboAjtMembre;
         private System.Windows.Forms.Button btValdierMembres;
-        private System.Windows.Forms.TextBox txtListeMembres;
         private System.Windows.Forms.Button btAjtMembres;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtNbAliens;
@@ -493,6 +496,8 @@
         private System.Windows.Forms.Button btAjtObjCapture;
         private System.Windows.Forms.Button btValiderObjCapture;
         private System.Windows.Forms.ListBox lstObj;
+        private System.Windows.Forms.ListBox lstMembres;
+        private System.Windows.Forms.TextBox txtFeuilleDeRoute;
     }
 }
 
