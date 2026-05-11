@@ -19,11 +19,18 @@ namespace _2__Creation_De_Mission
         private SQLiteConnection cx;
         private DataSet ds;
         private SQLiteDataAdapter da;
+        private string nomPlanete;    
+        private int numeroMission;
 
 
         public FormCreationMission()
         {
             InitializeComponent();
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(800, 600);
+
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+        
 
             try
             {
@@ -36,6 +43,7 @@ namespace _2__Creation_De_Mission
             catch (SQLiteException er) { MessageBox.Show(er.Message); }
 
             ChargerPlanetes();
+            ChargerAliens();
 
             dateTimeDepart.Value = DateTime.Today;
             dateTimeRetour.Value = DateTime.Today.AddMonths(6);
@@ -84,6 +92,53 @@ namespace _2__Creation_De_Mission
             }
         }
 
+        private void ChargerMembres()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string sql = @"SELECT m.matricule,
+                             m.nom || ' ' || m.prenom || ' - ' ||
+                            CASE WHEN mil.matriculeMembre IS NOT NULL
+                            THEN 'Militaire : ' || mil.grade
+                            ELSE 'Civil : ' || c.Specialite
+                            END AS affichage
+                            FROM   Membre m
+                            LEFT JOIN Militaire mil ON mil.matriculeMembre = m.matricule
+                            LEFT JOIN Civil c   ON c.matriculeMembre = m.matricule
+                            ORDER BY m.nom, m.prenom";
+                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                cboAjtMembre.DataSource = dt;
+                cboAjtMembre.DisplayMember = "affichage";
+                cboAjtMembre.ValueMember = "matricule";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur chargement membres  : " + ex.Message);
+            }
+        }
+
+        private void ChargerAliens()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string sql = @"SELECT e.id,
+                             e.nom || ' - ' || e.couleur AS affichage
+                             FROM   Espece e
+                             JOIN   Ennemi en ON en.idEspece = e.id
+                             ORDER  BY e.nom";
+                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                cboAliens.DataSource = dt;
+                cboAliens.DisplayMember = "affichage";
+                cboAliens.ValueMember = "id";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur chargement aliens  : " + ex.Message);
+            }
+        }
+
         private void FormCreationMission_Load(object sender, EventArgs e)
         {
 
@@ -96,6 +151,7 @@ namespace _2__Creation_De_Mission
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
 
             if (cboNomPlanete.SelectedItem == null)
             {
@@ -110,7 +166,8 @@ namespace _2__Creation_De_Mission
             SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
             cmd.Parameters.AddWithValue("@planete", planete);
             int numero = Convert.ToInt32(cmd.ExecuteScalar());
-
+            this.nomPlanete = planete;
+            this.numeroMission = numero;
             lblNomMission.Text = $"Nom de la mission : {planete} - {numero}";
 
 
@@ -152,6 +209,66 @@ namespace _2__Creation_De_Mission
             {
                 e.Handled = true;
             }
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNbAliens_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = false;
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btValiderLaMission_Click(object sender, EventArgs e)
+        {
+            ChargerMembres();
+        }
+
+        private void cboAjtMembre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboAliens_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btAjtObjCapture_Click(object sender, EventArgs e)
+        {
+            if (cboAliens.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une espèce.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtNbAliens.Text))
+            {
+                MessageBox.Show("Veuillez saisir un nombre de captures.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string affichage = cboAliens.Text + " --> objectif de captures : " + txtNbAliens.Text;
+            lstObj.Items.Add(affichage);
+        }
+
+        private void btValiderObjCapture_Click(object sender, EventArgs e)
+        {
+          
         }
     }
 }
