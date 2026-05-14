@@ -16,7 +16,15 @@ namespace _2__Creation_De_Mission
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormCreationMission());
+
+            // Ouvre d'abord l'authentification
+            FormAuthentification fAuth = new FormAuthentification();
+            if (fAuth.ShowDialog() == DialogResult.OK)
+            {
+                // Authentification réussie → ouvre le formulaire de création
+                Application.Run(new FormCreationMission());
+            }
+            // Sinon l'application se ferme sans rien ouvrir
         }
     }
 }
