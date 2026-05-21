@@ -113,6 +113,7 @@
             this.grpNouvelleMission.TabIndex = 0;
             this.grpNouvelleMission.TabStop = false;
             this.grpNouvelleMission.Text = "Nouvelle mission";
+            this.grpNouvelleMission.Enter += new System.EventHandler(this.grpNouvelleMission_Enter);
             // 
             // lstMembres
             // 
@@ -129,7 +130,7 @@
             // 
             this.lstObj.FormattingEnabled = true;
             this.lstObj.ItemHeight = 29;
-            this.lstObj.Location = new System.Drawing.Point(50, 1092);
+            this.lstObj.Location = new System.Drawing.Point(50, 1106);
             this.lstObj.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.lstObj.Name = "lstObj";
             this.lstObj.Size = new System.Drawing.Size(624, 120);
@@ -149,7 +150,7 @@
             // 
             // btAjtObjCapture
             // 
-            this.btAjtObjCapture.Location = new System.Drawing.Point(714, 1042);
+            this.btAjtObjCapture.Location = new System.Drawing.Point(714, 1045);
             this.btAjtObjCapture.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btAjtObjCapture.Name = "btAjtObjCapture";
             this.btAjtObjCapture.Size = new System.Drawing.Size(185, 49);
@@ -190,7 +191,7 @@
             // 
             // btValdierMembres
             // 
-            this.btValdierMembres.Location = new System.Drawing.Point(714, 952);
+            this.btValdierMembres.Location = new System.Drawing.Point(714, 950);
             this.btValdierMembres.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btValdierMembres.Name = "btValdierMembres";
             this.btValdierMembres.Size = new System.Drawing.Size(185, 36);
@@ -201,7 +202,7 @@
             // 
             // btAjtMembres
             // 
-            this.btAjtMembres.Location = new System.Drawing.Point(714, 809);
+            this.btAjtMembres.Location = new System.Drawing.Point(714, 806);
             this.btAjtMembres.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.btAjtMembres.Name = "btAjtMembres";
             this.btAjtMembres.Size = new System.Drawing.Size(185, 49);
@@ -216,7 +217,7 @@
             this.cboAjtMembre.Location = new System.Drawing.Point(53, 818);
             this.cboAjtMembre.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.cboAjtMembre.Name = "cboAjtMembre";
-            this.cboAjtMembre.Size = new System.Drawing.Size(529, 37);
+            this.cboAjtMembre.Size = new System.Drawing.Size(621, 37);
             this.cboAjtMembre.TabIndex = 25;
             this.cboAjtMembre.SelectedIndexChanged += new System.EventHandler(this.cboAjtMembre_SelectedIndexChanged);
             // 
@@ -294,7 +295,7 @@
             this.dateTimeRetour.Location = new System.Drawing.Point(230, 340);
             this.dateTimeRetour.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.dateTimeRetour.Name = "dateTimeRetour";
-            this.dateTimeRetour.Size = new System.Drawing.Size(220, 35);
+            this.dateTimeRetour.Size = new System.Drawing.Size(363, 35);
             this.dateTimeRetour.TabIndex = 17;
             // 
             // dateTimeDepart
@@ -302,7 +303,7 @@
             this.dateTimeDepart.Location = new System.Drawing.Point(230, 283);
             this.dateTimeDepart.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.dateTimeDepart.Name = "dateTimeDepart";
-            this.dateTimeDepart.Size = new System.Drawing.Size(220, 35);
+            this.dateTimeDepart.Size = new System.Drawing.Size(363, 35);
             this.dateTimeDepart.TabIndex = 16;
             // 
             // cboChefDeMission
@@ -311,7 +312,7 @@
             this.cboChefDeMission.Location = new System.Drawing.Point(344, 160);
             this.cboChefDeMission.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.cboChefDeMission.Name = "cboChefDeMission";
-            this.cboChefDeMission.Size = new System.Drawing.Size(519, 37);
+            this.cboChefDeMission.Size = new System.Drawing.Size(359, 37);
             this.cboChefDeMission.TabIndex = 15;
             // 
             // txtBudget

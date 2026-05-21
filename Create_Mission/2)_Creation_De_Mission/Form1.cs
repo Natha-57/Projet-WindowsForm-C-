@@ -439,5 +439,10 @@ namespace _2__Creation_De_Mission
             MessageBox.Show("Membres validés !", "Succès",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void grpNouvelleMission_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
