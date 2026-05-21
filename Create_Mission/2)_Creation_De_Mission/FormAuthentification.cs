@@ -22,33 +22,41 @@ namespace _2__Creation_De_Mission
         {
             try
             {
-                string chaine = "Data Source=..\\..\\Stargate.db";
-                SQLiteConnection cx = new SQLiteConnection(chaine);
-                cx.Open();
-
-                string sql = "SELECT mdp FROM Admin WHERE login = @login";
-                SQLiteCommand cmd = new SQLiteCommand(sql, cx);
-                cmd.Parameters.AddWithValue("@login", txtLogin.Text);
-                string mdp = cmd.ExecuteScalar()?.ToString();
-
-                if (mdp != null && BCrypt.Net.BCrypt.Verify(txtMdp.Text, mdp))
+                string chaine = "Data Source=..\\..\\..\\..\\Fichiers Moodle\\Stargate.db";
+                using (SQLiteConnection cx = new SQLiteConnection(chaine))
                 {
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Login ou mot de passe incorrect.", "Accès refusé",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtMdp.Clear();
-                }
+                    cx.Open();
+                    string sql = "SELECT mdp FROM Admin WHERE login = @login";
+                    SQLiteCommand cmd = new SQLiteCommand(sql, cx);
+                    cmd.Parameters.AddWithValue("@login", txtLogin.Text);
+                    string mdp = cmd.ExecuteScalar()?.ToString();
 
-                cx.Close();
+                    if (mdp != null)
+                    {
+                        string mdpCorrige = mdp.Replace("$2y$", "$2a$");
+                        if (BCrypt.Net.BCrypt.Verify(txtMdp.Text, mdpCorrige))
+                        {
+                            this.DialogResult = DialogResult.OK; 
+                        }
+                        else
+                        {
+                            MessageBox.Show("Login ou mot de passe incorrect.", "Accès refusé",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            txtMdp.Clear();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login introuvable.", "Accès refusé",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erreur : " + ex.Message);
             }
+
         }
     }
 }
