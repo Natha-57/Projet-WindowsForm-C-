@@ -45,7 +45,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtFeuilleDeRoute = new System.Windows.Forms.TextBox();
             this.dateTimeRetour = new System.Windows.Forms.DateTimePicker();
             this.dateTimeDepart = new System.Windows.Forms.DateTimePicker();
             this.cboChefDeMission = new System.Windows.Forms.ComboBox();
@@ -64,11 +63,13 @@
             this.btValiderPlanete = new System.Windows.Forms.Button();
             this.cboNomPlanete = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtFeuilleDeRoute = new System.Windows.Forms.RichTextBox();
             this.grpNouvelleMission.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpNouvelleMission
             // 
+            this.grpNouvelleMission.Controls.Add(this.txtFeuilleDeRoute);
             this.grpNouvelleMission.Controls.Add(this.lstMembres);
             this.grpNouvelleMission.Controls.Add(this.lstObj);
             this.grpNouvelleMission.Controls.Add(this.btValiderObjCapture);
@@ -85,7 +86,6 @@
             this.grpNouvelleMission.Controls.Add(this.label13);
             this.grpNouvelleMission.Controls.Add(this.label12);
             this.grpNouvelleMission.Controls.Add(this.label11);
-            this.grpNouvelleMission.Controls.Add(this.txtFeuilleDeRoute);
             this.grpNouvelleMission.Controls.Add(this.dateTimeRetour);
             this.grpNouvelleMission.Controls.Add(this.dateTimeDepart);
             this.grpNouvelleMission.Controls.Add(this.cboChefDeMission);
@@ -171,10 +171,10 @@
             // cboAliens
             // 
             this.cboAliens.FormattingEnabled = true;
-            this.cboAliens.Location = new System.Drawing.Point(53, 1052);
+            this.cboAliens.Location = new System.Drawing.Point(50, 1052);
             this.cboAliens.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.cboAliens.Name = "cboAliens";
-            this.cboAliens.Size = new System.Drawing.Size(176, 37);
+            this.cboAliens.Size = new System.Drawing.Size(179, 37);
             this.cboAliens.TabIndex = 30;
             this.cboAliens.SelectedIndexChanged += new System.EventHandler(this.cboAliens_SelectedIndexChanged);
             // 
@@ -214,10 +214,10 @@
             // cboAjtMembre
             // 
             this.cboAjtMembre.FormattingEnabled = true;
-            this.cboAjtMembre.Location = new System.Drawing.Point(53, 818);
+            this.cboAjtMembre.Location = new System.Drawing.Point(50, 818);
             this.cboAjtMembre.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.cboAjtMembre.Name = "cboAjtMembre";
-            this.cboAjtMembre.Size = new System.Drawing.Size(621, 37);
+            this.cboAjtMembre.Size = new System.Drawing.Size(624, 37);
             this.cboAjtMembre.TabIndex = 25;
             this.cboAjtMembre.SelectedIndexChanged += new System.EventHandler(this.cboAjtMembre_SelectedIndexChanged);
             // 
@@ -281,14 +281,6 @@
             this.label11.Size = new System.Drawing.Size(127, 29);
             this.label11.TabIndex = 19;
             this.label11.Text = "personnes";
-            // 
-            // txtFeuilleDeRoute
-            // 
-            this.txtFeuilleDeRoute.Location = new System.Drawing.Point(230, 398);
-            this.txtFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.txtFeuilleDeRoute.Name = "txtFeuilleDeRoute";
-            this.txtFeuilleDeRoute.Size = new System.Drawing.Size(473, 35);
-            this.txtFeuilleDeRoute.TabIndex = 18;
             // 
             // dateTimeRetour
             // 
@@ -463,6 +455,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "1- Choix de la planète";
             // 
+            // txtFeuilleDeRoute
+            // 
+            this.txtFeuilleDeRoute.Location = new System.Drawing.Point(253, 398);
+            this.txtFeuilleDeRoute.Name = "txtFeuilleDeRoute";
+            this.txtFeuilleDeRoute.Size = new System.Drawing.Size(340, 124);
+            this.txtFeuilleDeRoute.TabIndex = 37;
+            this.txtFeuilleDeRoute.Text = "";
+            // 
             // FormCreationMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(25F, 51F);
@@ -517,7 +517,7 @@
         private System.Windows.Forms.Button btValiderObjCapture;
         private System.Windows.Forms.ListBox lstObj;
         private System.Windows.Forms.ListBox lstMembres;
-        private System.Windows.Forms.TextBox txtFeuilleDeRoute;
+        private System.Windows.Forms.RichTextBox txtFeuilleDeRoute;
     }
 }
 
