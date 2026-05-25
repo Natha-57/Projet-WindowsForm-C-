@@ -87,19 +87,19 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 
 ### Nathan WHILENM
 
-- Volets : 
+    - Volets : 
 
 ### Oscar MAGOULES
 
-- Volets :
+    - Volets :
 
 ### Nathan WEISS
 
-- Création des images de l'application (sur Canva) : 
+    - Création des images de l'application (sur Canva) : 
 
-    [✓] Images pour les specialités de l'équipage sous forme de logo (11)
-    [✓] Images pour les grades des militaires (5)
-    [✓] Images pour CHAQUE espèce extraterrestre (35)
-    [✓] Images pour CHAQUE planète (11)
+        [✓] Images pour les specialités de l'équipage sous forme de logo (11)
+        [✓] Images pour les grades des militaires (5)
+        [✓] Images pour CHAQUE espèce extraterrestre (35)
+        [✓] Images pour CHAQUE planète (11)
 
-- Volets :
+    - Volets :
