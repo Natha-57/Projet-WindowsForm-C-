@@ -32,6 +32,12 @@ namespace _3_Visualisation_et_MAJ_missions
         {
 
         }
+
+        private void btJournalDeBoard_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.ShowDialog();
+        }
     }
 }
 

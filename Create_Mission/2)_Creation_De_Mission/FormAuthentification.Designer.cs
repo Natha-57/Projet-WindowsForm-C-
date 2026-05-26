@@ -47,9 +47,9 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(106, 108);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(1315, 700);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -58,7 +58,7 @@
             // txtMdp
             // 
             this.txtMdp.Location = new System.Drawing.Point(483, 416);
-            this.txtMdp.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtMdp.Margin = new System.Windows.Forms.Padding(6);
             this.txtMdp.Name = "txtMdp";
             this.txtMdp.PasswordChar = '*';
             this.txtMdp.Size = new System.Drawing.Size(631, 56);
@@ -67,7 +67,7 @@
             // txtLogin
             // 
             this.txtLogin.Location = new System.Drawing.Point(483, 226);
-            this.txtLogin.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtLogin.Margin = new System.Windows.Forms.Padding(6);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(631, 56);
             this.txtLogin.TabIndex = 4;
@@ -75,7 +75,7 @@
             // btValider
             // 
             this.btValider.Location = new System.Drawing.Point(1052, 600);
-            this.btValider.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btValider.Margin = new System.Windows.Forms.Padding(6);
             this.btValider.Name = "btValider";
             this.btValider.Size = new System.Drawing.Size(250, 88);
             this.btValider.TabIndex = 3;
@@ -122,7 +122,7 @@
             this.ClientSize = new System.Drawing.Size(1667, 918);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormAuthentification";
             this.Text = "FormAuthentification";
             this.groupBox1.ResumeLayout(false);

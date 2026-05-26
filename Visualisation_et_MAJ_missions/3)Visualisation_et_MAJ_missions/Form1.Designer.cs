@@ -91,9 +91,9 @@
             // grpFeuilleDeRoute
             // 
             this.grpFeuilleDeRoute.Location = new System.Drawing.Point(114, 400);
-            this.grpFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(6);
             this.grpFeuilleDeRoute.Name = "grpFeuilleDeRoute";
-            this.grpFeuilleDeRoute.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpFeuilleDeRoute.Padding = new System.Windows.Forms.Padding(6);
             this.grpFeuilleDeRoute.Size = new System.Drawing.Size(1038, 279);
             this.grpFeuilleDeRoute.TabIndex = 5;
             this.grpFeuilleDeRoute.TabStop = false;
@@ -102,9 +102,9 @@
             // grpMembresEquipage
             // 
             this.grpMembresEquipage.Location = new System.Drawing.Point(114, 727);
-            this.grpMembresEquipage.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpMembresEquipage.Margin = new System.Windows.Forms.Padding(6);
             this.grpMembresEquipage.Name = "grpMembresEquipage";
-            this.grpMembresEquipage.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpMembresEquipage.Padding = new System.Windows.Forms.Padding(6);
             this.grpMembresEquipage.Size = new System.Drawing.Size(1038, 279);
             this.grpMembresEquipage.TabIndex = 6;
             this.grpMembresEquipage.TabStop = false;
@@ -118,6 +118,7 @@
             this.btJournalDeBoard.TabIndex = 7;
             this.btJournalDeBoard.Text = "Journal de Board >";
             this.btJournalDeBoard.UseVisualStyleBackColor = true;
+            this.btJournalDeBoard.Click += new System.EventHandler(this.btJournalDeBoard_Click);
             // 
             // Form1
             // 
@@ -132,7 +133,7 @@
             this.Controls.Add(this.lblBudget);
             this.Controls.Add(this.lblDateDepart);
             this.Controls.Add(this.lblNomMission);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
