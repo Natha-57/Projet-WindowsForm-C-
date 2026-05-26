@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.grpEvenement = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtNumPage = new System.Windows.Forms.RichTextBox();
+            this.btSuivant = new System.Windows.Forms.Button();
+            this.btAllerToutAlaFin = new System.Windows.Forms.Button();
+            this.btRevenir1foisEnArriere = new System.Windows.Forms.Button();
+            this.btToutDebut = new System.Windows.Forms.Button();
             this.grpDepenses = new System.Windows.Forms.GroupBox();
             this.grpContact = new System.Windows.Forms.GroupBox();
             this.btEditerUnPdf = new System.Windows.Forms.Button();
@@ -46,11 +46,11 @@
             // 
             // grpEvenement
             // 
-            this.grpEvenement.Controls.Add(this.richTextBox1);
-            this.grpEvenement.Controls.Add(this.button4);
-            this.grpEvenement.Controls.Add(this.button3);
-            this.grpEvenement.Controls.Add(this.button2);
-            this.grpEvenement.Controls.Add(this.button1);
+            this.grpEvenement.Controls.Add(this.txtNumPage);
+            this.grpEvenement.Controls.Add(this.btSuivant);
+            this.grpEvenement.Controls.Add(this.btAllerToutAlaFin);
+            this.grpEvenement.Controls.Add(this.btRevenir1foisEnArriere);
+            this.grpEvenement.Controls.Add(this.btToutDebut);
             this.grpEvenement.Location = new System.Drawing.Point(80, 34);
             this.grpEvenement.Name = "grpEvenement";
             this.grpEvenement.Size = new System.Drawing.Size(447, 807);
@@ -58,49 +58,49 @@
             this.grpEvenement.TabStop = false;
             this.grpEvenement.Text = "Evènements du journal";
             // 
-            // richTextBox1
+            // txtNumPage
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(179, 735);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(90, 67);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
+            this.txtNumPage.Location = new System.Drawing.Point(179, 735);
+            this.txtNumPage.Name = "txtNumPage";
+            this.txtNumPage.Size = new System.Drawing.Size(90, 67);
+            this.txtNumPage.TabIndex = 4;
+            this.txtNumPage.Text = "";
             // 
-            // button4
+            // btSuivant
             // 
-            this.button4.Location = new System.Drawing.Point(275, 734);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(80, 67);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btSuivant.Location = new System.Drawing.Point(275, 734);
+            this.btSuivant.Name = "btSuivant";
+            this.btSuivant.Size = new System.Drawing.Size(80, 67);
+            this.btSuivant.TabIndex = 3;
+            this.btSuivant.Text = ">";
+            this.btSuivant.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btAllerToutAlaFin
             // 
-            this.button3.Location = new System.Drawing.Point(361, 734);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(80, 67);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btAllerToutAlaFin.Location = new System.Drawing.Point(361, 734);
+            this.btAllerToutAlaFin.Name = "btAllerToutAlaFin";
+            this.btAllerToutAlaFin.Size = new System.Drawing.Size(80, 67);
+            this.btAllerToutAlaFin.TabIndex = 2;
+            this.btAllerToutAlaFin.Text = ">>";
+            this.btAllerToutAlaFin.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btRevenir1foisEnArriere
             // 
-            this.button2.Location = new System.Drawing.Point(92, 734);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(80, 67);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btRevenir1foisEnArriere.Location = new System.Drawing.Point(92, 734);
+            this.btRevenir1foisEnArriere.Name = "btRevenir1foisEnArriere";
+            this.btRevenir1foisEnArriere.Size = new System.Drawing.Size(80, 67);
+            this.btRevenir1foisEnArriere.TabIndex = 1;
+            this.btRevenir1foisEnArriere.Text = "<";
+            this.btRevenir1foisEnArriere.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btToutDebut
             // 
-            this.button1.Location = new System.Drawing.Point(6, 734);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 67);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btToutDebut.Location = new System.Drawing.Point(6, 734);
+            this.btToutDebut.Name = "btToutDebut";
+            this.btToutDebut.Size = new System.Drawing.Size(80, 67);
+            this.btToutDebut.TabIndex = 0;
+            this.btToutDebut.Text = "<<";
+            this.btToutDebut.UseVisualStyleBackColor = true;
             // 
             // grpDepenses
             // 
@@ -182,11 +182,11 @@
         private System.Windows.Forms.GroupBox grpEvenement;
         private System.Windows.Forms.GroupBox grpDepenses;
         private System.Windows.Forms.GroupBox grpContact;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox txtNumPage;
+        private System.Windows.Forms.Button btSuivant;
+        private System.Windows.Forms.Button btAllerToutAlaFin;
+        private System.Windows.Forms.Button btRevenir1foisEnArriere;
+        private System.Windows.Forms.Button btToutDebut;
         private System.Windows.Forms.Button btEditerUnPdf;
         private System.Windows.Forms.Label txtSommesVersées;
         private System.Windows.Forms.Label txtDepenses;

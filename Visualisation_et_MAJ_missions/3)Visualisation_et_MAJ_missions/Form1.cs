@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using System.IO;
 
 namespace _3_Visualisation_et_MAJ_missions
 {
