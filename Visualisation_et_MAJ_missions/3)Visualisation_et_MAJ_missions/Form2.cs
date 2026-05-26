@@ -16,21 +16,23 @@ namespace _3_Visualisation_et_MAJ_missions
     public partial class Form2 : Form
     {
         private SQLiteConnection cx;
-        private string nomPlanete;
-        private int numeroMission;
+        private string planete;
+        private int num;
         public Form2()
         {
             InitializeComponent();
-            string chaine = "Data Source=..\\..\\Stargate.db";
+            string chaine = "Data Source=..\\..\\..\\..\\Fichiers Moodle\\Stargate.db";
             this.cx = new SQLiteConnection(chaine);
             this.cx.Open();
+
+            ChargerDepenses();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
-            pbHome.Image = Image.FromFile("sae_2.4\\Images App\\Icones diverses\\home.png");
+            pbHome.Image = System.Drawing.Image.FromFile("sae_2.4\\Images App\\Icones diverses\\home.png");
 
             Form1 f1 = new Form1();
             f1.ShowDialog();
@@ -52,15 +54,28 @@ namespace _3_Visualisation_et_MAJ_missions
 
             using (SQLiteCommand cmd = new SQLiteCommand(query, cx))
             {
-                cmd.Parameters.AddWithValue("@nomPlanete", nomPlanete);
-                cmd.Parameters.AddWithValue("@numeroMission", numeroMission);
+                cmd.Parameters.AddWithValue("@planete", planete);
+                cmd.Parameters.AddWithValue("@num", num);
 
                 DataTable dt = new DataTable();
                 new SQLiteDataAdapter(cmd).Fill(dt);
                 dgvDepenses.DataSource = dt;
 
-                
+                string sqlTotal = @"SELECT COALESCE(SUM(montant), 0) 
+                        FROM   Depense 
+                        WHERE  nomPlanete    = @planete 
+                        AND    numeroMission = @num";
+                SQLiteCommand cmdTotal = new SQLiteCommand(sqlTotal, this.cx);
+                cmdTotal.Parameters.AddWithValue("@planete", planete);
+                cmdTotal.Parameters.AddWithValue("@num", num);
+                lblDepenses.Text = $"Total des dépenses : {cmdTotal.ExecuteScalar()} €";
+
             }
+        }
+
+        private void dgvDepenses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
         }
     }
 }

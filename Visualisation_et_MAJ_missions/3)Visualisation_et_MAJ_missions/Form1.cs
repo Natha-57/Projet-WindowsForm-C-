@@ -23,7 +23,7 @@ namespace _3_Visualisation_et_MAJ_missions
             this.nomPlanete = nomPlanete;
             this.numeroMission = numeroMission;
 
-            string chaine = "Data Source=..\\..\\Stargate.db";
+            string chaine = "Data Source=..\\..\\..\\..\\Fichiers Moodle\\Stargate.db";
             this.cx = new SQLiteConnection(chaine);
             this.cx.Open();
 
@@ -41,6 +41,8 @@ namespace _3_Visualisation_et_MAJ_missions
             f2.ShowDialog();
             this.Close();
         }
+
+
 
     }
 }
