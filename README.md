@@ -86,19 +86,19 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 ## Répartition du travail
 
 ### Nathan WILHELM
-```sh
+
     - Volets :
 
         [✓] 2) Création d’une nouvelle mission puis affectation des membres et objectifs
         [✓] 3) Récapitulatif complet des informations sur une mission
         [✓] 4) Visualisation en mode 1 à 1 des événements survenus lors d’une mission donnée
-```
+
 ### Oscar MAGOULES
-```sh
+
     - Volets :
-```
+
 ### Nathan WEISS
-```sh
+
     - Création des images de l'application (sur Canva) : 
 
         [✓] Images pour les specialités de l'équipage sous forme de logo (11)
@@ -107,4 +107,3 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
         [✓] Images pour CHAQUE planète (11)
 
     - Volets :
-```
