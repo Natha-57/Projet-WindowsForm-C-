@@ -85,7 +85,7 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 
 ## Répartition du travail
 
-### Nathan WHILENM
+### Nathan WILHELM
 
     - Volets :
 
