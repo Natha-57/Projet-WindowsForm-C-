@@ -40,8 +40,11 @@
             this.txtSommesVersées = new System.Windows.Forms.Label();
             this.txtDepenses = new System.Windows.Forms.Label();
             this.pbHome = new System.Windows.Forms.PictureBox();
+            this.dgvDepenses = new System.Windows.Forms.DataGridView();
             this.grpEvenement.SuspendLayout();
+            this.grpDepenses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepenses)).BeginInit();
             this.SuspendLayout();
             // 
             // grpEvenement
@@ -104,6 +107,7 @@
             // 
             // grpDepenses
             // 
+            this.grpDepenses.Controls.Add(this.dgvDepenses);
             this.grpDepenses.Location = new System.Drawing.Point(579, 34);
             this.grpDepenses.Name = "grpDepenses";
             this.grpDepenses.Size = new System.Drawing.Size(638, 452);
@@ -156,6 +160,18 @@
             this.pbHome.TabStop = false;
             this.pbHome.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // dgvDepenses
+            // 
+            this.dgvDepenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDepenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDepenses.Location = new System.Drawing.Point(6, 30);
+            this.dgvDepenses.Name = "dgvDepenses";
+            this.dgvDepenses.ReadOnly = true;
+            this.dgvDepenses.RowHeadersWidth = 82;
+            this.dgvDepenses.RowTemplate.Height = 33;
+            this.dgvDepenses.Size = new System.Drawing.Size(626, 416);
+            this.dgvDepenses.TabIndex = 0;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -171,7 +187,9 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.grpEvenement.ResumeLayout(false);
+            this.grpDepenses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepenses)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +209,6 @@
         private System.Windows.Forms.Label txtSommesVersées;
         private System.Windows.Forms.Label txtDepenses;
         private System.Windows.Forms.PictureBox pbHome;
+        private System.Windows.Forms.DataGridView dgvDepenses;
     }
 }

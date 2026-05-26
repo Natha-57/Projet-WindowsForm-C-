@@ -27,7 +27,7 @@ namespace _3_Visualisation_et_MAJ_missions
             this.cx = new SQLiteConnection(chaine);
             this.cx.Open();
 
-            ChargerMission(nomPlanete, numeroMission);
+           // ChargerMission(nomPlanete, numeroMission);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -39,7 +39,9 @@ namespace _3_Visualisation_et_MAJ_missions
         {
             Form2 f2 = new Form2();
             f2.ShowDialog();
+            this.Close();
         }
+
     }
 }
 
