@@ -16,6 +16,8 @@ namespace _2__Creation_De_Mission
         public FormAuthentification()
         {
             InitializeComponent();
+            this.Resize += FormAuthentification_Resize;           // abonnement à l'événement
+            FormAuthentification_Resize(this, EventArgs.Empty);  // centrage immédiat au démarrage
         }
 
         private void btValider_Click(object sender, EventArgs e)
@@ -57,6 +59,27 @@ namespace _2__Creation_De_Mission
                 MessageBox.Show("Erreur : " + ex.Message);
             }
 
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormAuthentification_Resize(object sender, EventArgs e)
+        {
+            label1.Left = (groupBox1.Width - label1.Width) / 2;
+            label4.Left = (groupBox1.Width - label4.Width) / 2;
+        }
+
+        private void btRetour_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
