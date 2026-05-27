@@ -101,7 +101,7 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 
     - Création des images de l'application (sur Canva) : 
 
-        [x] Logo 'Stargate' + icône d'application + Typo
+        [✓] Logo 'Stargate' + icône d'application + Typo
         [✓] Images pour les specialités de l'équipage sous forme de logo (11)
         [✓] Images pour les grades des militaires (5)
         [✓] Images pour CHAQUE espèce extraterrestre (35)
