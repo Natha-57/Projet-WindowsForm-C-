@@ -13,7 +13,7 @@ namespace TdB_Missions
 		// Objet Connection
         private static SQLiteConnection connec;
 
-        // Constructeur privé pour empêcher l'instanciation directe depuis l'extérieur.
+        // Constructeur privé pour empêcher l'insta nciation directe depuis l'extérieur.
         private Connexion() { }
 
         // Méthode publique pour obtenir l'instance unique de la classe.
