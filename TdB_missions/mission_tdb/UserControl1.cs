@@ -17,7 +17,7 @@ namespace mission_tdb
         {
             InitializeComponent();
         }
-        public UserControl1(string nom_mission, string date_dep, string date_fin, string nom_chef, string image_path)
+        public UserControl1(string nom_mission, string date_dep, string date_fin, string nom_chef, string image_path, )
         {
             InitializeComponent();
             label1.Text = nom_mission;
