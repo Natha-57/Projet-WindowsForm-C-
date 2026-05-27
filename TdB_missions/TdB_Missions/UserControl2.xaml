@@ -1,0 +1,18 @@
+﻿<UserControl x:Name="Mussion" x:Class="TdB_Missions.UserControl2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TdB_Missions"
+             mc:Ignorable="d" Height="428" Width="816">
+    <Grid Margin="-164,0,173,225" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Button Content="Button" HorizontalAlignment="Left" Margin="611,80,0,0" VerticalAlignment="Top" Height="55" Width="128"/>
+        <Label x:Name="Nom_Mission" Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="307"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="37,58,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label x:Name="Date_dép" Content="Label" HorizontalAlignment="Left" Margin="189,58,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label x:Name="Date_ret" Content="Label" HorizontalAlignment="Left" Margin="366,58,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label x:Name="Nom_chef" Content="Label" HorizontalAlignment="Left" Margin="189,128,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label x:Name="Objectif" Content="Label" HorizontalAlignment="Left" Margin="366,128,0,0" VerticalAlignment="Top" Height="26" Width="150"/>
+
+    </Grid>
+</UserControl>
