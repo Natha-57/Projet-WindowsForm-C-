@@ -72,7 +72,7 @@ git commit -m "nom_commit"
 
 ```sh
 git push
-```
+```sh
 
 ###  Comment mettre à jour son clône ?
 

@@ -24,7 +24,10 @@ namespace mission_tdb
             label2.Text = date_dep;
             label3.Text = date_fin;
             label4.Text = nom_chef;
-            pictureBox1.ImageLocation = image_path;
+            pictureBox1.Image = Image.FromFile(image_path);
+     
+            
+
         }
 
         private void label4_Click(object sender, EventArgs e)

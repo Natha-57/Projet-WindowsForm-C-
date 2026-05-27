@@ -16,7 +16,9 @@ namespace TdB_Missions
 
         public Form1()
         {
+
             InitializeComponent();
+
             try
             {
                 string sql;
@@ -30,7 +32,6 @@ namespace TdB_Missions
                     da.Fill(MesDatas.DsGlobal, nomTable);
                     liste = liste + nomTable + "\n";
                 }
-                MessageBox.Show(liste + "\n" + MesDatas.DsGlobal.Tables.Count.ToString() + " tables");
             }
             catch (SQLiteException err)
             {
@@ -44,17 +45,17 @@ namespace TdB_Missions
             int axeX = 25;
             int axeY = 20;
             int i = 0;
-            string filtre = "MesDatas.DsGlobal.Tables[\"membre\"].Rows[1]";
             
 
             foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
             {
                 try
                 {
-                    DataRow[] dr = MesDatas.DsGlobal.Tables["membres"].Select("matricule =" + row[5].ToString());
+                    string filtre = "matricule = '" + row[5].ToString() + "'";
+               
+                    DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
                     DataRow d = dr[0];
-
-                    UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), MesDatas.DsGlobal.Tables["membre"].Rows[2].ToString(), row[5].ToString());
+                    UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), d[1].ToString() +" "+ d[2].ToString(), "../../../../Images_App/Planètes/Logo - " + row[0]+".png");
                     uc.Location = new Point(axeX, axeY + i);
                     this.Controls.Add(uc);
                     i += 225;

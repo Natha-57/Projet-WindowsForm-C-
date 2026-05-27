@@ -37,11 +37,14 @@
             this.grpDepenses = new System.Windows.Forms.GroupBox();
             this.grpContact = new System.Windows.Forms.GroupBox();
             this.btEditerUnPdf = new System.Windows.Forms.Button();
-            this.txtSommesVersées = new System.Windows.Forms.Label();
-            this.txtDepenses = new System.Windows.Forms.Label();
+            this.lblSommesVersées = new System.Windows.Forms.Label();
+            this.lblDepenses = new System.Windows.Forms.Label();
             this.pbHome = new System.Windows.Forms.PictureBox();
+            this.dgvDepenses = new System.Windows.Forms.DataGridView();
             this.grpEvenement.SuspendLayout();
+            this.grpDepenses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepenses)).BeginInit();
             this.SuspendLayout();
             // 
             // grpEvenement
@@ -104,6 +107,7 @@
             // 
             // grpDepenses
             // 
+            this.grpDepenses.Controls.Add(this.dgvDepenses);
             this.grpDepenses.Location = new System.Drawing.Point(579, 34);
             this.grpDepenses.Name = "grpDepenses";
             this.grpDepenses.Size = new System.Drawing.Size(638, 452);
@@ -129,23 +133,23 @@
             this.btEditerUnPdf.Text = "Editer un PDF";
             this.btEditerUnPdf.UseVisualStyleBackColor = true;
             // 
-            // txtSommesVersées
+            // lblSommesVersées
             // 
-            this.txtSommesVersées.AutoSize = true;
-            this.txtSommesVersées.Location = new System.Drawing.Point(579, 793);
-            this.txtSommesVersées.Name = "txtSommesVersées";
-            this.txtSommesVersées.Size = new System.Drawing.Size(287, 25);
-            this.txtSommesVersées.TabIndex = 4;
-            this.txtSommesVersées.Text = "Total des sommes versées : ";
+            this.lblSommesVersées.AutoSize = true;
+            this.lblSommesVersées.Location = new System.Drawing.Point(579, 793);
+            this.lblSommesVersées.Name = "lblSommesVersées";
+            this.lblSommesVersées.Size = new System.Drawing.Size(287, 25);
+            this.lblSommesVersées.TabIndex = 4;
+            this.lblSommesVersées.Text = "Total des sommes versées : ";
             // 
-            // txtDepenses
+            // lblDepenses
             // 
-            this.txtDepenses.AutoSize = true;
-            this.txtDepenses.Location = new System.Drawing.Point(579, 506);
-            this.txtDepenses.Name = "txtDepenses";
-            this.txtDepenses.Size = new System.Drawing.Size(219, 25);
-            this.txtDepenses.TabIndex = 5;
-            this.txtDepenses.Text = "Total des dépenses : ";
+            this.lblDepenses.AutoSize = true;
+            this.lblDepenses.Location = new System.Drawing.Point(579, 506);
+            this.lblDepenses.Name = "lblDepenses";
+            this.lblDepenses.Size = new System.Drawing.Size(219, 25);
+            this.lblDepenses.TabIndex = 5;
+            this.lblDepenses.Text = "Total des dépenses : ";
             // 
             // pbHome
             // 
@@ -156,14 +160,27 @@
             this.pbHome.TabStop = false;
             this.pbHome.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // dgvDepenses
+            // 
+            this.dgvDepenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDepenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDepenses.Location = new System.Drawing.Point(6, 30);
+            this.dgvDepenses.Name = "dgvDepenses";
+            this.dgvDepenses.ReadOnly = true;
+            this.dgvDepenses.RowHeadersWidth = 82;
+            this.dgvDepenses.RowTemplate.Height = 33;
+            this.dgvDepenses.Size = new System.Drawing.Size(626, 416);
+            this.dgvDepenses.TabIndex = 0;
+            this.dgvDepenses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDepenses_CellContentClick);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 920);
             this.Controls.Add(this.pbHome);
-            this.Controls.Add(this.txtDepenses);
-            this.Controls.Add(this.txtSommesVersées);
+            this.Controls.Add(this.lblDepenses);
+            this.Controls.Add(this.lblSommesVersées);
             this.Controls.Add(this.btEditerUnPdf);
             this.Controls.Add(this.grpContact);
             this.Controls.Add(this.grpDepenses);
@@ -171,7 +188,9 @@
             this.Name = "Form2";
             this.Text = "Form2";
             this.grpEvenement.ResumeLayout(false);
+            this.grpDepenses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDepenses)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,8 +207,9 @@
         private System.Windows.Forms.Button btRevenir1foisEnArriere;
         private System.Windows.Forms.Button btToutDebut;
         private System.Windows.Forms.Button btEditerUnPdf;
-        private System.Windows.Forms.Label txtSommesVersées;
-        private System.Windows.Forms.Label txtDepenses;
+        private System.Windows.Forms.Label lblSommesVersées;
+        private System.Windows.Forms.Label lblDepenses;
         private System.Windows.Forms.PictureBox pbHome;
+        private System.Windows.Forms.DataGridView dgvDepenses;
     }
 }
