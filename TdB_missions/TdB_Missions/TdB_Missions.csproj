@@ -61,11 +61,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connexion.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="FormJdB.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormJdB.Designer.cs">
+      <DependentUpon>FormJdB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormResumeMission.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormResumeMission.Designer.cs">
+      <DependentUpon>FormResumeMission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTdB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTdB.Designer.cs">
+      <DependentUpon>FormTdB.cs</DependentUpon>
     </Compile>
     <Compile Include="FormAuthentification.cs">
       <SubType>Form</SubType>
@@ -82,8 +94,14 @@
     <Compile Include="mesDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="FormJdB.resx">
+      <DependentUpon>FormJdB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormResumeMission.resx">
+      <DependentUpon>FormResumeMission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTdB.resx">
+      <DependentUpon>FormTdB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAuthentification.resx">
       <DependentUpon>FormAuthentification.cs</DependentUpon>

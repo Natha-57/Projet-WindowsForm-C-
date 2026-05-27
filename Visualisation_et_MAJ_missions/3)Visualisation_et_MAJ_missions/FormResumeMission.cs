@@ -12,12 +12,12 @@ using System.IO;
 
 namespace _3_Visualisation_et_MAJ_missions
 {
-    public partial class Form1 : Form
+    public partial class FormResumeMission : Form
     {
         private SQLiteConnection cx;
         private string nomPlanete;
         private int numeroMission;
-        public Form1()
+        public FormResumeMission()
         {
             InitializeComponent();
             this.nomPlanete = nomPlanete;
@@ -37,7 +37,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void btJournalDeBoard_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2();
+            FormJdB f2 = new FormJdB();
             f2.ShowDialog();
             
         }

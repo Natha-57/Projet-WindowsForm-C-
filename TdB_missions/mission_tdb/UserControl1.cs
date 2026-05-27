@@ -12,7 +12,10 @@ namespace mission_tdb
 {
     public partial class UserControl1: UserControl
     {
-        Form f;
+        public event EventHandler OuvrirFormulaire;
+        public string NomPlanete { get; set; }
+        public int NumeroMission { get; set; }
+
         public UserControl1()
         {
             InitializeComponent();
@@ -46,8 +49,7 @@ namespace mission_tdb
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form form = new Form();
-            form.ShowDialog();
+            OuvrirFormulaire?.Invoke(this, EventArgs.Empty);
         }
     }
 }

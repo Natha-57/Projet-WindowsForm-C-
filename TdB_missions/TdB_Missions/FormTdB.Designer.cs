@@ -1,6 +1,6 @@
 ﻿namespace TdB_Missions
 {
-    partial class Form1
+    partial class FormTdB
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTdB));
             this.btCreerMission = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -39,14 +39,14 @@
             this.btCreerMission.UseVisualStyleBackColor = true;
             this.btCreerMission.Click += new System.EventHandler(this.btCreerMission_Click);
             // 
-            // Form1
+            // FormTdB
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btCreerMission);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "FormTdB";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

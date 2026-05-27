@@ -24,7 +24,7 @@ namespace _2__Creation_De_Mission
         {
             try
             {
-                string chaine = "Data Source=..\\..\\..\\..\\Fichiers Moodle\\Stargate.db";
+                string chaine = "Data Source=Stargate.db";
                 using (SQLiteConnection cx = new SQLiteConnection(chaine))
                 {
                     cx.Open();

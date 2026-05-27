@@ -1,6 +1,6 @@
 ﻿namespace _3_Visualisation_et_MAJ_missions
 {
-    partial class Form2
+    partial class FormJdB
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.grpEvenement = new System.Windows.Forms.GroupBox();
+            this.lblCompteurPages = new System.Windows.Forms.Label();
+            this.lblEvenement = new System.Windows.Forms.Label();
+            this.lblDateEvenement = new System.Windows.Forms.Label();
             this.btSuivant = new System.Windows.Forms.Button();
             this.btAllerToutAlaFin = new System.Windows.Forms.Button();
             this.btRevenir1foisEnArriere = new System.Windows.Forms.Button();
@@ -36,20 +39,17 @@
             this.grpDepenses = new System.Windows.Forms.GroupBox();
             this.dgvDepenses = new System.Windows.Forms.DataGridView();
             this.grpContact = new System.Windows.Forms.GroupBox();
+            this.dgvContacts = new System.Windows.Forms.DataGridView();
             this.btEditerUnPdf = new System.Windows.Forms.Button();
             this.lblSommesVersées = new System.Windows.Forms.Label();
             this.lblDepenses = new System.Windows.Forms.Label();
             this.pbHome = new System.Windows.Forms.PictureBox();
-            this.dgvContacts = new System.Windows.Forms.DataGridView();
-            this.lblDateEvenement = new System.Windows.Forms.Label();
-            this.lblEvenement = new System.Windows.Forms.Label();
-            this.lblCompteurPages = new System.Windows.Forms.Label();
             this.grpEvenement.SuspendLayout();
             this.grpDepenses.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepenses)).BeginInit();
             this.grpContact.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
             this.SuspendLayout();
             // 
             // grpEvenement
@@ -67,6 +67,33 @@
             this.grpEvenement.TabIndex = 0;
             this.grpEvenement.TabStop = false;
             this.grpEvenement.Text = "Evènements du journal";
+            // 
+            // lblCompteurPages
+            // 
+            this.lblCompteurPages.AutoSize = true;
+            this.lblCompteurPages.Location = new System.Drawing.Point(204, 232);
+            this.lblCompteurPages.Name = "lblCompteurPages";
+            this.lblCompteurPages.Size = new System.Drawing.Size(70, 25);
+            this.lblCompteurPages.TabIndex = 7;
+            this.lblCompteurPages.Text = "label1";
+            // 
+            // lblEvenement
+            // 
+            this.lblEvenement.AutoSize = true;
+            this.lblEvenement.Location = new System.Drawing.Point(16, 109);
+            this.lblEvenement.Name = "lblEvenement";
+            this.lblEvenement.Size = new System.Drawing.Size(70, 25);
+            this.lblEvenement.TabIndex = 6;
+            this.lblEvenement.Text = "label2";
+            // 
+            // lblDateEvenement
+            // 
+            this.lblDateEvenement.AutoSize = true;
+            this.lblDateEvenement.Location = new System.Drawing.Point(16, 40);
+            this.lblDateEvenement.Name = "lblDateEvenement";
+            this.lblDateEvenement.Size = new System.Drawing.Size(70, 25);
+            this.lblDateEvenement.TabIndex = 5;
+            this.lblDateEvenement.Text = "label1";
             // 
             // btSuivant
             // 
@@ -137,6 +164,17 @@
             this.grpContact.TabStop = false;
             this.grpContact.Text = "Contacts avec les informateurs";
             // 
+            // dgvContacts
+            // 
+            this.dgvContacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContacts.Location = new System.Drawing.Point(13, 30);
+            this.dgvContacts.Name = "dgvContacts";
+            this.dgvContacts.ReadOnly = true;
+            this.dgvContacts.RowHeadersWidth = 82;
+            this.dgvContacts.RowTemplate.Height = 33;
+            this.dgvContacts.Size = new System.Drawing.Size(625, 214);
+            this.dgvContacts.TabIndex = 0;
+            // 
             // btEditerUnPdf
             // 
             this.btEditerUnPdf.Location = new System.Drawing.Point(80, 847);
@@ -173,45 +211,7 @@
             this.pbHome.TabStop = false;
             this.pbHome.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // dgvContacts
-            // 
-            this.dgvContacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContacts.Location = new System.Drawing.Point(13, 30);
-            this.dgvContacts.Name = "dgvContacts";
-            this.dgvContacts.ReadOnly = true;
-            this.dgvContacts.RowHeadersWidth = 82;
-            this.dgvContacts.RowTemplate.Height = 33;
-            this.dgvContacts.Size = new System.Drawing.Size(625, 214);
-            this.dgvContacts.TabIndex = 0;
-            // 
-            // lblDateEvenement
-            // 
-            this.lblDateEvenement.AutoSize = true;
-            this.lblDateEvenement.Location = new System.Drawing.Point(16, 40);
-            this.lblDateEvenement.Name = "lblDateEvenement";
-            this.lblDateEvenement.Size = new System.Drawing.Size(70, 25);
-            this.lblDateEvenement.TabIndex = 5;
-            this.lblDateEvenement.Text = "label1";
-            // 
-            // lblEvenement
-            // 
-            this.lblEvenement.AutoSize = true;
-            this.lblEvenement.Location = new System.Drawing.Point(16, 109);
-            this.lblEvenement.Name = "lblEvenement";
-            this.lblEvenement.Size = new System.Drawing.Size(70, 25);
-            this.lblEvenement.TabIndex = 6;
-            this.lblEvenement.Text = "label2";
-            // 
-            // lblCompteurPages
-            // 
-            this.lblCompteurPages.AutoSize = true;
-            this.lblCompteurPages.Location = new System.Drawing.Point(204, 232);
-            this.lblCompteurPages.Name = "lblCompteurPages";
-            this.lblCompteurPages.Size = new System.Drawing.Size(70, 25);
-            this.lblCompteurPages.TabIndex = 7;
-            this.lblCompteurPages.Text = "label1";
-            // 
-            // Form2
+            // FormJdB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -223,15 +223,15 @@
             this.Controls.Add(this.grpContact);
             this.Controls.Add(this.grpDepenses);
             this.Controls.Add(this.grpEvenement);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "FormJdB";
+            this.Text = "Journal de Board";
             this.grpEvenement.ResumeLayout(false);
             this.grpEvenement.PerformLayout();
             this.grpDepenses.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepenses)).EndInit();
             this.grpContact.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

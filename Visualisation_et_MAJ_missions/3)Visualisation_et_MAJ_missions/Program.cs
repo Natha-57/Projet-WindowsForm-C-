@@ -16,7 +16,7 @@ namespace _3_Visualisation_et_MAJ_missions
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormResumeMission());
         }
     }
 }

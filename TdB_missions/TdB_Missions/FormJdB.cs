@@ -14,14 +14,14 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace _3_Visualisation_et_MAJ_missions
 {
-    public partial class Form2 : Form
+    public partial class FormJdB : Form
     {
         private SQLiteConnection cx;
         private string planete;
         private int num;
         private DataTable dtEvenements;
         private int indexEvenement = 0;
-        public Form2()
+        public FormJdB()
         {
             InitializeComponent();
             string chaine = "Data Source=..\\..\\..\\..\\Fichiers Moodle\\Stargate.db";

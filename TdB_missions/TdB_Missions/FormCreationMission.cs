@@ -363,7 +363,7 @@ namespace _2__Creation_De_Mission
                 MessageBox.Show("Objectifs enregistrés avec succès !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
-                Form1 form2 = new Form1();
+                FormTdB form2 = new FormTdB();
                 form2.Show();
                 this.Close();
             }

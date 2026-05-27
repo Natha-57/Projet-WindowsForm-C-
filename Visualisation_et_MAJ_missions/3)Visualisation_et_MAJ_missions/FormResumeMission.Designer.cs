@@ -1,6 +1,6 @@
 ﻿namespace _3_Visualisation_et_MAJ_missions
 {
-    partial class Form1
+    partial class FormResumeMission
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -120,11 +120,11 @@
             this.btJournalDeBoard.UseVisualStyleBackColor = true;
             this.btJournalDeBoard.Click += new System.EventHandler(this.btJournalDeBoard_Click);
             // 
-            // Form1
+            // FormResumeMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 1213);
+            this.ClientSize = new System.Drawing.Size(1198, 1061);
             this.Controls.Add(this.btJournalDeBoard);
             this.Controls.Add(this.grpMembresEquipage);
             this.Controls.Add(this.grpFeuilleDeRoute);
@@ -134,8 +134,8 @@
             this.Controls.Add(this.lblDateDepart);
             this.Controls.Add(this.lblNomMission);
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "FormResumeMission";
+            this.Text = "Resume Mission";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

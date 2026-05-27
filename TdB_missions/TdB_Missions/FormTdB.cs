@@ -9,13 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using _2__Creation_De_Mission;
+using _3_Visualisation_et_MAJ_missions;
 using mission_tdb;
 namespace TdB_Missions
 {
-    public partial class Form1 : Form
+    public partial class FormTdB : Form
     { 
 
-        public Form1()
+        public FormTdB()
         {
 
             InitializeComponent();
@@ -38,7 +39,6 @@ namespace TdB_Missions
             {
                 MessageBox.Show(err.Message);
             }
-           // MessageBox.Show("Tables chargées : \n" + MesDatas.DsGlobal.Tables.Count);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,18 +46,23 @@ namespace TdB_Missions
             int axeX = 25;
             int axeY = 20;
             int i = 0;
-            
 
             foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
             {
                 try
                 {
                     string filtre = "matricule = '" + row[5].ToString() + "'";
-               
                     DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
                     DataRow d = dr[0];
+
                     UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), d[1].ToString() +" "+ d[2].ToString(), "../../../../Images App/Planètes/Logo - " + row[0]+".png");
+                    
+                    uc.NomPlanete = row[0].ToString();
+                    uc.NumeroMission = Convert.ToInt32(row[1]);
+                    
                     uc.Location = new Point(axeX, axeY + i);
+                    uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
+                    
                     this.Controls.Add(uc);
                     i += 225;
                 }
@@ -66,6 +71,16 @@ namespace TdB_Missions
                     MessageBox.Show(err.ToString());
                 }
             }
+        }
+
+        private void UserControl1_OuvrirFormulaire(object sender, EventArgs e)
+        {
+            UserControl1 uc = (UserControl1)sender;
+
+            FormResumeMission f =
+                new FormResumeMission(uc.NomPlanete, uc.NumeroMission);
+
+            f.Show();
         }
 
         private void btCreerMission_Click(object sender, EventArgs e)
