@@ -36,6 +36,7 @@
             this.grpFeuilleDeRoute = new System.Windows.Forms.GroupBox();
             this.txtFeuilleRoute = new System.Windows.Forms.RichTextBox();
             this.grpMembresEquipage = new System.Windows.Forms.GroupBox();
+            this.flpMembres = new System.Windows.Forms.FlowLayoutPanel();
             this.grbMembres = new System.Windows.Forms.GroupBox();
             this.lstObjectifs = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pbJdB = new System.Windows.Forms.PictureBox();
-            this.flpMembres = new System.Windows.Forms.FlowLayoutPanel();
             this.pbPlanete = new System.Windows.Forms.PictureBox();
             this.grpFeuilleDeRoute.SuspendLayout();
             this.grpMembresEquipage.SuspendLayout();
@@ -93,6 +93,7 @@
             this.lblSoldeApresDepenses.Size = new System.Drawing.Size(70, 25);
             this.lblSoldeApresDepenses.TabIndex = 3;
             this.lblSoldeApresDepenses.Text = "label4";
+            this.lblSoldeApresDepenses.Click += new System.EventHandler(this.lblSoldeApresDepenses_Click);
             // 
             // lblDateRetour
             // 
@@ -135,6 +136,14 @@
             this.grpMembresEquipage.TabIndex = 6;
             this.grpMembresEquipage.TabStop = false;
             this.grpMembresEquipage.Text = "Membres de l\'équipage";
+            // 
+            // flpMembres
+            // 
+            this.flpMembres.AutoScroll = true;
+            this.flpMembres.Location = new System.Drawing.Point(10, 33);
+            this.flpMembres.Name = "flpMembres";
+            this.flpMembres.Size = new System.Drawing.Size(1019, 237);
+            this.flpMembres.TabIndex = 1;
             // 
             // grbMembres
             // 
@@ -215,14 +224,6 @@
             this.pbJdB.TabIndex = 13;
             this.pbJdB.TabStop = false;
             this.pbJdB.Click += new System.EventHandler(this.pbJdB_Click);
-            // 
-            // flpMembres
-            // 
-            this.flpMembres.AutoScroll = true;
-            this.flpMembres.Location = new System.Drawing.Point(10, 33);
-            this.flpMembres.Name = "flpMembres";
-            this.flpMembres.Size = new System.Drawing.Size(1019, 237);
-            this.flpMembres.TabIndex = 1;
             // 
             // pbPlanete
             // 

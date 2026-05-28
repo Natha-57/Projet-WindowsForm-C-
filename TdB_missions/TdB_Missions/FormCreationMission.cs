@@ -362,9 +362,7 @@ namespace _2__Creation_De_Mission
                 transaction.Commit();
                 MessageBox.Show("Objectifs enregistrés avec succès !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                FormTdB form2 = new FormTdB();
-                form2.Show();
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)

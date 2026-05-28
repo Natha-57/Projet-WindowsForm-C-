@@ -85,10 +85,18 @@ namespace TdB_Missions
 
         private void btCreerMission_Click(object sender, EventArgs e)
         {
-            this.Hide();
             FormAuthentification formAuth = new FormAuthentification();
-            formAuth.ShowDialog();
-            this.Close();
+            if (formAuth.ShowDialog() == DialogResult.OK)
+            {
+                
+                Rafraichir(); 
+            }
+        }
+
+        public void Rafraichir()
+        {
+            this.Controls.Clear();
+            Form1_Load(null, null);
         }
     }
 }

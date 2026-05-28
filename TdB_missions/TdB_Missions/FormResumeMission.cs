@@ -229,6 +229,11 @@ namespace _3_Visualisation_et_MAJ_missions
             FormJdB f2 = new FormJdB(this.nomPlanete, this.numeroMission);
             f2.ShowDialog();
         }
+
+        private void lblSoldeApresDepenses_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
