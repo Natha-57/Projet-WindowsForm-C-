@@ -36,8 +36,6 @@
             this.grpFeuilleDeRoute = new System.Windows.Forms.GroupBox();
             this.txtFeuilleRoute = new System.Windows.Forms.RichTextBox();
             this.grpMembresEquipage = new System.Windows.Forms.GroupBox();
-            this.lstMembres = new System.Windows.Forms.ListBox();
-            this.btJournalDeBoard = new System.Windows.Forms.Button();
             this.grbMembres = new System.Windows.Forms.GroupBox();
             this.lstObjectifs = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,15 +43,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.pbJdB = new System.Windows.Forms.PictureBox();
+            this.flpMembres = new System.Windows.Forms.FlowLayoutPanel();
+            this.pbPlanete = new System.Windows.Forms.PictureBox();
             this.grpFeuilleDeRoute.SuspendLayout();
             this.grpMembresEquipage.SuspendLayout();
             this.grbMembres.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJdB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlanete)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNomMission
             // 
             this.lblNomMission.AutoSize = true;
-            this.lblNomMission.Location = new System.Drawing.Point(608, 63);
+            this.lblNomMission.Location = new System.Drawing.Point(659, 79);
             this.lblNomMission.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblNomMission.Name = "lblNomMission";
             this.lblNomMission.Size = new System.Drawing.Size(130, 25);
@@ -123,7 +126,7 @@
             // 
             // grpMembresEquipage
             // 
-            this.grpMembresEquipage.Controls.Add(this.lstMembres);
+            this.grpMembresEquipage.Controls.Add(this.flpMembres);
             this.grpMembresEquipage.Location = new System.Drawing.Point(113, 571);
             this.grpMembresEquipage.Margin = new System.Windows.Forms.Padding(6);
             this.grpMembresEquipage.Name = "grpMembresEquipage";
@@ -132,25 +135,6 @@
             this.grpMembresEquipage.TabIndex = 6;
             this.grpMembresEquipage.TabStop = false;
             this.grpMembresEquipage.Text = "Membres de l\'équipage";
-            // 
-            // lstMembres
-            // 
-            this.lstMembres.FormattingEnabled = true;
-            this.lstMembres.ItemHeight = 25;
-            this.lstMembres.Location = new System.Drawing.Point(9, 33);
-            this.lstMembres.Name = "lstMembres";
-            this.lstMembres.Size = new System.Drawing.Size(1020, 229);
-            this.lstMembres.TabIndex = 0;
-            // 
-            // btJournalDeBoard
-            // 
-            this.btJournalDeBoard.Location = new System.Drawing.Point(857, 1065);
-            this.btJournalDeBoard.Name = "btJournalDeBoard";
-            this.btJournalDeBoard.Size = new System.Drawing.Size(295, 113);
-            this.btJournalDeBoard.TabIndex = 7;
-            this.btJournalDeBoard.Text = "Journal de Board >";
-            this.btJournalDeBoard.UseVisualStyleBackColor = true;
-            this.btJournalDeBoard.Click += new System.EventHandler(this.btJournalDeBoard_Click);
             // 
             // grbMembres
             // 
@@ -216,26 +200,51 @@
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1072, 144);
+            this.label5.Location = new System.Drawing.Point(1060, 171);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 25);
+            this.label5.Size = new System.Drawing.Size(105, 58);
             this.label5.TabIndex = 12;
-            this.label5.Text = "label1";
+            this.label5.Text = "Journal de Board";
+            // 
+            // pbJdB
+            // 
+            this.pbJdB.Location = new System.Drawing.Point(1065, 79);
+            this.pbJdB.Name = "pbJdB";
+            this.pbJdB.Size = new System.Drawing.Size(100, 89);
+            this.pbJdB.TabIndex = 13;
+            this.pbJdB.TabStop = false;
+            this.pbJdB.Click += new System.EventHandler(this.pbJdB_Click);
+            // 
+            // flpMembres
+            // 
+            this.flpMembres.AutoScroll = true;
+            this.flpMembres.Location = new System.Drawing.Point(10, 33);
+            this.flpMembres.Name = "flpMembres";
+            this.flpMembres.Size = new System.Drawing.Size(1019, 237);
+            this.flpMembres.TabIndex = 1;
+            // 
+            // pbPlanete
+            // 
+            this.pbPlanete.Location = new System.Drawing.Point(360, 12);
+            this.pbPlanete.Name = "pbPlanete";
+            this.pbPlanete.Size = new System.Drawing.Size(239, 171);
+            this.pbPlanete.TabIndex = 14;
+            this.pbPlanete.TabStop = false;
             // 
             // FormResumeMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1249, 1061);
+            this.Controls.Add(this.pbPlanete);
+            this.Controls.Add(this.pbJdB);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grbMembres);
-            this.Controls.Add(this.btJournalDeBoard);
             this.Controls.Add(this.grpMembresEquipage);
             this.Controls.Add(this.grpFeuilleDeRoute);
             this.Controls.Add(this.lblDateRetour);
@@ -250,6 +259,8 @@
             this.grpFeuilleDeRoute.ResumeLayout(false);
             this.grpMembresEquipage.ResumeLayout(false);
             this.grbMembres.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbJdB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPlanete)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,16 +275,17 @@
         private System.Windows.Forms.Label lblDateRetour;
         private System.Windows.Forms.GroupBox grpFeuilleDeRoute;
         private System.Windows.Forms.GroupBox grpMembresEquipage;
-        private System.Windows.Forms.Button btJournalDeBoard;
         private System.Windows.Forms.RichTextBox txtFeuilleRoute;
         private System.Windows.Forms.GroupBox grbMembres;
         private System.Windows.Forms.ListBox lstObjectifs;
-        private System.Windows.Forms.ListBox lstMembres;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pbJdB;
+        private System.Windows.Forms.FlowLayoutPanel flpMembres;
+        private System.Windows.Forms.PictureBox pbPlanete;
     }
 }
 

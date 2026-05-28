@@ -37,6 +37,12 @@ namespace _3_Visualisation_et_MAJ_missions
             {
                 MessageBox.Show(ex.Message);
             }
+
+            pbJdB.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbJdB.SizeMode = PictureBoxSizeMode.Zoom;
+            pbJdB.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\jdb.png");
+
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,6 +52,13 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void ChargerMission()
         {
+            string cheminPhoto = $"..\\..\\..\\..\\Images App\\Planètes\\Logo - {this.nomPlanete}.png";
+            if (File.Exists(cheminPhoto))
+            {
+                pbPlanete.Image = Image.FromFile(cheminPhoto);
+                pbPlanete.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+
             try
             {
                 string sql = @"
@@ -144,31 +157,61 @@ namespace _3_Visualisation_et_MAJ_missions
             try
             {
                 string sql = @"
-                SELECT membre.nom,
-                       membre.prenom
-                FROM Composer
-                JOIN Membre membre
-                    ON membre.matricule = Composer.matriculeMembre
-                WHERE Composer.nomPlanete = @planete
-                AND Composer.numeroMission = @numero";
+            SELECT m.nom, m.prenom,
+                   CASE WHEN mil.matriculeMembre IS NOT NULL 
+                        THEN mil.grade
+                        ELSE c.Specialite
+                   END AS type
+            FROM Composer comp
+            JOIN Membre m ON m.matricule = comp.matriculeMembre
+            LEFT JOIN Militaire mil ON mil.matriculeMembre = m.matricule
+            LEFT JOIN Civil c ON c.matriculeMembre = m.matricule
+            WHERE comp.nomPlanete = @planete
+            AND comp.numeroMission = @numero";
 
                 SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
-
                 cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
                 cmd.Parameters.AddWithValue("@numero", this.numeroMission);
-
                 SQLiteDataReader reader = cmd.ExecuteReader();
 
-             lstMembres.Items.Clear();
+                flpMembres.Controls.Clear();
 
                 while (reader.Read())
                 {
-                    string membre =
-                        reader["nom"].ToString()
-                        + " "
-                        + reader["prenom"].ToString();
+                    string type = reader["type"].ToString();
 
-                    lstMembres.Items.Add(membre);
+                    Panel pnl = new Panel
+                    {
+                        Width = 80,
+                        Height = 100,
+                        Margin = new Padding(5)
+                    };
+
+                    PictureBox pb = new PictureBox
+                    {
+                        Width = 60,
+                        Height = 60,
+                        SizeMode = PictureBoxSizeMode.Zoom,
+                        Location = new Point(10, 5)
+                    };
+
+                    string cheminPhoto = $"..\\..\\..\\..\\Images App\\Membres\\Logo - {type}.png";
+                    if (File.Exists(cheminPhoto))
+                        pb.Image = Image.FromFile(cheminPhoto);
+
+                    Label lbl = new Label
+                    {
+                        Text = reader["nom"] + "\n" + reader["prenom"],
+                        Width = 80,
+                        Height = 35,
+                        Location = new Point(0, 65),
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Font = new Font("Segoe UI", 7)
+                    };
+
+                    pnl.Controls.Add(pb);
+                    pnl.Controls.Add(lbl);
+                    flpMembres.Controls.Add(pnl);
                 }
 
                 reader.Close();
@@ -179,9 +222,11 @@ namespace _3_Visualisation_et_MAJ_missions
             }
         }
 
-        private void btJournalDeBoard_Click(object sender, EventArgs e)
+
+
+        private void pbJdB_Click(object sender, EventArgs e)
         {
-            FormJdB f2 = new FormJdB();
+            FormJdB f2 = new FormJdB(this.nomPlanete, this.numeroMission);
             f2.ShowDialog();
         }
     }

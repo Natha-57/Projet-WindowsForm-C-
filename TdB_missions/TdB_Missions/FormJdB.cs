@@ -21,16 +21,20 @@ namespace _3_Visualisation_et_MAJ_missions
         private int num;
         private DataTable dtEvenements;
         private int indexEvenement = 0;
-        public FormJdB()
+        public FormJdB(string planete, int num)
         {
             InitializeComponent();
-            string chaine = "Data Source=..\\..\\..\\..\\Fichiers Moodle\\Stargate.db";
+            this.planete = planete;
+            this.num = num;
+
+            string chaine = "Data Source=Stargate.db";
             this.cx = new SQLiteConnection(chaine);
             this.cx.Open();
 
             ChargerDepenses();
             ChargerContacts();
             ChargerEvenements();
+        
 
             pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
@@ -179,7 +183,5 @@ namespace _3_Visualisation_et_MAJ_missions
         {
             
         }
-
-        //jevois pas pourquoi on aurait besoin de ça, mais bon, on va laisser ça là au cas où
     }
 }

@@ -79,10 +79,9 @@
             // 
             // lblEvenement
             // 
-            this.lblEvenement.AutoSize = true;
-            this.lblEvenement.Location = new System.Drawing.Point(16, 109);
+            this.lblEvenement.Location = new System.Drawing.Point(16, 99);
             this.lblEvenement.Name = "lblEvenement";
-            this.lblEvenement.Size = new System.Drawing.Size(70, 25);
+            this.lblEvenement.Size = new System.Drawing.Size(460, 109);
             this.lblEvenement.TabIndex = 6;
             this.lblEvenement.Text = "label2";
             // 
@@ -103,6 +102,7 @@
             this.btSuivant.TabIndex = 3;
             this.btSuivant.Text = ">";
             this.btSuivant.UseVisualStyleBackColor = true;
+            this.btSuivant.Click += new System.EventHandler(this.btSuivant_Click);
             // 
             // btAllerToutAlaFin
             // 
@@ -112,6 +112,7 @@
             this.btAllerToutAlaFin.TabIndex = 2;
             this.btAllerToutAlaFin.Text = ">>";
             this.btAllerToutAlaFin.UseVisualStyleBackColor = true;
+            this.btAllerToutAlaFin.Click += new System.EventHandler(this.btAllerToutAlaFin_Click);
             // 
             // btRevenir1foisEnArriere
             // 
@@ -121,6 +122,7 @@
             this.btRevenir1foisEnArriere.TabIndex = 1;
             this.btRevenir1foisEnArriere.Text = "<";
             this.btRevenir1foisEnArriere.UseVisualStyleBackColor = true;
+            this.btRevenir1foisEnArriere.Click += new System.EventHandler(this.btRevenir1foisEnArriere_Click);
             // 
             // btToutDebut
             // 
@@ -130,6 +132,7 @@
             this.btToutDebut.TabIndex = 0;
             this.btToutDebut.Text = "<<";
             this.btToutDebut.UseVisualStyleBackColor = true;
+            this.btToutDebut.Click += new System.EventHandler(this.btToutDebut_Click);
             // 
             // grpDepenses
             // 
