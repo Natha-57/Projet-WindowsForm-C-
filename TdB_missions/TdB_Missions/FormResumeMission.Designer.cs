@@ -46,11 +46,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.pbJdB = new System.Windows.Forms.PictureBox();
             this.pbPlanete = new System.Windows.Forms.PictureBox();
+            this.pbHome = new System.Windows.Forms.PictureBox();
             this.grpFeuilleDeRoute.SuspendLayout();
             this.grpMembresEquipage.SuspendLayout();
             this.grbMembres.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbJdB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlanete)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNomMission
@@ -233,11 +235,21 @@
             this.pbPlanete.TabIndex = 14;
             this.pbPlanete.TabStop = false;
             // 
+            // pbHome
+            // 
+            this.pbHome.Location = new System.Drawing.Point(134, 79);
+            this.pbHome.Name = "pbHome";
+            this.pbHome.Size = new System.Drawing.Size(116, 89);
+            this.pbHome.TabIndex = 15;
+            this.pbHome.TabStop = false;
+            this.pbHome.Click += new System.EventHandler(this.pbHome_Click);
+            // 
             // FormResumeMission
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1249, 1061);
+            this.Controls.Add(this.pbHome);
             this.Controls.Add(this.pbPlanete);
             this.Controls.Add(this.pbJdB);
             this.Controls.Add(this.label5);
@@ -262,6 +274,7 @@
             this.grbMembres.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbJdB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPlanete)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHome)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,6 +300,7 @@
         private System.Windows.Forms.PictureBox pbJdB;
         private System.Windows.Forms.FlowLayoutPanel flpMembres;
         private System.Windows.Forms.PictureBox pbPlanete;
+        private System.Windows.Forms.PictureBox pbHome;
     }
 }
 

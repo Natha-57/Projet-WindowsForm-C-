@@ -42,7 +42,9 @@ namespace _3_Visualisation_et_MAJ_missions
             pbJdB.SizeMode = PictureBoxSizeMode.Zoom;
             pbJdB.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\jdb.png");
 
-            
+            pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbHome.SizeMode = PictureBoxSizeMode.Zoom;
+            pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\home.png");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -93,14 +95,19 @@ namespace _3_Visualisation_et_MAJ_missions
                    txtFeuilleRoute.Text =
                        reader["feuilleDeRoute"].ToString();
 
-                    lblBudget.Text =
-                        reader["budget"].ToString() + " €";
+                    int budget = Convert.ToInt32(reader["budget"]);
+                    lblBudget.Text = budget + " €";
 
-                    lblSoldeApresDepenses.Text =
-                        reader["budget"].ToString() + " €";
+                    string sqlSolde = @"SELECT COALESCE(SUM(montant), 0) 
+                        FROM Depense 
+                        WHERE nomPlanete    = @planete 
+                        AND   numeroMission = @numero";
+                    SQLiteCommand cmdSolde = new SQLiteCommand(sqlSolde, this.cx);
+                    cmdSolde.Parameters.AddWithValue("@planete", this.nomPlanete);
+                    cmdSolde.Parameters.AddWithValue("@numero", this.numeroMission);
+                    int totalDepenses = Convert.ToInt32(cmdSolde.ExecuteScalar());
 
-                  //  lblChefMission.Text =
-                    //    reader["chef"].ToString();
+                    lblSoldeApresDepenses.Text = (budget - totalDepenses) + " €";
                 }
 
                 reader.Close();
@@ -226,6 +233,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void pbJdB_Click(object sender, EventArgs e)
         {
+            
             FormJdB f2 = new FormJdB(this.nomPlanete, this.numeroMission);
             f2.ShowDialog();
         }
@@ -233,6 +241,11 @@ namespace _3_Visualisation_et_MAJ_missions
         private void lblSoldeApresDepenses_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pbHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 
