@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.IO;
+using TdB_Missions;
 
 namespace _3_Visualisation_et_MAJ_missions
 {
@@ -24,7 +25,7 @@ namespace _3_Visualisation_et_MAJ_missions
             this.numeroMission = numeroMission;
 
             string chaine = "Data Source=Stargate.db";
-            this.cx = new SQLiteConnection(chaine);
+            this.cx = Connexion.Connec;
             try
             {
                 this.cx.Open();
