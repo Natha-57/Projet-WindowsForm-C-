@@ -43,6 +43,7 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
             int axeX = 25;
             int axeY = 20;
             int i = 0;
@@ -57,8 +58,8 @@ namespace TdB_Missions
 
                     UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), d[1].ToString() +" "+ d[2].ToString(), "../../../../Images App/Planètes/Logo - " + row[0]+".png");
                     
-                    uc.NomPlanete = row[0].ToString();
-                    uc.NumeroMission = Convert.ToInt32(row[1]);
+                    uc.setNomPlanete(row[0].ToString());
+                    uc.setNumeroMission(Convert.ToInt32(row[1]));
                     
                     uc.Location = new Point(axeX, axeY + i);
                     uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
@@ -78,7 +79,7 @@ namespace TdB_Missions
             UserControl1 uc = (UserControl1)sender;
 
             FormResumeMission f =
-                new FormResumeMission(uc.NomPlanete, uc.NumeroMission);
+                new FormResumeMission(uc.getNomPlanete(), uc.getNumeroMission());
 
             f.Show();
         }

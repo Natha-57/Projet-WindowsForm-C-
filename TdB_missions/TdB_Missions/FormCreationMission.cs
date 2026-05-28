@@ -143,7 +143,7 @@ namespace _2__Creation_De_Mission
 
         private void FormCreationMission_Load(object sender, EventArgs e)
         {
-
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

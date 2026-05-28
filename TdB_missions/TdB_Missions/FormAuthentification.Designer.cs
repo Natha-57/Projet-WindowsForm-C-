@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAuthentification));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -65,7 +64,7 @@
             this.label2.Location = new System.Drawing.Point(11, 123);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 40);
+            this.label2.Size = new System.Drawing.Size(52, 22);
             this.label2.TabIndex = 1;
             this.label2.Text = "Login";
             // 
@@ -76,7 +75,7 @@
             this.label3.Location = new System.Drawing.Point(11, 175);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(211, 40);
+            this.label3.Size = new System.Drawing.Size(107, 22);
             this.label3.TabIndex = 2;
             this.label3.Text = "Mot de passe";
             // 
@@ -97,7 +96,7 @@
             this.txtLogin.Location = new System.Drawing.Point(130, 117);
             this.txtLogin.Margin = new System.Windows.Forms.Padding(6);
             this.txtLogin.Name = "txtLogin";
-            this.txtLogin.Size = new System.Drawing.Size(375, 56);
+            this.txtLogin.Size = new System.Drawing.Size(375, 32);
             this.txtLogin.TabIndex = 4;
             // 
             // txtMdp
@@ -106,7 +105,7 @@
             this.txtMdp.Margin = new System.Windows.Forms.Padding(6);
             this.txtMdp.Name = "txtMdp";
             this.txtMdp.PasswordChar = '*';
-            this.txtMdp.Size = new System.Drawing.Size(375, 56);
+            this.txtMdp.Size = new System.Drawing.Size(375, 32);
             this.txtMdp.TabIndex = 5;
             // 
             // label4
@@ -116,7 +115,7 @@
             this.label4.Location = new System.Drawing.Point(22, 57);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(948, 52);
+            this.label4.Size = new System.Drawing.Size(468, 27);
             this.label4.TabIndex = 6;
             this.label4.Text = "Seul les militaires peuvent créer des missions !";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -155,7 +154,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(15, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(63, 63);
@@ -166,7 +164,6 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(84, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(446, 63);
@@ -177,7 +174,7 @@
             // 
             // FormAuthentification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(25F, 51F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(120)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(547, 394);
@@ -186,7 +183,6 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormAuthentification";
             this.Text = "Authentification";

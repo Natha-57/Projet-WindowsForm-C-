@@ -183,5 +183,10 @@ namespace _3_Visualisation_et_MAJ_missions
         {
             
         }
+
+        private void FormJdB_Load(object sender, EventArgs e)
+        {
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
+        }
     }
 }

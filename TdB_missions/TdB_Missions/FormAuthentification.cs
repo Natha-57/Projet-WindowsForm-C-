@@ -98,7 +98,9 @@ namespace _2__Creation_De_Mission
 
         private void FormAuthentification_Load(object sender, EventArgs e)
         {
-
+            pictureBox2.Image = Image.FromFile("../../../../Images_App/Texte Long Star Gate.png");
+            pictureBox1.Image = Image.FromFile("../../../../Images_App/Logo Star Gate.png");
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
         }
 
         private void label4_Click(object sender, EventArgs e)
