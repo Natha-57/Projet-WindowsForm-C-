@@ -13,8 +13,8 @@ namespace mission_tdb
     public partial class UserControl1: UserControl
     {
         public event EventHandler OuvrirFormulaire;
-        public string NomPlanete { get; set; }
-        public int NumeroMission { get; set; }
+        private string NomPlanete;
+        private int NumeroMission;
 
         public UserControl1()
         {
@@ -28,11 +28,24 @@ namespace mission_tdb
             label3.Text = date_fin;
             label4.Text = nom_chef;
             pictureBox1.Image = Image.FromFile(image_path);
-     
-            
-
         }
 
+        public string getNomPlanete()
+        {
+            return this.NomPlanete;
+        }
+        public void setNomPlanete(string np)
+        {
+           this.NomPlanete = np;
+        }
+        public int getNumeroMission()
+        {
+            return this.NumeroMission;
+        }
+        public void setNumeroMission(int nm)
+        {
+            this.NumeroMission = nm;
+        }
         private void label4_Click(object sender, EventArgs e)
         {
 
