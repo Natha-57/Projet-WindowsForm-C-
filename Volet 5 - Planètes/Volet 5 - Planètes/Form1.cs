@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Data.SQLite;
 
 namespace Volet_4___Races_Aliens
 {
-    public partial class Form_Aliens : Form
+    public partial class Form_Planetes : Form
     {
         private readonly string _cheminBD =
             System.IO.Path.Combine(
@@ -23,84 +18,71 @@ namespace Volet_4___Races_Aliens
         private readonly string _cheminImages =
             System.IO.Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
-                "Images");
-
-        private readonly string _cheminImagesPlanetes =
-            System.IO.Path.Combine(
-                AppDomain.CurrentDomain.BaseDirectory,
                 "ImagesPlanetes");
 
         private DataSet _ds = new DataSet();
-        private FlowLayoutPanel flowRaces;
+        private FlowLayoutPanel flowPlanetes;
 
-        public Form_Aliens()
+        public Form_Planetes()
         {
             InitializeComponent();
         }
 
+        // ======================================================================
+        // CHARGEMENT
+        // ======================================================================
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox1.Items.AddRange(new object[] {
-                "(Toutes)", "Bleu", "Gris", "Marron",
-                "Orange", "Pourpre", "Rose", "Vert", "Violet" });
-            comboBox1.SelectedIndex = 0;
-
-            comboBox2.Items.AddRange(new object[] {
-                "(Tous)", "Alliée", "Ennemie", "Inconnue" });
-            comboBox2.SelectedIndex = 0;
-
-            comboBox3.Items.AddRange(new object[] {
-                "(Toutes)", "Aina", "Aurae", "Jupiter", "Kobaia",
-                "La 9ème planète", "Malaria", "Mars", "Mercure", "Muh",
-                "Neptune", "Saturne", "Sckxyss", "Setna", "Sohia",
-                "Terre", "Uranus", "Vénus", "Origine inconnue" });
-            comboBox3.SelectedIndex = 0;
-
-            flowRaces = new FlowLayoutPanel();
-            flowRaces.Location = new Point(12, 200);
-            flowRaces.Location = new Point(12, 270);
-            flowRaces.Size = new Size(this.ClientSize.Width - 24, this.ClientSize.Height - 280);
-            flowRaces.FlowDirection = FlowDirection.LeftToRight;
-            flowRaces.WrapContents = true;
-            flowRaces.AutoSize = false;
-            flowRaces.AutoScroll = true;
-            flowRaces.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
-                                    | AnchorStyles.Left | AnchorStyles.Right;
-            this.Controls.Add(flowRaces);
-
-            button_chercher.Click += (s, ev) => AppliquerFiltres();
-            button_reset.Click += BtnReset_Click;
+            // FlowLayoutPanel pour les cartes planètes
+            flowPlanetes = new FlowLayoutPanel();
+            flowPlanetes.Location = new Point(12, 80);
+            flowPlanetes.Size = new Size(this.ClientSize.Width - 24,
+                                                   this.ClientSize.Height - 90);
+            flowPlanetes.FlowDirection = FlowDirection.LeftToRight;
+            flowPlanetes.WrapContents = true;
+            flowPlanetes.AutoScroll = true;
+            flowPlanetes.AutoSize = false;
+            flowPlanetes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom
+                                       | AnchorStyles.Left | AnchorStyles.Right;
+            this.Controls.Add(flowPlanetes);
 
             ChargerDonnees();
-            AppliquerFiltres();
+            AfficherCartes();
         }
+
+        // ======================================================================
+        // CHARGEMENT EN MODE CONNECTÉ
+        // ======================================================================
 
         private void ChargerDonnees()
         {
-            string sql = @"
-                SELECT
-                    e.id,
-                    e.nom,
-                    e.couleur,
-                    CASE
-                        WHEN a.idEspece IS NOT NULL THEN 'Alliée'
-                        WHEN en.idEspece IS NOT NULL THEN 'Ennemie'
-                        ELSE 'Inconnue'
-                    END AS type,
-                    COALESCE(a.datePremierContact, '') AS datePremierContact,
-                    COALESCE(a.degreBienveillance, '') AS degreBienveillance,
-                    COALESCE(a.instrumentMusique, '') AS instrumentMusique,
-                    COALESCE(en.typeArme, '') AS typeArme,
-                    COALESCE(en.degreAgressivite, '') AS degreAgressivite,
-                    COALESCE(
-                        (SELECT GROUP_CONCAT(h.nomPlanete, ', ')
-                         FROM Habiter h WHERE h.idEspece = e.id),
-                        'Origine inconnue'
-                    ) AS planetes
-                FROM Espece e
+            // Planètes
+            string sqlPlanetes = @"
+                SELECT nom, temperature, gravite, dataBazON
+                FROM Planete
+                ORDER BY nom";
+
+            // Espèces par planète avec pourcentage
+            string sqlEspeces = @"
+                SELECT h.nomPlanete, e.nom AS nomEspece, e.couleur,
+                       h.pourcentage,
+                       CASE
+                           WHEN a.idEspece IS NOT NULL THEN 'Alliée'
+                           WHEN en.idEspece IS NOT NULL THEN 'Ennemie'
+                           ELSE 'Inconnue'
+                       END AS type
+                FROM Habiter h
+                JOIN Espece e ON h.idEspece = e.id
                 LEFT JOIN Allie  a  ON e.id = a.idEspece
                 LEFT JOIN Ennemi en ON e.id = en.idEspece
-                ORDER BY e.nom";
+                ORDER BY h.nomPlanete, h.pourcentage DESC";
+
+            // Missions par planète
+            string sqlMissions = @"
+                SELECT nomPlanete, COUNT(*) AS nbMissions
+                FROM Mission
+                GROUP BY nomPlanete";
 
             try
             {
@@ -108,9 +90,18 @@ namespace Volet_4___Races_Aliens
                     $"Data Source={_cheminBD};Version=3;"))
                 {
                     conn.Open();
-                    _ds.Tables.Add("Races");
-                    using (var da = new SQLiteDataAdapter(sql, conn))
-                        da.Fill(_ds.Tables["Races"]);
+
+                    _ds.Tables.Add("Planetes");
+                    using (var da = new SQLiteDataAdapter(sqlPlanetes, conn))
+                        da.Fill(_ds.Tables["Planetes"]);
+
+                    _ds.Tables.Add("EspecesPlanete");
+                    using (var da = new SQLiteDataAdapter(sqlEspeces, conn))
+                        da.Fill(_ds.Tables["EspecesPlanete"]);
+
+                    _ds.Tables.Add("MissionsPlanete");
+                    using (var da = new SQLiteDataAdapter(sqlMissions, conn))
+                        da.Fill(_ds.Tables["MissionsPlanete"]);
                 }
             }
             catch (Exception ex)
@@ -121,220 +112,191 @@ namespace Volet_4___Races_Aliens
             }
         }
 
-        private void AppliquerFiltres()
+        // ======================================================================
+        // AFFICHAGE DES CARTES (mode déconnecté)
+        // ======================================================================
+
+        private void AfficherCartes()
         {
-            if (_ds.Tables["Races"] == null) return;
+            if (_ds.Tables["Planetes"] == null) return;
 
-            string nom = textBox1.Text.Trim().ToLower();
-            string couleur = comboBox1.SelectedItem?.ToString() ?? "(Toutes)";
-            string type = comboBox2.SelectedItem?.ToString() ?? "(Tous)";
-            string planete = comboBox3.SelectedItem?.ToString() ?? "(Toutes)";
+            flowPlanetes.SuspendLayout();
+            flowPlanetes.Controls.Clear();
 
-            var lignes = _ds.Tables["Races"].AsEnumerable().Where(r =>
-            {
-                bool okNom = string.IsNullOrEmpty(nom) ||
-                                 r["nom"].ToString().ToLower().Contains(nom);
-                bool okCouleur = couleur == "(Toutes)" ||
-                                 r["couleur"].ToString() == couleur;
-                bool okType = type == "(Tous)" ||
-                                 r["type"].ToString() == type;
-                bool okPlanete = planete == "(Toutes)" ||
-                                 (planete == "Origine inconnue" &&
-                                  r["planetes"].ToString() == "Origine inconnue") ||
-                                 r["planetes"].ToString().Contains(planete);
-                return okNom && okCouleur && okType && okPlanete;
-            }).ToList();
+            foreach (DataRow row in _ds.Tables["Planetes"].Rows)
+                flowPlanetes.Controls.Add(CreerCartePlanete(row));
 
-            flowRaces.SuspendLayout();
-            flowRaces.Controls.Clear();
-
-            foreach (var row in lignes)
-                flowRaces.Controls.Add(CreerCarteRace(row));
-
-            flowRaces.ResumeLayout();
-
-            label4.Text = $"{lignes.Count} espèce(s) trouvée(s)";
+            flowPlanetes.ResumeLayout();
         }
 
-        private Panel CreerCarteRace(DataRow row)
-        {
-            string typeRace = row["type"].ToString();
-            bool allie = typeRace == "Alliée";
-            bool ennemi = typeRace == "Ennemie";
+        // ======================================================================
+        // CRÉATION D'UNE CARTE DE PLANÈTE
+        // ======================================================================
 
-            Color bordure = allie ? Color.FromArgb(0, 150, 70)
-                          : ennemi ? Color.FromArgb(190, 30, 30)
-                                   : Color.FromArgb(120, 130, 150);
+        private Panel CreerCartePlanete(DataRow row)
+        {
+            string nomPlanete = row["nom"].ToString();
+            bool databaz = row["dataBazON"] != DBNull.Value && Convert.ToInt32(row["dataBazON"]) == 1;
 
             // --- Carte ---
             Panel carte = new Panel();
-            carte.Size = new Size(160, 212);
-            carte.Margin = new Padding(5);
+            carte.Size = new Size(200, 260);
+            carte.Margin = new Padding(8);
             carte.BackColor = Color.White;
             carte.Cursor = Cursors.Hand;
             carte.Tag = row;
-            carte.Paint += (s, e) => e.Graphics.DrawRectangle(
-                                  new Pen(bordure, 2), 1, 1,
-                                  carte.Width - 3, carte.Height - 3);
+            carte.Paint += (s, e) =>
+            {
+                e.Graphics.DrawRectangle(
+                    new Pen(Color.FromArgb(180, 190, 210), 1),
+                    1, 1, carte.Width - 3, carte.Height - 3);
+            };
 
-            // --- Panel image ---
-            Panel pnlImg = new Panel();
-            pnlImg.Size = new Size(130, 110);
-            pnlImg.Location = new Point(15, 20);
-            pnlImg.BackColor = Color.White;
-            pnlImg.BorderStyle = BorderStyle.None;
-
+            // --- Image planète ---
             PictureBox img = new PictureBox();
-            img.Size = new Size(130, 110);
-            img.Location = new Point(0, 0);
+            img.Size = new Size(140, 140);
+            img.Location = new Point(30, 10);
             img.SizeMode = PictureBoxSizeMode.Zoom;
             img.BackColor = Color.White;
 
-            string cheminImg = System.IO.Path.Combine(
-                                   _cheminImages,
-                                   row["nom"].ToString() + ".png");
-
-            if (System.IO.File.Exists(cheminImg))
-            {
+            string cheminImg = Path.Combine(_cheminImages, "Logo - " + nomPlanete + ".png");
+            if (File.Exists(cheminImg))
                 img.Image = Image.FromFile(cheminImg);
-            }
             else
             {
-                img.BackColor = CouleurEspece(row["couleur"].ToString());
-                string initTxt = row["nom"].ToString().Length >= 2
-                                 ? row["nom"].ToString().Substring(0, 2).ToUpper()
-                                 : row["nom"].ToString().ToUpper();
+                img.BackColor = Color.FromArgb(200, 210, 230);
                 img.Paint += (s, e) =>
                 {
-                    using (Font f = new Font("Trebuchet MS", 14F, FontStyle.Bold))
+                    using (Font f = new Font("Trebuchet MS", 10F, FontStyle.Bold))
                     using (StringFormat sf = new StringFormat
                     {
                         Alignment = StringAlignment.Center,
                         LineAlignment = StringAlignment.Center
                     })
                     {
-                        e.Graphics.DrawString(initTxt, f, Brushes.White,
+                        e.Graphics.DrawString(nomPlanete, f, Brushes.White,
                             new RectangleF(0, 0, img.Width, img.Height), sf);
                     }
                 };
             }
-            pnlImg.Controls.Add(img);
-
-            // --- Badge type ---
-            Label badge = new Label();
-            badge.Text = allie ? "ALLIÉE" : ennemi ? "ENNEMIE" : "?";
-            badge.Font = new Font("Trebuchet MS", 7.5F, FontStyle.Bold);
-            badge.ForeColor = Color.White;
-            badge.BackColor = bordure;
-            badge.TextAlign = ContentAlignment.MiddleCenter;
-            badge.Location = new Point(0, 0);
-            badge.Size = new Size(65, 18);
-            badge.AutoSize = false;
 
             // --- Nom ---
             Label lblNom = new Label();
-            lblNom.Text = row["nom"].ToString();
-            lblNom.Font = new Font("Trebuchet MS", 10F, FontStyle.Bold);
+            lblNom.Text = nomPlanete;
+            lblNom.Font = new Font("Trebuchet MS", 11F, FontStyle.Bold);
             lblNom.ForeColor = Color.FromArgb(20, 40, 80);
             lblNom.TextAlign = ContentAlignment.MiddleCenter;
-            lblNom.Location = new Point(0, 133);
-            lblNom.Size = new Size(160, 22);
+            lblNom.Location = new Point(0, 153);
+            lblNom.Size = new Size(200, 24);
             lblNom.AutoSize = false;
 
-            // --- Couleur ---
-            Label lblCouleur = new Label();
-            lblCouleur.Text = row["couleur"].ToString();
-            lblCouleur.Font = new Font("Trebuchet MS", 9F);
-            lblCouleur.ForeColor = Color.FromArgb(90, 100, 120);
-            lblCouleur.TextAlign = ContentAlignment.MiddleCenter;
-            lblCouleur.Location = new Point(0, 157);
-            lblCouleur.Size = new Size(160, 18);
-            lblCouleur.AutoSize = false;
+            // --- Température ---
+            Label lblTemp = new Label();
+            lblTemp.Text = $"🌡  {row["temperature"]}°";
+            lblTemp.Font = new Font("Trebuchet MS", 9F);
+            lblTemp.ForeColor = Color.FromArgb(80, 90, 110);
+            lblTemp.TextAlign = ContentAlignment.MiddleCenter;
+            lblTemp.Location = new Point(0, 178);
+            lblTemp.Size = new Size(200, 18);
+            lblTemp.AutoSize = false;
 
-            // --- Planètes ---
-            Label lblPlanete = new Label();
-            lblPlanete.Text = row["planetes"].ToString();
-            lblPlanete.Font = new Font("Trebuchet MS", 8.5F, FontStyle.Italic);
-            lblPlanete.ForeColor = Color.FromArgb(110, 120, 140);
-            lblPlanete.TextAlign = ContentAlignment.TopCenter;
-            lblPlanete.Location = new Point(0, 177);
-            lblPlanete.Size = new Size(160, 30);
-            lblPlanete.AutoSize = false;
+            // --- Gravité ---
+            Label lblGrav = new Label();
+            lblGrav.Text = $"Gravité : {row["gravite"]} G";
+            lblGrav.Font = new Font("Trebuchet MS", 9F);
+            lblGrav.ForeColor = Color.FromArgb(80, 90, 110);
+            lblGrav.TextAlign = ContentAlignment.MiddleCenter;
+            lblGrav.Location = new Point(0, 197);
+            lblGrav.Size = new Size(200, 18);
+            lblGrav.AutoSize = false;
+
+            // --- DataBaz ---
+            Label lblDatabaz = new Label();
+            lblDatabaz.Text = databaz ? "Présence de Databaz" : "Pas de Databaz";
+            lblDatabaz.Font = new Font("Trebuchet MS", 9F, FontStyle.Bold);
+            lblDatabaz.ForeColor = databaz ? Color.FromArgb(0, 128, 0) : Color.FromArgb(180, 0, 0);
+            lblDatabaz.TextAlign = ContentAlignment.MiddleCenter;
+            lblDatabaz.Location = new Point(0, 216);
+            lblDatabaz.Size = new Size(200, 18);
+            lblDatabaz.AutoSize = false;
+
+            // --- Missions ---
+            DataRow[] missions = _ds.Tables["MissionsPlanete"].Select(
+                $"nomPlanete = '{nomPlanete}'");
+            int nbMissions = missions.Length > 0 ? Convert.ToInt32(missions[0]["nbMissions"]) : 0;
+
+            Label lblMissions = new Label();
+            lblMissions.Text = nbMissions > 0
+                                    ? $"{nbMissions} mission(s) effectuée(s)"
+                                    : "Aucune mission";
+            lblMissions.Font = new Font("Trebuchet MS", 8F, FontStyle.Italic);
+            lblMissions.ForeColor = Color.FromArgb(110, 120, 140);
+            lblMissions.TextAlign = ContentAlignment.MiddleCenter;
+            lblMissions.Location = new Point(0, 236);
+            lblMissions.Size = new Size(200, 18);
+            lblMissions.AutoSize = false;
 
             carte.Controls.AddRange(new Control[] {
-        pnlImg, badge, lblNom, lblCouleur, lblPlanete });
+                img, lblNom, lblTemp, lblGrav, lblDatabaz, lblMissions });
 
             // Hover
             carte.MouseEnter += (s, e) => carte.BackColor = Color.FromArgb(235, 242, 255);
             carte.MouseLeave += (s, e) => carte.BackColor = Color.White;
 
-            // Clic → détail sur tous les contrôles de la carte
+            // Clic → détail
             EventHandler clic = (s, e) => AfficherDetail(row);
             carte.Click += clic;
-            pnlImg.Click += clic;
             img.Click += clic;
             lblNom.Click += clic;
-            lblCouleur.Click += clic;
-            lblPlanete.Click += clic;
-            badge.Click += clic;
+            lblTemp.Click += clic;
+            lblGrav.Click += clic;
+            lblDatabaz.Click += clic;
+            lblMissions.Click += clic;
 
             return carte;
         }
 
+        // ======================================================================
+        // DÉTAIL AU CLIC
+        // ======================================================================
+
         private void AfficherDetail(DataRow row)
         {
-            using (FormDetail fd = new FormDetail(row, _cheminImages, _cheminImagesPlanetes))
-                fd.ShowDialog(this);
-        }
+            string nomPlanete = row["nom"].ToString();
+            bool databaz = row["dataBazON"] != DBNull.Value && Convert.ToInt32(row["dataBazON"]) == 1;
 
-        private void BtnReset_Click(object sender, EventArgs e)
-        {
-            textBox1.Text = "";
-            comboBox1.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-            AppliquerFiltres();
-        }
+            // Espèces de cette planète
+            DataRow[] especes = _ds.Tables["EspecesPlanete"].Select(
+                $"nomPlanete = '{nomPlanete}'");
 
-        private Color CouleurEspece(string couleur)
-        {
-            switch (couleur)
+            // Missions
+            DataRow[] missions = _ds.Tables["MissionsPlanete"].Select(
+                $"nomPlanete = '{nomPlanete}'");
+            int nbMissions = missions.Length > 0 ? Convert.ToInt32(missions[0]["nbMissions"]) : 0;
+
+            // Construction du message
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"Planète : {nomPlanete}");
+            sb.AppendLine($"Température : {row["temperature"]}°");
+            sb.AppendLine($"Gravité : {row["gravite"]}");
+            sb.AppendLine($"DataBaz : {(databaz ? "Présent" : "Absent")}");
+            sb.AppendLine($"Missions effectuées : {nbMissions}");
+            sb.AppendLine();
+
+            if (especes.Length > 0)
             {
-                case "Bleu": return Color.FromArgb(40, 100, 200);
-                case "Gris": return Color.FromArgb(120, 130, 145);
-                case "Marron": return Color.FromArgb(130, 80, 40);
-                case "Orange": return Color.FromArgb(220, 120, 20);
-                case "Pourpre": return Color.FromArgb(130, 0, 130);
-                case "Rose": return Color.FromArgb(210, 80, 130);
-                case "Vert": return Color.FromArgb(30, 140, 70);
-                case "Violet": return Color.FromArgb(100, 60, 180);
-                default: return Color.FromArgb(100, 110, 130);
+                sb.AppendLine("Espèces présentes :");
+                foreach (DataRow esp in especes)
+                    sb.AppendLine($"  • {esp["nomEspece"]} ({esp["type"]}) — {esp["pourcentage"]}%");
             }
-        }
-
-        private string NiveauLabel(string code)
-        {
-            switch (code)
+            else
             {
-                case "A": return "A — Très élevé";
-                case "B": return "B — Élevé";
-                case "C": return "C — Moyen";
-                case "D": return "D — Faible";
-                case "E": return "E — Très faible";
-                case "F": return "F — Minimal";
-                default: return code;
+                sb.AppendLine("Aucune espèce répertoriée.");
             }
-        }
 
-        private void textBox1_TextChanged(object sender, EventArgs e) { }
-        private void label2_Click(object sender, EventArgs e) { }
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void button_chercher_Click(object sender, EventArgs e) { AppliquerFiltres(); }
-
-        private void button_retour_Click(object sender, EventArgs e)
-        {
-
+            MessageBox.Show(sb.ToString(),
+                $"Informations — {nomPlanete}",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

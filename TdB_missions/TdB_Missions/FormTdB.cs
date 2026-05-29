@@ -48,6 +48,13 @@ namespace TdB_Missions
             int axeY = 20;
             int i = 0;
 
+            // Vérification : la table 'mission' doit exister dans le DataSet
+            if (!MesDatas.DsGlobal.Tables.Contains("mission"))
+            {
+                MessageBox.Show("Table 'mission' introuvable dans le DataSet. Vérifiez la base de données ou le chargement des tables.");
+                return;
+            }
+
             foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
             {
                 try
