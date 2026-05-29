@@ -450,5 +450,10 @@ namespace _2__Creation_De_Mission
         {
 
         }
+
+        private void cboChefDeMission_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

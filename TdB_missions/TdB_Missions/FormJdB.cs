@@ -188,5 +188,10 @@ namespace _3_Visualisation_et_MAJ_missions
         {
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
         }
+
+        private void lblEvenement_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

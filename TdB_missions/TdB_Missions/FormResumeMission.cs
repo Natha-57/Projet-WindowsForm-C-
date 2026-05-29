@@ -44,6 +44,18 @@ namespace _3_Visualisation_et_MAJ_missions
             pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
             pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\home.png");
+
+            pbDepense.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbDepense.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDepense.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\depense.png");
+
+            pbEvenement.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbEvenement.SizeMode = PictureBoxSizeMode.Zoom;
+            pbEvenement.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\event.png");
+
+            pbContact.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbContact.SizeMode = PictureBoxSizeMode.Zoom;
+            pbContact.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\contact.png");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -245,6 +257,233 @@ namespace _3_Visualisation_et_MAJ_missions
         private void pbHome_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtNouvelleDepense_TextChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void pbContact_Click(object sender, EventArgs e)
+        {
+
+            if (grpNouvelEvenement.Visible || grpNouvelleDepense.Visible)
+            {
+                grpNouvelEvenement.Hide();
+                grpNouvelleDepense.Hide();
+                grpNouveauContact.Show();
+            }
+            else
+                grpNouveauContact.Show();
+
+
+
+            ChargerMembresSimplifie();
+
+
+        }
+
+        private void pbDepense_Click(object sender, EventArgs e)
+        {
+            if (grpNouvelEvenement.Visible || grpNouveauContact.Visible)
+            {
+                grpNouvelEvenement.Hide();
+                grpNouveauContact.Hide();
+                grpNouvelleDepense.Show();
+            }
+            else
+                grpNouvelleDepense.Show();
+
+
+            ChargerMembresSimplifie();
+
+        }
+
+        private void pbEvenement_Click(object sender, EventArgs e)
+        {
+            if (grpNouveauContact.Visible || grpNouvelleDepense.Visible)
+            {
+                grpNouveauContact.Hide();
+                grpNouvelleDepense.Hide();
+                grpNouvelEvenement.Show();
+            }
+            else
+                grpNouvelEvenement.Show();
+
+            ChargerMembresSimplifie();
+
+        }
+
+        private void ChargerMembresSimplifie()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string sql = @"SELECT m.matricule,
+                             m.nom || ' ' || m.prenom AS affichage
+                             FROM   Membre m
+                             ORDER  BY m.nom, m.prenom";
+                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                cboMembre3.DataSource = dt;
+                cboMembre3.DisplayMember = "affichage";
+                cboMembre3.ValueMember = "matricule";
+
+                cboMembre2.DataSource = dt;
+                cboMembre2.DisplayMember = "affichage";
+                cboMembre2.ValueMember = "matricule";
+
+                cboMembre1.DataSource = dt;
+                cboMembre1.DisplayMember = "affichage";
+                cboMembre1.ValueMember = "matricule";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur chargement membres  : " + ex.Message);
+            }
+        }
+
+        private void txtNouvelleDepense_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = false;
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNouvelEvenement_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = false;
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtNouveauContact_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = false;
+
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btAnnulerNouvelleDepense_Click(object sender, EventArgs e)
+        {
+            grpNouvelleDepense.Hide();
+        }
+
+        private void btAnnulerNouvelEvenement_Click(object sender, EventArgs e)
+        {
+            grpNouvelEvenement.Hide();
+        }
+
+        private void btAnnulerNouveauContact_Click(object sender, EventArgs e)
+        {
+            grpNouveauContact.Hide();
+        }
+
+        private void btAjoutNouvelEvenement_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCommentaireEvenement.Text))
+            {
+                MessageBox.Show("Veuillez saisir un commentaire.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                string sql = @"INSERT INTO JournalDeBord (nomPlanete, numero, dateJ, commentaires)
+                       VALUES (@planete, @num, @date, @commentaire)";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
+                cmd.Parameters.AddWithValue("@num", this.numeroMission);
+                cmd.Parameters.AddWithValue("@date", dtpNouvelEvenement.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@commentaire", txtCommentaireEvenement.Text.Trim());
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Événement ajouté !", "Succès",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                grpNouvelEvenement.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
+        }
+
+        private void btAjoutNouveauContact_Click(object sender, EventArgs e)
+        {
+            if (cboMembre3.SelectedItem == null || string.IsNullOrEmpty(txtNouveauContact.Text))
+            {
+                MessageBox.Show("Veuillez remplir tous les champs.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                string sql = @"INSERT INTO Contact 
+                           (nomPlanete, numeroMission, dateC, sommeVersee, appreciation, nomCodeInformateur)
+                       VALUES 
+                           (@planete, @num, @date, @somme, @appreciation, @informateur)";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
+                cmd.Parameters.AddWithValue("@num", this.numeroMission);
+                cmd.Parameters.AddWithValue("@date", dtpNouveauContact.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@somme", Convert.ToInt32(txtNouveauContact.Text));
+                cmd.Parameters.AddWithValue("@appreciation", txtCommentaireContact.Text.Trim());
+                cmd.Parameters.AddWithValue("@informateur", cboMembre3.SelectedValue.ToString());
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Contact ajouté !", "Succès",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                grpNouveauContact.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
+        }
+
+        private void btAjoutNouvelleDepense_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCommentaireDepense.Text) || string.IsNullOrEmpty(txtNouvelleDepense.Text))
+            {
+                MessageBox.Show("Veuillez remplir tous les champs.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                string sql = @"INSERT INTO Depense 
+                           (nomPlanete, numeroMission, dateD, montant, motif, idTypeDepense)
+                       VALUES 
+                           (@planete, @num, @date, @montant, @motif, @type)";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
+                cmd.Parameters.AddWithValue("@num", this.numeroMission);
+                cmd.Parameters.AddWithValue("@date", dtpNouvelleDepense.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@montant", Convert.ToInt32(txtNouvelleDepense.Text));
+                cmd.Parameters.AddWithValue("@motif", txtCommentaireDepense.Text.Trim());
+                cmd.Parameters.AddWithValue("@type", cboMembre1.SelectedValue);
+                cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Dépense ajoutée !", "Succès",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                grpNouvelleDepense.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
         }
     }
 
