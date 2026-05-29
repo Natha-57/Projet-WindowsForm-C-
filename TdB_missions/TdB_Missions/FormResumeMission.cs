@@ -24,12 +24,10 @@ namespace _3_Visualisation_et_MAJ_missions
             this.nomPlanete = nomPlanete;
             this.numeroMission = numeroMission;
 
-            string chaine = "Data Source=Stargate.db";
+            //string chaine = "Data Source=Stargate.db";
             this.cx = Connexion.Connec;
             try
             {
-                this.cx.Open();
-
                 ChargerMission();
                 ChargerObjectifs();
                 ChargerMembres();

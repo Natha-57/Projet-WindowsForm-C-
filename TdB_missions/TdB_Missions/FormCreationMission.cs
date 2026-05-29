@@ -35,10 +35,8 @@ namespace _2__Creation_De_Mission
 
 
             try
-            {
-                string chaine = "Data Source=Stargate.db";
-                this.cx = new SQLiteConnection(chaine);
-                this.cx.Open();
+            {         
+                this.cx = Connexion.Connec;
                 this.ds = new DataSet();
                 this.da = new SQLiteDataAdapter();
             }

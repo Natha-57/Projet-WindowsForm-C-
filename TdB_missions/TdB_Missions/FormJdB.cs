@@ -10,6 +10,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TdB_Missions;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace _3_Visualisation_et_MAJ_missions
@@ -28,8 +29,7 @@ namespace _3_Visualisation_et_MAJ_missions
             this.num = num;
 
             string chaine = "Data Source=Stargate.db";
-            this.cx = new SQLiteConnection(chaine);
-            this.cx.Open();
+            this.cx = Connexion.Connec;
 
             ChargerDepenses();
             ChargerContacts();
