@@ -71,7 +71,7 @@ namespace TdB_Missions
                     uc.Location = new Point(axeX, axeY + i);
                     uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
                     
-                    this.Controls.Add(uc);
+                    panel1.Controls.Add(uc);
                     i += 225;
                 }
                 catch (NullReferenceException err)
@@ -105,6 +105,16 @@ namespace TdB_Missions
         {
             this.Controls.Clear();
             Form1_Load(null, null);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

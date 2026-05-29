@@ -23,10 +23,10 @@ namespace mission_tdb
         public UserControl1(string nom_mission, string date_dep, string date_fin, string nom_chef, string image_path )
         {
             InitializeComponent();
-            label1.Text = nom_mission;
-            label2.Text = date_dep;
-            label3.Text = date_fin;
-            label4.Text = nom_chef;
+            label1.Text = "Mission "+ nom_mission;
+            label2.Text = "Date de départ : " + date_dep;
+            label3.Text = "Date de retour : " + date_fin;
+            label4.Text = "En charge de la mission : "  +nom_chef;
             pictureBox1.Image = Image.FromFile(image_path);
         }
 
