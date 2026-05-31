@@ -49,44 +49,44 @@
             this.pbHome = new System.Windows.Forms.PictureBox();
             this.btAjoutNouvelleDepense = new System.Windows.Forms.Button();
             this.grpNouveauContact = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cboEspece = new System.Windows.Forms.ComboBox();
+            this.cboMembre3 = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtCommentaireContact = new System.Windows.Forms.RichTextBox();
+            this.txtNouveauContact = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dtpNouveauContact = new System.Windows.Forms.DateTimePicker();
+            this.btAnnulerNouveauContact = new System.Windows.Forms.Button();
+            this.btAjoutNouveauContact = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.grpNouvelEvenement = new System.Windows.Forms.GroupBox();
+            this.cboMembre2 = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtCommentaireEvenement = new System.Windows.Forms.RichTextBox();
+            this.dtpNouvelEvenement = new System.Windows.Forms.DateTimePicker();
+            this.btAnnulerNouvelEvenement = new System.Windows.Forms.Button();
+            this.btAjoutNouvelEvenement = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.grpNouvelleDepense = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btAjoutNouvelEvenement = new System.Windows.Forms.Button();
-            this.btAjoutNouveauContact = new System.Windows.Forms.Button();
-            this.btAnnulerNouvelleDepense = new System.Windows.Forms.Button();
-            this.btAnnulerNouvelEvenement = new System.Windows.Forms.Button();
-            this.btAnnulerNouveauContact = new System.Windows.Forms.Button();
-            this.dtpNouvelleDepense = new System.Windows.Forms.DateTimePicker();
-            this.dtpNouvelEvenement = new System.Windows.Forms.DateTimePicker();
-            this.dtpNouveauContact = new System.Windows.Forms.DateTimePicker();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtNouvelleDepense = new System.Windows.Forms.TextBox();
-            this.txtNouvelEvenement = new System.Windows.Forms.TextBox();
-            this.txtNouveauContact = new System.Windows.Forms.TextBox();
-            this.txtCommentaireDepense = new System.Windows.Forms.RichTextBox();
-            this.txtCommentaireEvenement = new System.Windows.Forms.RichTextBox();
-            this.txtCommentaireContact = new System.Windows.Forms.RichTextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.cboMembre1 = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cboMembre2 = new System.Windows.Forms.ComboBox();
-            this.cboMembre3 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtCommentaireDepense = new System.Windows.Forms.RichTextBox();
+            this.txtNouvelleDepense = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dtpNouvelleDepense = new System.Windows.Forms.DateTimePicker();
+            this.btAnnulerNouvelleDepense = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.grpEdition = new System.Windows.Forms.GroupBox();
-            this.pbContact = new System.Windows.Forms.PictureBox();
-            this.pbDepense = new System.Windows.Forms.PictureBox();
-            this.pbEvenement = new System.Windows.Forms.PictureBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.pbEvenement = new System.Windows.Forms.PictureBox();
+            this.pbDepense = new System.Windows.Forms.PictureBox();
+            this.pbContact = new System.Windows.Forms.PictureBox();
             this.grpFeuilleDeRoute.SuspendLayout();
             this.grpMembresEquipage.SuspendLayout();
             this.grbMembres.SuspendLayout();
@@ -97,9 +97,9 @@
             this.grpNouvelEvenement.SuspendLayout();
             this.grpNouvelleDepense.SuspendLayout();
             this.grpEdition.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbContact)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDepense)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEvenement)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDepense)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbContact)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNomMission
@@ -158,9 +158,9 @@
             // 
             this.grpFeuilleDeRoute.Controls.Add(this.txtFeuilleRoute);
             this.grpFeuilleDeRoute.Location = new System.Drawing.Point(114, 400);
-            this.grpFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(6);
             this.grpFeuilleDeRoute.Name = "grpFeuilleDeRoute";
-            this.grpFeuilleDeRoute.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpFeuilleDeRoute.Padding = new System.Windows.Forms.Padding(6);
             this.grpFeuilleDeRoute.Size = new System.Drawing.Size(1038, 160);
             this.grpFeuilleDeRoute.TabIndex = 5;
             this.grpFeuilleDeRoute.TabStop = false;
@@ -169,7 +169,7 @@
             // txtFeuilleRoute
             // 
             this.txtFeuilleRoute.Location = new System.Drawing.Point(8, 37);
-            this.txtFeuilleRoute.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFeuilleRoute.Margin = new System.Windows.Forms.Padding(4);
             this.txtFeuilleRoute.Name = "txtFeuilleRoute";
             this.txtFeuilleRoute.Size = new System.Drawing.Size(1020, 114);
             this.txtFeuilleRoute.TabIndex = 0;
@@ -179,9 +179,9 @@
             // 
             this.grpMembresEquipage.Controls.Add(this.flpMembres);
             this.grpMembresEquipage.Location = new System.Drawing.Point(112, 571);
-            this.grpMembresEquipage.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpMembresEquipage.Margin = new System.Windows.Forms.Padding(6);
             this.grpMembresEquipage.Name = "grpMembresEquipage";
-            this.grpMembresEquipage.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grpMembresEquipage.Padding = new System.Windows.Forms.Padding(6);
             this.grpMembresEquipage.Size = new System.Drawing.Size(1038, 279);
             this.grpMembresEquipage.TabIndex = 6;
             this.grpMembresEquipage.TabStop = false;
@@ -191,7 +191,7 @@
             // 
             this.flpMembres.AutoScroll = true;
             this.flpMembres.Location = new System.Drawing.Point(10, 33);
-            this.flpMembres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flpMembres.Margin = new System.Windows.Forms.Padding(4);
             this.flpMembres.Name = "flpMembres";
             this.flpMembres.Size = new System.Drawing.Size(1020, 237);
             this.flpMembres.TabIndex = 1;
@@ -200,9 +200,9 @@
             // 
             this.grbMembres.Controls.Add(this.lstObjectifs);
             this.grbMembres.Location = new System.Drawing.Point(112, 862);
-            this.grbMembres.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grbMembres.Margin = new System.Windows.Forms.Padding(6);
             this.grbMembres.Name = "grbMembres";
-            this.grbMembres.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.grbMembres.Padding = new System.Windows.Forms.Padding(6);
             this.grbMembres.Size = new System.Drawing.Size(1038, 185);
             this.grbMembres.TabIndex = 7;
             this.grbMembres.TabStop = false;
@@ -213,7 +213,7 @@
             this.lstObjectifs.FormattingEnabled = true;
             this.lstObjectifs.ItemHeight = 25;
             this.lstObjectifs.Location = new System.Drawing.Point(8, 33);
-            this.lstObjectifs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstObjectifs.Margin = new System.Windows.Forms.Padding(4);
             this.lstObjectifs.Name = "lstObjectifs";
             this.lstObjectifs.Size = new System.Drawing.Size(1020, 129);
             this.lstObjectifs.TabIndex = 0;
@@ -271,7 +271,7 @@
             // pbJdB
             // 
             this.pbJdB.Location = new System.Drawing.Point(1064, 79);
-            this.pbJdB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbJdB.Margin = new System.Windows.Forms.Padding(4);
             this.pbJdB.Name = "pbJdB";
             this.pbJdB.Size = new System.Drawing.Size(100, 88);
             this.pbJdB.TabIndex = 13;
@@ -281,7 +281,7 @@
             // pbPlanete
             // 
             this.pbPlanete.Location = new System.Drawing.Point(360, 12);
-            this.pbPlanete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbPlanete.Margin = new System.Windows.Forms.Padding(4);
             this.pbPlanete.Name = "pbPlanete";
             this.pbPlanete.Size = new System.Drawing.Size(240, 171);
             this.pbPlanete.TabIndex = 14;
@@ -291,7 +291,7 @@
             // 
             this.pbHome.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbHome.Location = new System.Drawing.Point(134, 79);
-            this.pbHome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pbHome.Margin = new System.Windows.Forms.Padding(4);
             this.pbHome.Name = "pbHome";
             this.pbHome.Size = new System.Drawing.Size(116, 88);
             this.pbHome.TabIndex = 15;
@@ -310,6 +310,8 @@
             // 
             // grpNouveauContact
             // 
+            this.grpNouveauContact.Controls.Add(this.label10);
+            this.grpNouveauContact.Controls.Add(this.cboEspece);
             this.grpNouveauContact.Controls.Add(this.cboMembre3);
             this.grpNouveauContact.Controls.Add(this.label17);
             this.grpNouveauContact.Controls.Add(this.label14);
@@ -328,6 +330,102 @@
             this.grpNouveauContact.Text = "Nouveu Contact";
             this.grpNouveauContact.Visible = false;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(42, 488);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 25);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Espèce";
+            // 
+            // cboEspece
+            // 
+            this.cboEspece.FormattingEnabled = true;
+            this.cboEspece.Location = new System.Drawing.Point(183, 485);
+            this.cboEspece.Name = "cboEspece";
+            this.cboEspece.Size = new System.Drawing.Size(350, 33);
+            this.cboEspece.TabIndex = 27;
+            this.cboEspece.SelectedIndexChanged += new System.EventHandler(this.cboEspece_SelectedIndexChanged);
+            // 
+            // cboMembre3
+            // 
+            this.cboMembre3.FormattingEnabled = true;
+            this.cboMembre3.Location = new System.Drawing.Point(183, 422);
+            this.cboMembre3.Name = "cboMembre3";
+            this.cboMembre3.Size = new System.Drawing.Size(350, 33);
+            this.cboMembre3.TabIndex = 26;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(42, 425);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(120, 25);
+            this.label17.TabIndex = 26;
+            this.label17.Text = "Informateur";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(42, 248);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(139, 25);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "Commentaire";
+            // 
+            // txtCommentaireContact
+            // 
+            this.txtCommentaireContact.Location = new System.Drawing.Point(183, 248);
+            this.txtCommentaireContact.Name = "txtCommentaireContact";
+            this.txtCommentaireContact.Size = new System.Drawing.Size(350, 143);
+            this.txtCommentaireContact.TabIndex = 23;
+            this.txtCommentaireContact.Text = "";
+            // 
+            // txtNouveauContact
+            // 
+            this.txtNouveauContact.Location = new System.Drawing.Point(183, 168);
+            this.txtNouveauContact.Name = "txtNouveauContact";
+            this.txtNouveauContact.Size = new System.Drawing.Size(100, 31);
+            this.txtNouveauContact.TabIndex = 22;
+            this.txtNouveauContact.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNouveauContact_KeyPress);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(42, 175);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(84, 25);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "Somme";
+            // 
+            // dtpNouveauContact
+            // 
+            this.dtpNouveauContact.Location = new System.Drawing.Point(183, 86);
+            this.dtpNouveauContact.Name = "dtpNouveauContact";
+            this.dtpNouveauContact.Size = new System.Drawing.Size(350, 31);
+            this.dtpNouveauContact.TabIndex = 20;
+            // 
+            // btAnnulerNouveauContact
+            // 
+            this.btAnnulerNouveauContact.Location = new System.Drawing.Point(311, 594);
+            this.btAnnulerNouveauContact.Name = "btAnnulerNouveauContact";
+            this.btAnnulerNouveauContact.Size = new System.Drawing.Size(120, 41);
+            this.btAnnulerNouveauContact.TabIndex = 19;
+            this.btAnnulerNouveauContact.Text = "Annuler";
+            this.btAnnulerNouveauContact.UseVisualStyleBackColor = true;
+            this.btAnnulerNouveauContact.Click += new System.EventHandler(this.btAnnulerNouveauContact_Click);
+            // 
+            // btAjoutNouveauContact
+            // 
+            this.btAjoutNouveauContact.Location = new System.Drawing.Point(437, 594);
+            this.btAjoutNouveauContact.Name = "btAjoutNouveauContact";
+            this.btAjoutNouveauContact.Size = new System.Drawing.Size(96, 41);
+            this.btAjoutNouveauContact.TabIndex = 18;
+            this.btAjoutNouveauContact.Text = "Valider";
+            this.btAjoutNouveauContact.UseVisualStyleBackColor = true;
+            this.btAjoutNouveauContact.Click += new System.EventHandler(this.btAjoutNouveauContact_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -343,19 +441,80 @@
             this.grpNouvelEvenement.Controls.Add(this.label16);
             this.grpNouvelEvenement.Controls.Add(this.label13);
             this.grpNouvelEvenement.Controls.Add(this.txtCommentaireEvenement);
-            this.grpNouvelEvenement.Controls.Add(this.txtNouvelEvenement);
-            this.grpNouvelEvenement.Controls.Add(this.label10);
             this.grpNouvelEvenement.Controls.Add(this.dtpNouvelEvenement);
             this.grpNouvelEvenement.Controls.Add(this.btAnnulerNouvelEvenement);
             this.grpNouvelEvenement.Controls.Add(this.btAjoutNouvelEvenement);
             this.grpNouvelEvenement.Controls.Add(this.label7);
-            this.grpNouvelEvenement.Location = new System.Drawing.Point(654, 203);
+            this.grpNouvelEvenement.Location = new System.Drawing.Point(1307, 405);
             this.grpNouvelEvenement.Name = "grpNouvelEvenement";
             this.grpNouvelEvenement.Size = new System.Drawing.Size(588, 647);
             this.grpNouvelEvenement.TabIndex = 18;
             this.grpNouvelEvenement.TabStop = false;
             this.grpNouvelEvenement.Text = "Nouvel Evènement";
             this.grpNouvelEvenement.Visible = false;
+            // 
+            // cboMembre2
+            // 
+            this.cboMembre2.FormattingEnabled = true;
+            this.cboMembre2.Location = new System.Drawing.Point(183, 459);
+            this.cboMembre2.Name = "cboMembre2";
+            this.cboMembre2.Size = new System.Drawing.Size(350, 33);
+            this.cboMembre2.TabIndex = 25;
+            this.cboMembre2.SelectedIndexChanged += new System.EventHandler(this.cboMembre2_SelectedIndexChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(42, 459);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(120, 25);
+            this.label16.TabIndex = 25;
+            this.label16.Text = "Informateur";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(42, 248);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(139, 25);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Commentaire";
+            // 
+            // txtCommentaireEvenement
+            // 
+            this.txtCommentaireEvenement.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtCommentaireEvenement.Location = new System.Drawing.Point(183, 248);
+            this.txtCommentaireEvenement.Name = "txtCommentaireEvenement";
+            this.txtCommentaireEvenement.Size = new System.Drawing.Size(350, 143);
+            this.txtCommentaireEvenement.TabIndex = 22;
+            this.txtCommentaireEvenement.Text = "";
+            // 
+            // dtpNouvelEvenement
+            // 
+            this.dtpNouvelEvenement.Location = new System.Drawing.Point(183, 86);
+            this.dtpNouvelEvenement.Name = "dtpNouvelEvenement";
+            this.dtpNouvelEvenement.Size = new System.Drawing.Size(350, 31);
+            this.dtpNouvelEvenement.TabIndex = 19;
+            // 
+            // btAnnulerNouvelEvenement
+            // 
+            this.btAnnulerNouvelEvenement.Location = new System.Drawing.Point(311, 594);
+            this.btAnnulerNouvelEvenement.Name = "btAnnulerNouvelEvenement";
+            this.btAnnulerNouvelEvenement.Size = new System.Drawing.Size(120, 41);
+            this.btAnnulerNouvelEvenement.TabIndex = 18;
+            this.btAnnulerNouvelEvenement.Text = "Annuler";
+            this.btAnnulerNouvelEvenement.UseVisualStyleBackColor = true;
+            this.btAnnulerNouvelEvenement.Click += new System.EventHandler(this.btAnnulerNouvelEvenement_Click);
+            // 
+            // btAjoutNouvelEvenement
+            // 
+            this.btAjoutNouvelEvenement.Location = new System.Drawing.Point(437, 594);
+            this.btAjoutNouvelEvenement.Name = "btAjoutNouvelEvenement";
+            this.btAjoutNouvelEvenement.Size = new System.Drawing.Size(96, 41);
+            this.btAjoutNouvelEvenement.TabIndex = 17;
+            this.btAjoutNouvelEvenement.Text = "Valider";
+            this.btAjoutNouvelEvenement.UseVisualStyleBackColor = true;
+            this.btAjoutNouvelEvenement.Click += new System.EventHandler(this.btAjoutNouvelEvenement_Click);
             // 
             // label7
             // 
@@ -378,7 +537,7 @@
             this.grpNouvelleDepense.Controls.Add(this.btAnnulerNouvelleDepense);
             this.grpNouvelleDepense.Controls.Add(this.label8);
             this.grpNouvelleDepense.Controls.Add(this.btAjoutNouvelleDepense);
-            this.grpNouvelleDepense.Location = new System.Drawing.Point(42, 194);
+            this.grpNouvelleDepense.Location = new System.Drawing.Point(1307, 405);
             this.grpNouvelleDepense.Name = "grpNouvelleDepense";
             this.grpNouvelleDepense.Size = new System.Drawing.Size(588, 647);
             this.grpNouvelleDepense.TabIndex = 18;
@@ -386,34 +545,64 @@
             this.grpNouvelleDepense.Text = "Nouvelle Dépense";
             this.grpNouvelleDepense.Visible = false;
             // 
-            // label8
+            // cboMembre1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(42, 92);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 25);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Date";
+            this.cboMembre1.FormattingEnabled = true;
+            this.cboMembre1.Location = new System.Drawing.Point(183, 471);
+            this.cboMembre1.Name = "cboMembre1";
+            this.cboMembre1.Size = new System.Drawing.Size(350, 33);
+            this.cboMembre1.TabIndex = 24;
             // 
-            // btAjoutNouvelEvenement
+            // label15
             // 
-            this.btAjoutNouvelEvenement.Location = new System.Drawing.Point(437, 594);
-            this.btAjoutNouvelEvenement.Name = "btAjoutNouvelEvenement";
-            this.btAjoutNouvelEvenement.Size = new System.Drawing.Size(96, 41);
-            this.btAjoutNouvelEvenement.TabIndex = 17;
-            this.btAjoutNouvelEvenement.Text = "Valider";
-            this.btAjoutNouvelEvenement.UseVisualStyleBackColor = true;
-            this.btAjoutNouvelEvenement.Click += new System.EventHandler(this.btAjoutNouvelEvenement_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(32, 474);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(149, 25);
+            this.label15.TabIndex = 23;
+            this.label15.Text = "Type dépence";
             // 
-            // btAjoutNouveauContact
+            // label12
             // 
-            this.btAjoutNouveauContact.Location = new System.Drawing.Point(437, 594);
-            this.btAjoutNouveauContact.Name = "btAjoutNouveauContact";
-            this.btAjoutNouveauContact.Size = new System.Drawing.Size(96, 41);
-            this.btAjoutNouveauContact.TabIndex = 18;
-            this.btAjoutNouveauContact.Text = "Valider";
-            this.btAjoutNouveauContact.UseVisualStyleBackColor = true;
-            this.btAjoutNouveauContact.Click += new System.EventHandler(this.btAjoutNouveauContact_Click);
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(42, 260);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(139, 25);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Commentaire";
+            // 
+            // txtCommentaireDepense
+            // 
+            this.txtCommentaireDepense.Location = new System.Drawing.Point(183, 260);
+            this.txtCommentaireDepense.Name = "txtCommentaireDepense";
+            this.txtCommentaireDepense.Size = new System.Drawing.Size(350, 143);
+            this.txtCommentaireDepense.TabIndex = 21;
+            this.txtCommentaireDepense.Text = "";
+            // 
+            // txtNouvelleDepense
+            // 
+            this.txtNouvelleDepense.Location = new System.Drawing.Point(183, 168);
+            this.txtNouvelleDepense.Name = "txtNouvelleDepense";
+            this.txtNouvelleDepense.Size = new System.Drawing.Size(100, 31);
+            this.txtNouvelleDepense.TabIndex = 20;
+            this.txtNouvelleDepense.TextChanged += new System.EventHandler(this.txtNouvelleDepense_TextChanged);
+            this.txtNouvelleDepense.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNouvelleDepense_KeyPress);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(42, 175);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 25);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Somme";
+            // 
+            // dtpNouvelleDepense
+            // 
+            this.dtpNouvelleDepense.Location = new System.Drawing.Point(183, 86);
+            this.dtpNouvelleDepense.Name = "dtpNouvelleDepense";
+            this.dtpNouvelleDepense.Size = new System.Drawing.Size(350, 31);
+            this.dtpNouvelleDepense.TabIndex = 18;
             // 
             // btAnnulerNouvelleDepense
             // 
@@ -425,201 +614,14 @@
             this.btAnnulerNouvelleDepense.UseVisualStyleBackColor = true;
             this.btAnnulerNouvelleDepense.Click += new System.EventHandler(this.btAnnulerNouvelleDepense_Click);
             // 
-            // btAnnulerNouvelEvenement
+            // label8
             // 
-            this.btAnnulerNouvelEvenement.Location = new System.Drawing.Point(311, 594);
-            this.btAnnulerNouvelEvenement.Name = "btAnnulerNouvelEvenement";
-            this.btAnnulerNouvelEvenement.Size = new System.Drawing.Size(120, 41);
-            this.btAnnulerNouvelEvenement.TabIndex = 18;
-            this.btAnnulerNouvelEvenement.Text = "Annuler";
-            this.btAnnulerNouvelEvenement.UseVisualStyleBackColor = true;
-            this.btAnnulerNouvelEvenement.Click += new System.EventHandler(this.btAnnulerNouvelEvenement_Click);
-            // 
-            // btAnnulerNouveauContact
-            // 
-            this.btAnnulerNouveauContact.Location = new System.Drawing.Point(311, 594);
-            this.btAnnulerNouveauContact.Name = "btAnnulerNouveauContact";
-            this.btAnnulerNouveauContact.Size = new System.Drawing.Size(120, 41);
-            this.btAnnulerNouveauContact.TabIndex = 19;
-            this.btAnnulerNouveauContact.Text = "Annuler";
-            this.btAnnulerNouveauContact.UseVisualStyleBackColor = true;
-            this.btAnnulerNouveauContact.Click += new System.EventHandler(this.btAnnulerNouveauContact_Click);
-            // 
-            // dtpNouvelleDepense
-            // 
-            this.dtpNouvelleDepense.Location = new System.Drawing.Point(183, 86);
-            this.dtpNouvelleDepense.Name = "dtpNouvelleDepense";
-            this.dtpNouvelleDepense.Size = new System.Drawing.Size(350, 31);
-            this.dtpNouvelleDepense.TabIndex = 18;
-            // 
-            // dtpNouvelEvenement
-            // 
-            this.dtpNouvelEvenement.Location = new System.Drawing.Point(183, 86);
-            this.dtpNouvelEvenement.Name = "dtpNouvelEvenement";
-            this.dtpNouvelEvenement.Size = new System.Drawing.Size(350, 31);
-            this.dtpNouvelEvenement.TabIndex = 19;
-            // 
-            // dtpNouveauContact
-            // 
-            this.dtpNouveauContact.Location = new System.Drawing.Point(183, 86);
-            this.dtpNouveauContact.Name = "dtpNouveauContact";
-            this.dtpNouveauContact.Size = new System.Drawing.Size(350, 31);
-            this.dtpNouveauContact.TabIndex = 20;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(42, 175);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 25);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Somme";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(42, 175);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 25);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "Somme";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(42, 175);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(84, 25);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Somme";
-            // 
-            // txtNouvelleDepense
-            // 
-            this.txtNouvelleDepense.Location = new System.Drawing.Point(183, 168);
-            this.txtNouvelleDepense.Name = "txtNouvelleDepense";
-            this.txtNouvelleDepense.Size = new System.Drawing.Size(100, 31);
-            this.txtNouvelleDepense.TabIndex = 20;
-            this.txtNouvelleDepense.TextChanged += new System.EventHandler(this.txtNouvelleDepense_TextChanged);
-            this.txtNouvelleDepense.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNouvelleDepense_KeyPress);
-            // 
-            // txtNouvelEvenement
-            // 
-            this.txtNouvelEvenement.Location = new System.Drawing.Point(183, 168);
-            this.txtNouvelEvenement.Name = "txtNouvelEvenement";
-            this.txtNouvelEvenement.Size = new System.Drawing.Size(100, 31);
-            this.txtNouvelEvenement.TabIndex = 21;
-            this.txtNouvelEvenement.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNouvelEvenement_KeyPress);
-            // 
-            // txtNouveauContact
-            // 
-            this.txtNouveauContact.Location = new System.Drawing.Point(183, 168);
-            this.txtNouveauContact.Name = "txtNouveauContact";
-            this.txtNouveauContact.Size = new System.Drawing.Size(100, 31);
-            this.txtNouveauContact.TabIndex = 22;
-            this.txtNouveauContact.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNouveauContact_KeyPress);
-            // 
-            // txtCommentaireDepense
-            // 
-            this.txtCommentaireDepense.Location = new System.Drawing.Point(183, 260);
-            this.txtCommentaireDepense.Name = "txtCommentaireDepense";
-            this.txtCommentaireDepense.Size = new System.Drawing.Size(350, 143);
-            this.txtCommentaireDepense.TabIndex = 21;
-            this.txtCommentaireDepense.Text = "";
-            // 
-            // txtCommentaireEvenement
-            // 
-            this.txtCommentaireEvenement.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtCommentaireEvenement.Location = new System.Drawing.Point(183, 248);
-            this.txtCommentaireEvenement.Name = "txtCommentaireEvenement";
-            this.txtCommentaireEvenement.Size = new System.Drawing.Size(350, 143);
-            this.txtCommentaireEvenement.TabIndex = 22;
-            this.txtCommentaireEvenement.Text = "";
-            // 
-            // txtCommentaireContact
-            // 
-            this.txtCommentaireContact.Location = new System.Drawing.Point(183, 248);
-            this.txtCommentaireContact.Name = "txtCommentaireContact";
-            this.txtCommentaireContact.Size = new System.Drawing.Size(350, 143);
-            this.txtCommentaireContact.TabIndex = 23;
-            this.txtCommentaireContact.Text = "";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(42, 260);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(139, 25);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "Commentaire";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(42, 248);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(139, 25);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "Commentaire";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(42, 248);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(139, 25);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "Commentaire";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(42, 471);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(120, 25);
-            this.label15.TabIndex = 23;
-            this.label15.Text = "Informateur";
-            // 
-            // cboMembre1
-            // 
-            this.cboMembre1.FormattingEnabled = true;
-            this.cboMembre1.Location = new System.Drawing.Point(183, 471);
-            this.cboMembre1.Name = "cboMembre1";
-            this.cboMembre1.Size = new System.Drawing.Size(350, 33);
-            this.cboMembre1.TabIndex = 24;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(42, 459);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(120, 25);
-            this.label16.TabIndex = 25;
-            this.label16.Text = "Informateur";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(42, 459);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(120, 25);
-            this.label17.TabIndex = 26;
-            this.label17.Text = "Informateur";
-            // 
-            // cboMembre2
-            // 
-            this.cboMembre2.FormattingEnabled = true;
-            this.cboMembre2.Location = new System.Drawing.Point(183, 459);
-            this.cboMembre2.Name = "cboMembre2";
-            this.cboMembre2.Size = new System.Drawing.Size(350, 33);
-            this.cboMembre2.TabIndex = 25;
-            // 
-            // cboMembre3
-            // 
-            this.cboMembre3.FormattingEnabled = true;
-            this.cboMembre3.Location = new System.Drawing.Point(183, 459);
-            this.cboMembre3.Name = "cboMembre3";
-            this.cboMembre3.Size = new System.Drawing.Size(350, 33);
-            this.cboMembre3.TabIndex = 26;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(42, 92);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 25);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Date";
             // 
             // grpEdition
             // 
@@ -636,25 +638,32 @@
             this.grpEdition.TabStop = false;
             this.grpEdition.Text = "Editer la mission";
             // 
-            // pbContact
+            // label20
             // 
-            this.pbContact.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbContact.Location = new System.Drawing.Point(60, 30);
-            this.pbContact.Name = "pbContact";
-            this.pbContact.Size = new System.Drawing.Size(77, 77);
-            this.pbContact.TabIndex = 0;
-            this.pbContact.TabStop = false;
-            this.pbContact.Click += new System.EventHandler(this.pbContact_Click);
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(391, 122);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(191, 25);
+            this.label20.TabIndex = 29;
+            this.label20.Text = "Nouvel évènement";
             // 
-            // pbDepense
+            // label19
             // 
-            this.pbDepense.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbDepense.Location = new System.Drawing.Point(256, 30);
-            this.pbDepense.Name = "pbDepense";
-            this.pbDepense.Size = new System.Drawing.Size(77, 77);
-            this.pbDepense.TabIndex = 1;
-            this.pbDepense.TabStop = false;
-            this.pbDepense.Click += new System.EventHandler(this.pbDepense_Click);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(204, 122);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(185, 25);
+            this.label19.TabIndex = 28;
+            this.label19.Text = "Nouvelle dépense";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(7, 122);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(174, 25);
+            this.label18.TabIndex = 27;
+            this.label18.Text = "Nouveau contact";
             // 
             // pbEvenement
             // 
@@ -666,32 +675,25 @@
             this.pbEvenement.TabStop = false;
             this.pbEvenement.Click += new System.EventHandler(this.pbEvenement_Click);
             // 
-            // label18
+            // pbDepense
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(7, 122);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(174, 25);
-            this.label18.TabIndex = 27;
-            this.label18.Text = "Nouveau contact";
+            this.pbDepense.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbDepense.Location = new System.Drawing.Point(256, 30);
+            this.pbDepense.Name = "pbDepense";
+            this.pbDepense.Size = new System.Drawing.Size(77, 77);
+            this.pbDepense.TabIndex = 1;
+            this.pbDepense.TabStop = false;
+            this.pbDepense.Click += new System.EventHandler(this.pbDepense_Click);
             // 
-            // label19
+            // pbContact
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(204, 122);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(185, 25);
-            this.label19.TabIndex = 28;
-            this.label19.Text = "Nouvelle dépense";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(391, 122);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(191, 25);
-            this.label20.TabIndex = 29;
-            this.label20.Text = "Nouvel évènement";
+            this.pbContact.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbContact.Location = new System.Drawing.Point(60, 30);
+            this.pbContact.Name = "pbContact";
+            this.pbContact.Size = new System.Drawing.Size(77, 77);
+            this.pbContact.TabIndex = 0;
+            this.pbContact.TabStop = false;
+            this.pbContact.Click += new System.EventHandler(this.pbContact_Click);
             // 
             // FormResumeMission
             // 
@@ -718,7 +720,7 @@
             this.Controls.Add(this.lblBudget);
             this.Controls.Add(this.lblDateDepart);
             this.Controls.Add(this.lblNomMission);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximumSize = new System.Drawing.Size(2000, 2000);
             this.MinimumSize = new System.Drawing.Size(1254, 1071);
             this.Name = "FormResumeMission";
@@ -739,9 +741,9 @@
             this.grpNouvelleDepense.PerformLayout();
             this.grpEdition.ResumeLayout(false);
             this.grpEdition.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbContact)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbDepense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEvenement)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDepense)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbContact)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -783,8 +785,6 @@
         private System.Windows.Forms.TextBox txtNouveauContact;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.DateTimePicker dtpNouveauContact;
-        private System.Windows.Forms.TextBox txtNouvelEvenement;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtpNouvelEvenement;
         private System.Windows.Forms.TextBox txtNouvelleDepense;
         private System.Windows.Forms.Label label9;
@@ -808,6 +808,8 @@
         private System.Windows.Forms.PictureBox pbEvenement;
         private System.Windows.Forms.PictureBox pbDepense;
         private System.Windows.Forms.PictureBox pbContact;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cboEspece;
     }
 }
 

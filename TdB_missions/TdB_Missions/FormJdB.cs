@@ -28,7 +28,7 @@ namespace _3_Visualisation_et_MAJ_missions
             this.planete = planete;
             this.num = num;
 
-            string chaine = "Data Source=Stargate.db";
+            Connexion.FermerConnexion();
             this.cx = Connexion.Connec;
 
             ChargerDepenses();
@@ -97,7 +97,7 @@ namespace _3_Visualisation_et_MAJ_missions
                      JOIN   Espece      e ON e.id       = i.idEspeceEnnemi
                      WHERE  c.nomPlanete    = @planete
                      AND    c.numeroMission = @num
-                     ORDER  BY c.dateC";
+                     ORDER  BY date(c.dateC)";
 
             SQLiteCommand cmd = new SQLiteCommand(query, this.cx);
             cmd.Parameters.AddWithValue("@planete", this.planete);
@@ -123,7 +123,7 @@ namespace _3_Visualisation_et_MAJ_missions
                    FROM   JournalDeBord
                    WHERE  nomPlanete    = @planete 
                    AND    numero = @num
-                   ORDER  BY dateJ";
+                   ORDER  BY date(dateJ)";
 
             SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
             cmd.Parameters.AddWithValue("@planete", this.planete);
@@ -147,7 +147,7 @@ namespace _3_Visualisation_et_MAJ_missions
             }
 
             DataRow row = dtEvenements.Rows[indexEvenement];
-            lblDateEvenement.Text = row["dateJ"].ToString();
+            lblDateEvenement.Text = Convert.ToDateTime(row["dateJ"]).ToString("dd/MM/yyyy");
             lblEvenement.Text = row["commentaires"].ToString();
             lblCompteurPages.Text = $"{indexEvenement + 1} / {dtEvenements.Rows.Count}";
         }
