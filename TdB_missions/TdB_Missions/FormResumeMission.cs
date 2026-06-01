@@ -18,14 +18,14 @@ namespace _3_Visualisation_et_MAJ_missions
         private SQLiteConnection cx;
         private string nomPlanete;
         private int numeroMission;
+
         public FormResumeMission(string nomPlanete, int numeroMission)
         {
             InitializeComponent();
             this.nomPlanete = nomPlanete;
             this.numeroMission = numeroMission;
-
-            //string chaine = "Data Source=Stargate.db";
             this.cx = Connexion.Connec;
+
             try
             {
                 ChargerMission();
@@ -37,25 +37,20 @@ namespace _3_Visualisation_et_MAJ_missions
                 MessageBox.Show(ex.Message);
             }
 
-            pbJdB.SizeMode = PictureBoxSizeMode.CenterImage;
             pbJdB.SizeMode = PictureBoxSizeMode.Zoom;
-            pbJdB.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\jdb.png");
+            pbJdB.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\jdb.png");
 
-            pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
-            pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\home.png");
+            pbHome.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\home.png");
 
-            pbDepense.SizeMode = PictureBoxSizeMode.CenterImage;
             pbDepense.SizeMode = PictureBoxSizeMode.Zoom;
-            pbDepense.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\depense.png");
+            pbDepense.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\depense.png");
 
-            pbEvenement.SizeMode = PictureBoxSizeMode.CenterImage;
             pbEvenement.SizeMode = PictureBoxSizeMode.Zoom;
-            pbEvenement.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\event.png");
+            pbEvenement.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\event.png");
 
-            pbContact.SizeMode = PictureBoxSizeMode.CenterImage;
             pbContact.SizeMode = PictureBoxSizeMode.Zoom;
-            pbContact.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\contact.png");
+            pbContact.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\contact.png");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -72,188 +67,100 @@ namespace _3_Visualisation_et_MAJ_missions
                 pbPlanete.SizeMode = PictureBoxSizeMode.Zoom;
             }
 
-            try
-            {
-                string sql = @"
-                SELECT mission.dateDepart,
-                       mission.dateRetour,
-                       mission.feuilleDeRoute,
-                       mission.budget,
-                       membre.nom || ' ' || membre.prenom AS chef
-                FROM Mission mission
-                JOIN Membre membre
-                    ON mission.matriculeChef = membre.matricule
-                WHERE mission.nomPlanete = @planete
-                AND mission.numero = @numero";
+            string filtre = $"nomPlanete = '{this.nomPlanete}' AND numero = {this.numeroMission}";
+            DataRow[] rows = MesDatas.DsGlobal.Tables["Mission"].Select(filtre);
+            if (rows.Length == 0) return;
+            DataRow mission = rows[0];
 
-                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+            string filtreChef = $"matricule = '{mission["matriculeChef"]}'";
+            DataRow[] rowsChef = MesDatas.DsGlobal.Tables["Membre"].Select(filtreChef);
+            string chef = rowsChef.Length > 0
+                ? rowsChef[0]["nom"] + " " + rowsChef[0]["prenom"]
+                : "Inconnu";
 
-                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
-                cmd.Parameters.AddWithValue("@numero", this.numeroMission);
+            lblNomMission.Text = this.nomPlanete + " - " + this.numeroMission;
+            lblDateDepart.Text = Convert.ToDateTime(mission["dateDepart"]).ToShortDateString();
+            lblDateRetour.Text = Convert.ToDateTime(mission["dateRetour"]).ToShortDateString();
+            txtFeuilleRoute.Text = mission["feuilleDeRoute"].ToString();
+            lblBudget.Text = mission["budget"] + " €";
 
-                SQLiteDataReader reader = cmd.ExecuteReader();
+            string filtreDepense = $"nomPlanete = '{this.nomPlanete}' AND numeroMission = {this.numeroMission}";
+            DataRow[] depenses = MesDatas.DsGlobal.Tables["Depense"].Select(filtreDepense);
+            int totalDepenses = 0;
+            foreach (DataRow d in depenses)
+                totalDepenses += Convert.ToInt32(d["montant"]);
 
-                if (reader.Read())
-                {
-                    lblNomMission.Text = this.nomPlanete + " - " + this.numeroMission;
-
-                    lblDateDepart.Text =
-                        Convert.ToDateTime(reader["dateDepart"]).ToShortDateString();
-
-                    lblDateRetour.Text =
-                        Convert.ToDateTime(reader["dateRetour"]).ToShortDateString();
-
-                   txtFeuilleRoute.Text =
-                       reader["feuilleDeRoute"].ToString();
-
-                    int budget = Convert.ToInt32(reader["budget"]);
-                    lblBudget.Text = budget + " €";
-
-                    string sqlSolde = @"SELECT COALESCE(SUM(montant), 0) 
-                        FROM Depense 
-                        WHERE nomPlanete    = @planete 
-                        AND   numeroMission = @numero";
-                    SQLiteCommand cmdSolde = new SQLiteCommand(sqlSolde, this.cx);
-                    cmdSolde.Parameters.AddWithValue("@planete", this.nomPlanete);
-                    cmdSolde.Parameters.AddWithValue("@numero", this.numeroMission);
-                    int totalDepenses = Convert.ToInt32(cmdSolde.ExecuteScalar());
-
-                    lblSoldeApresDepenses.Text = (budget - totalDepenses) + " €";
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur mission : " + ex.Message);
-            }
+            int budget = Convert.ToInt32(mission["budget"]);
+            lblSoldeApresDepenses.Text = (budget - totalDepenses) + " €";
         }
 
         private void ChargerObjectifs()
         {
-            try
+            string filtre = $"nomPlanete = '{this.nomPlanete}' AND numeroMission = {this.numeroMission}";
+            DataRow[] rows = MesDatas.DsGlobal.Tables["ObjectifCapture"].Select(filtre);
+
+            lstObjectifs.Items.Clear();
+            foreach (DataRow row in rows)
             {
-                string sql = @"
-                SELECT espece.nom,
-                       objectifcapture.objectif
-                FROM ObjectifCapture objectifcapture
-                JOIN Espece espece
-                    ON espece.id = objectifcapture.idEspeceEnnemi
-                WHERE objectifcapture.nomPlanete = @planete
-                AND objectifcapture.numeroMission = @numero";
-
-                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
-
-                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
-                cmd.Parameters.AddWithValue("@numero", this.numeroMission);
-
-                SQLiteDataReader reader = cmd.ExecuteReader();
-
-              lstObjectifs.Items.Clear();
-
-              while (reader.Read())
-                {
-                    string ligne =
-                        reader["nom"].ToString()
-                        + " -> "
-                        + reader["objectif"].ToString()
-                        + " capture(s)";
-
-                    lstObjectifs.Items.Add(ligne);
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur objectifs : " + ex.Message);
+                string filtreEspece = $"id = {row["idEspeceEnnemi"]}";
+                DataRow[] especes = MesDatas.DsGlobal.Tables["Espece"].Select(filtreEspece);
+                string nomEspece = especes.Length > 0 ? especes[0]["nom"].ToString() : "Inconnue";
+                lstObjectifs.Items.Add($"{nomEspece} -> {row["objectif"]} capture(s)");
             }
         }
 
         private void ChargerMembres()
         {
-            try
+            string filtre = $"nomPlanete = '{this.nomPlanete}' AND numeroMission = {this.numeroMission}";
+            DataRow[] rows = MesDatas.DsGlobal.Tables["Composer"].Select(filtre);
+
+            flpMembres.Controls.Clear();
+            foreach (DataRow row in rows)
             {
-                string sql = @"
-            SELECT m.nom, m.prenom,
-                   CASE WHEN mil.matriculeMembre IS NOT NULL 
-                        THEN mil.grade
-                        ELSE c.Specialite
-                   END AS type
-            FROM Composer comp
-            JOIN Membre m ON m.matricule = comp.matriculeMembre
-            LEFT JOIN Militaire mil ON mil.matriculeMembre = m.matricule
-            LEFT JOIN Civil c ON c.matriculeMembre = m.matricule
-            WHERE comp.nomPlanete = @planete
-            AND comp.numeroMission = @numero";
+                string matricule = row["matriculeMembre"].ToString();
 
-                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
-                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
-                cmd.Parameters.AddWithValue("@numero", this.numeroMission);
-                SQLiteDataReader reader = cmd.ExecuteReader();
+                DataRow[] membre = MesDatas.DsGlobal.Tables["Membre"].Select($"matricule = '{matricule}'");
+                if (membre.Length == 0) continue;
 
-                flpMembres.Controls.Clear();
+                DataRow[] mil = MesDatas.DsGlobal.Tables["Militaire"].Select($"matriculeMembre = '{matricule}'");
+                DataRow[] civ = MesDatas.DsGlobal.Tables["Civil"].Select($"matriculeMembre = '{matricule}'");
+                string type = mil.Length > 0 ? mil[0]["grade"].ToString()
+                              : civ.Length > 0 ? civ[0]["Specialite"].ToString()
+                              : "";
 
-                while (reader.Read())
+                Panel pnl = new Panel { Width = 80, Height = 100, Margin = new Padding(5) };
+
+                PictureBox pb = new PictureBox
                 {
-                    string type = reader["type"].ToString();
+                    Width = 60,
+                    Height = 60,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    Location = new Point(10, 5)
+                };
+                string cheminPhoto = $"..\\..\\..\\..\\Images App\\Membres\\Logo - {type}.png";
+                if (File.Exists(cheminPhoto))
+                    pb.Image = Image.FromFile(cheminPhoto);
 
-                    Panel pnl = new Panel
-                    {
-                        Width = 80,
-                        Height = 100,
-                        Margin = new Padding(5)
-                    };
+                Label lbl = new Label
+                {
+                    Text = membre[0]["nom"] + "\n" + membre[0]["prenom"],
+                    Width = 80,
+                    Height = 35,
+                    Location = new Point(0, 65),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Segoe UI", 7)
+                };
 
-                    PictureBox pb = new PictureBox
-                    {
-                        Width = 60,
-                        Height = 60,
-                        SizeMode = PictureBoxSizeMode.Zoom,
-                        Location = new Point(10, 5)
-                    };
-
-                    string cheminPhoto = $"..\\..\\..\\..\\Images App\\Membres\\Logo - {type}.png";
-                    if (File.Exists(cheminPhoto))
-                        pb.Image = Image.FromFile(cheminPhoto);
-
-                    Label lbl = new Label
-                    {
-                        Text = reader["nom"] + "\n" + reader["prenom"],
-                        Width = 80,
-                        Height = 35,
-                        Location = new Point(0, 65),
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Font = new Font("Segoe UI", 7)
-                    };
-
-                    pnl.Controls.Add(pb);
-                    pnl.Controls.Add(lbl);
-                    flpMembres.Controls.Add(pnl);
-                }
-
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur membres : " + ex.Message);
+                pnl.Controls.Add(pb);
+                pnl.Controls.Add(lbl);
+                flpMembres.Controls.Add(pnl);
             }
         }
-
-
 
         private void pbJdB_Click(object sender, EventArgs e)
         {
-            
             FormJdB f2 = new FormJdB(this.nomPlanete, this.numeroMission);
             f2.ShowDialog();
-
-
-        }
-
-        private void lblSoldeApresDepenses_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pbHome_Click(object sender, EventArgs e)
@@ -261,61 +168,28 @@ namespace _3_Visualisation_et_MAJ_missions
             this.Close();
         }
 
-        private void txtNouvelleDepense_TextChanged(object sender, EventArgs e)
-        {
-            
-
-        }
-
         private void pbContact_Click(object sender, EventArgs e)
         {
-
-            if (grpNouvelEvenement.Visible || grpNouvelleDepense.Visible)
-            {
-                grpNouvelEvenement.Hide();
-                grpNouvelleDepense.Hide();
-                grpNouveauContact.Show();
-            }
-            else
-                grpNouveauContact.Show();
-
-
-
+            grpNouvelEvenement.Hide();
+            grpNouvelleDepense.Hide();
+            grpNouveauContact.Show();
             ChargerMembresSimplifie();
             ChargerEspeces();
-
-
         }
 
         private void pbDepense_Click(object sender, EventArgs e)
         {
-            if (grpNouvelEvenement.Visible || grpNouveauContact.Visible)
-            {
-                grpNouvelEvenement.Hide();
-                grpNouveauContact.Hide();
-                grpNouvelleDepense.Show();
-            }
-            else
-                grpNouvelleDepense.Show();
-
-
+            grpNouvelEvenement.Hide();
+            grpNouveauContact.Hide();
+            grpNouvelleDepense.Show();
             ChargerTypesDepenses();
-
         }
 
         private void pbEvenement_Click(object sender, EventArgs e)
         {
-            if (grpNouveauContact.Visible || grpNouvelleDepense.Visible)
-            {
-                grpNouveauContact.Hide();
-                grpNouvelleDepense.Hide();
-                grpNouvelEvenement.Show();
-            }
-            else
-                grpNouvelEvenement.Show();
-
-            
-
+            grpNouveauContact.Hide();
+            grpNouvelleDepense.Hide();
+            grpNouvelEvenement.Show();
         }
 
         private void ChargerMembresSimplifie()
@@ -344,7 +218,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 new SQLiteDataAdapter(sql, this.cx).Fill(dt);
                 cboMembre1.DataSource = dt;
                 cboMembre1.DisplayMember = "libelle";
-                cboMembre1.ValueMember = "id";    // corrigé
+                cboMembre1.ValueMember = "id";
             }
             catch (Exception ex)
             {
@@ -352,23 +226,23 @@ namespace _3_Visualisation_et_MAJ_missions
             }
         }
 
-        private void txtNouvelleDepense_KeyPress(object sender, KeyPressEventArgs e)
+        private void ChargerEspeces()
         {
-            e.Handled = false;
-
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            try
             {
-                e.Handled = true;
+                DataTable dt = new DataTable();
+                string sql = @"SELECT e.id, e.nom || ' - ' || e.couleur AS affichage
+                                 FROM   Espece e
+                                 JOIN   Ennemi en ON en.idEspece = e.id
+                                 ORDER  BY e.nom";
+                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                cboEspece.DataSource = dt;
+                cboEspece.DisplayMember = "affichage";
+                cboEspece.ValueMember = "id";
             }
-        }
-
-        private void txtNouveauContact_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = false;
-
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            catch (Exception ex)
             {
-                e.Handled = true;
+                MessageBox.Show("Erreur chargement espèces : " + ex.Message);
             }
         }
 
@@ -387,6 +261,7 @@ namespace _3_Visualisation_et_MAJ_missions
             grpNouveauContact.Hide();
         }
 
+
         private void btAjoutNouvelEvenement_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtCommentaireEvenement.Text))
@@ -398,40 +273,38 @@ namespace _3_Visualisation_et_MAJ_missions
 
             try
             {
-                // Vérification doublon date
                 string sqlCheck = @"SELECT COUNT(*) FROM JournalDeBord 
-                            WHERE nomPlanete = @planete 
-                            AND   numero     = @num 
-                            AND   dateJ      = @date";
+                                    WHERE nomPlanete = @planete 
+                                    AND   numero     = @num 
+                                    AND   dateJ      = @date";
                 SQLiteCommand cmdCheck = new SQLiteCommand(sqlCheck, this.cx);
                 cmdCheck.Parameters.AddWithValue("@planete", this.nomPlanete);
                 cmdCheck.Parameters.AddWithValue("@num", this.numeroMission);
                 cmdCheck.Parameters.AddWithValue("@date", dtpNouvelEvenement.Value.ToString("yyyy-MM-dd"));
-
                 if (Convert.ToInt32(cmdCheck.ExecuteScalar()) > 0)
                 {
                     MessageBox.Show("Un événement existe déjà à cette date.\nChoisissez une autre date.",
                         "Date déjà utilisée", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                var (dateDepart, dateRetour) = GetDatesMission();
-                DateTime dateSaisie = dtpNouvelEvenement.Value; 
 
-                if (dateSaisie < dateDepart || dateSaisie > dateRetour)
+                var (dateDepart, dateRetour) = GetDatesMission();
+                if (dtpNouvelEvenement.Value < dateDepart || dtpNouvelEvenement.Value > dateRetour)
                 {
                     MessageBox.Show($"La date doit être comprise entre le {dateDepart.ToShortDateString()} et le {dateRetour.ToShortDateString()}.",
                         "Date hors bornes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
                 string sql = @"INSERT INTO JournalDeBord (nomPlanete, numero, dateJ, commentaires)
-                       VALUES (@planete, @num, @date, @commentaire)";
+                               VALUES (@planete, @num, @date, @commentaire)";
                 SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
                 cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
                 cmd.Parameters.AddWithValue("@num", this.numeroMission);
                 cmd.Parameters.AddWithValue("@date", dtpNouvelEvenement.Value.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@commentaire", txtCommentaireEvenement.Text.Trim());
                 cmd.ExecuteNonQuery();
-
+                RafraichirDataSet();
                 MessageBox.Show("Événement ajouté !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 grpNouvelEvenement.Visible = false;
@@ -453,27 +326,23 @@ namespace _3_Visualisation_et_MAJ_missions
 
             try
             {
-                // Vérification doublon date
                 string sqlCheck = @"SELECT COUNT(*) FROM Contact 
-                            WHERE nomPlanete     = @planete 
-                            AND   numeroMission  = @num 
-                            AND   dateC          = @date";
+                                    WHERE nomPlanete    = @planete 
+                                    AND   numeroMission = @num 
+                                    AND   dateC         = @date";
                 SQLiteCommand cmdCheck = new SQLiteCommand(sqlCheck, this.cx);
                 cmdCheck.Parameters.AddWithValue("@planete", this.nomPlanete);
                 cmdCheck.Parameters.AddWithValue("@num", this.numeroMission);
                 cmdCheck.Parameters.AddWithValue("@date", dtpNouveauContact.Value.ToString("yyyy-MM-dd"));
-
                 if (Convert.ToInt32(cmdCheck.ExecuteScalar()) > 0)
                 {
-                    MessageBox.Show("Un contact existe déjà à cette date pour cette mission.\nChoisissez une autre date.",
+                    MessageBox.Show("Un contact existe déjà à cette date.\nChoisissez une autre date.",
                         "Date déjà utilisée", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 var (dateDepart, dateRetour) = GetDatesMission();
-                DateTime dateSaisie = dtpNouveauContact.Value;
-
-                if (dateSaisie < dateDepart || dateSaisie > dateRetour)
+                if (dtpNouveauContact.Value < dateDepart || dtpNouveauContact.Value > dateRetour)
                 {
                     MessageBox.Show($"La date doit être comprise entre le {dateDepart.ToShortDateString()} et le {dateRetour.ToShortDateString()}.",
                         "Date hors bornes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -481,9 +350,9 @@ namespace _3_Visualisation_et_MAJ_missions
                 }
 
                 string sql = @"INSERT INTO Contact 
-                       (nomPlanete, numeroMission, dateC, sommeVersee, appreciation, nomCodeInformateur)
-                       VALUES 
-                       (@planete, @num, @date, @somme, @appreciation, @informateur)";
+                               (nomPlanete, numeroMission, dateC, sommeVersee, appreciation, nomCodeInformateur)
+                               VALUES 
+                               (@planete, @num, @date, @somme, @appreciation, @informateur)";
                 SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
                 cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
                 cmd.Parameters.AddWithValue("@num", this.numeroMission);
@@ -492,7 +361,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 cmd.Parameters.AddWithValue("@appreciation", txtCommentaireContact.Text.Trim());
                 cmd.Parameters.AddWithValue("@informateur", cboMembre3.SelectedValue.ToString());
                 cmd.ExecuteNonQuery();
-
+                RafraichirDataSet();
                 MessageBox.Show("Contact ajouté !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 grpNouveauContact.Visible = false;
@@ -502,7 +371,6 @@ namespace _3_Visualisation_et_MAJ_missions
             {
                 MessageBox.Show("Erreur : " + ex.Message);
             }
-
         }
 
         private void btAjoutNouvelleDepense_Click(object sender, EventArgs e)
@@ -513,21 +381,21 @@ namespace _3_Visualisation_et_MAJ_missions
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var (dateDepart, dateRetour) = GetDatesMission();
-            DateTime dateSaisie = dtpNouvelleDepense.Value; 
 
-            if (dateSaisie < dateDepart || dateSaisie > dateRetour)
+            var (dateDepart, dateRetour) = GetDatesMission();
+            if (dtpNouvelleDepense.Value < dateDepart || dtpNouvelleDepense.Value > dateRetour)
             {
                 MessageBox.Show($"La date doit être comprise entre le {dateDepart.ToShortDateString()} et le {dateRetour.ToShortDateString()}.",
                     "Date hors bornes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             try
             {
                 string sql = @"INSERT INTO Depense 
-                           (nomPlanete, numeroMission, dateD, montant, motif, idTypeDepense)
-                       VALUES 
-                           (@planete, @num, @date, @montant, @motif, @type)";
+                               (nomPlanete, numeroMission, dateD, montant, motif, idTypeDepense)
+                               VALUES 
+                               (@planete, @num, @date, @montant, @motif, @type)";
                 SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
                 cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
                 cmd.Parameters.AddWithValue("@num", this.numeroMission);
@@ -536,6 +404,8 @@ namespace _3_Visualisation_et_MAJ_missions
                 cmd.Parameters.AddWithValue("@motif", txtCommentaireDepense.Text.Trim());
                 cmd.Parameters.AddWithValue("@type", cboMembre1.SelectedValue);
                 cmd.ExecuteNonQuery();
+
+                RafraichirDataSet();
 
                 MessageBox.Show("Dépense ajoutée !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -548,52 +418,43 @@ namespace _3_Visualisation_et_MAJ_missions
             }
         }
 
-        private void ChargerEspeces()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                string sql = @"SELECT e.id, e.nom || ' - ' || e.couleur AS affichage
-                       FROM   Espece e
-                       JOIN   Ennemi en ON en.idEspece = e.id
-                       ORDER  BY e.nom";
-                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
-                cboEspece.DataSource = dt;
-                cboEspece.DisplayMember = "affichage";
-                cboEspece.ValueMember = "id";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erreur chargement espèces : " + ex.Message);
-            }
-        }
 
-        private void cboEspece_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboMembre2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         private (DateTime dateDepart, DateTime dateRetour) GetDatesMission()
         {
-            string sql = @"SELECT dateDepart, dateRetour FROM Mission 
-                   WHERE nomPlanete = @planete AND numero = @numero";
-            SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
-            cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
-            cmd.Parameters.AddWithValue("@numero", this.numeroMission);
-            SQLiteDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            DateTime dep = Convert.ToDateTime(reader["dateDepart"]);
-            DateTime ret = Convert.ToDateTime(reader["dateRetour"]);
-            reader.Close();
+            string filtre = $"nomPlanete = '{this.nomPlanete}' AND numero = {this.numeroMission}";
+            DataRow[] rows = MesDatas.DsGlobal.Tables["Mission"].Select(filtre);
+            DateTime dep = Convert.ToDateTime(rows[0]["dateDepart"]);
+            DateTime ret = Convert.ToDateTime(rows[0]["dateRetour"]);
             return (dep, ret);
         }
 
+
+        private void RafraichirDataSet()
+        {
+            string sql;
+            DataTable schemaTable = Connexion.Connec.GetSchema("Tables");
+            foreach (DataRow row in schemaTable.Rows)
+            {
+                string nomTable = row[2].ToString();
+                sql = "SELECT * FROM " + nomTable;
+                SQLiteDataAdapter da = new SQLiteDataAdapter(sql, Connexion.Connec);
+                MesDatas.DsGlobal.Tables[nomTable].Clear();
+                da.Fill(MesDatas.DsGlobal, nomTable);
+            }
+        }
+
+
+        private void lblSoldeApresDepenses_Click(object sender, EventArgs e) { }
+        private void txtNouvelleDepense_TextChanged(object sender, EventArgs e) { }
+        private void cboEspece_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void cboMembre2_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void txtNouvelleDepense_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        private void txtNouveauContact_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
     }
-
 }
-
-

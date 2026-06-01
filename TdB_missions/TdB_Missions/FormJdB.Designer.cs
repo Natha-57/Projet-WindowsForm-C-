@@ -203,6 +203,7 @@
             this.btEditerUnPdf.TabIndex = 3;
             this.btEditerUnPdf.Text = "Editer un PDF";
             this.btEditerUnPdf.UseVisualStyleBackColor = true;
+            this.btEditerUnPdf.Click += new System.EventHandler(this.btEditerUnPdf_Click);
             // 
             // lblSommesVersées
             // 

@@ -62,8 +62,6 @@
             this.btAjoutNouveauContact = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.grpNouvelEvenement = new System.Windows.Forms.GroupBox();
-            this.cboMembre2 = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txtCommentaireEvenement = new System.Windows.Forms.RichTextBox();
             this.dtpNouvelEvenement = new System.Windows.Forms.DateTimePicker();
@@ -437,8 +435,6 @@
             // 
             // grpNouvelEvenement
             // 
-            this.grpNouvelEvenement.Controls.Add(this.cboMembre2);
-            this.grpNouvelEvenement.Controls.Add(this.label16);
             this.grpNouvelEvenement.Controls.Add(this.label13);
             this.grpNouvelEvenement.Controls.Add(this.txtCommentaireEvenement);
             this.grpNouvelEvenement.Controls.Add(this.dtpNouvelEvenement);
@@ -452,24 +448,6 @@
             this.grpNouvelEvenement.TabStop = false;
             this.grpNouvelEvenement.Text = "Nouvel Evènement";
             this.grpNouvelEvenement.Visible = false;
-            // 
-            // cboMembre2
-            // 
-            this.cboMembre2.FormattingEnabled = true;
-            this.cboMembre2.Location = new System.Drawing.Point(183, 459);
-            this.cboMembre2.Name = "cboMembre2";
-            this.cboMembre2.Size = new System.Drawing.Size(350, 33);
-            this.cboMembre2.TabIndex = 25;
-            this.cboMembre2.SelectedIndexChanged += new System.EventHandler(this.cboMembre2_SelectedIndexChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(42, 459);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(120, 25);
-            this.label16.TabIndex = 25;
-            this.label16.Text = "Informateur";
             // 
             // label13
             // 
@@ -794,8 +772,6 @@
         private System.Windows.Forms.RichTextBox txtCommentaireDepense;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cboMembre2;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cboMembre1;
         private System.Windows.Forms.Label label15;
