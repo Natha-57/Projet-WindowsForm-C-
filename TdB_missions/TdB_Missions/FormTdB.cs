@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using _2__Creation_De_Mission;
 using _3_Visualisation_et_MAJ_missions;
 using mission_tdb;
+using Volet_4___Races_Aliens;
 namespace TdB_Missions
 {
     public partial class FormTdB : Form
@@ -63,7 +64,7 @@ namespace TdB_Missions
                     DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
                     DataRow d = dr[0];
 
-                    UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), d[1].ToString() +" "+ d[2].ToString(), "../../../../Images App/Planètes/Logo - " + row[0]+".png");
+                    UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), d[1].ToString() +" "+ d[2].ToString(), "../../../../Images_App/Planètes/Logo - " + row[0]+".png");
                     
                     uc.setNomPlanete(row[0].ToString());
                     uc.setNumeroMission(Convert.ToInt32(row[1]));
@@ -115,6 +116,18 @@ namespace TdB_Missions
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form_Aliens f = new Form_Aliens();
+            f.Show();
+        }
+
+        private void btInfoPlanete_Click(object sender, EventArgs e)
+        {
+            Form_Planetes f = new Form_Planetes();  
+            f.Show();
         }
     }
 }

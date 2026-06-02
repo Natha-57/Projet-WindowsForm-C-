@@ -38,7 +38,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
             pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
-            pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\home.png"); 
+            pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\home.png"); 
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

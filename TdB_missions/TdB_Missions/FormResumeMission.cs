@@ -38,19 +38,19 @@ namespace _3_Visualisation_et_MAJ_missions
             }
 
             pbJdB.SizeMode = PictureBoxSizeMode.Zoom;
-            pbJdB.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\jdb.png");
+            pbJdB.Image = Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\jdb.png");
 
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
-            pbHome.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\home.png");
+            pbHome.Image = Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\home.png");
 
             pbDepense.SizeMode = PictureBoxSizeMode.Zoom;
-            pbDepense.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\depense.png");
+            pbDepense.Image = Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\depense.png");
 
             pbEvenement.SizeMode = PictureBoxSizeMode.Zoom;
-            pbEvenement.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\event.png");
+            pbEvenement.Image = Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\event.png");
 
             pbContact.SizeMode = PictureBoxSizeMode.Zoom;
-            pbContact.Image = Image.FromFile("..\\..\\..\\..\\Images App\\Icones diverses\\contact.png");
+            pbContact.Image = Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\contact.png");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -60,7 +60,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void ChargerMission()
         {
-            string cheminPhoto = $"..\\..\\..\\..\\Images App\\Planètes\\Logo - {this.nomPlanete}.png";
+            string cheminPhoto = $"..\\..\\..\\..\\Images_App\\Planètes\\Logo - {this.nomPlanete}.png";
             if (File.Exists(cheminPhoto))
             {
                 pbPlanete.Image = Image.FromFile(cheminPhoto);

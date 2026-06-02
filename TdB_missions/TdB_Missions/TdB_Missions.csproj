@@ -67,6 +67,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connexion.cs" />
+    <Compile Include="FormStat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs" />
+    <Compile Include="FormPlanete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPlanete.Designer.cs">
+      <DependentUpon>FormPlanete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAlien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAlien.Designer.cs">
+      <DependentUpon>FormAlien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDetailAlien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetailAlien.Designer.cs">
+      <DependentUpon>FormDetailAlien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDetailsPlanete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDetailsPlanete.Designer.cs">
+      <DependentUpon>FormDetailsPlanete.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormJdB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +128,19 @@
     <Compile Include="mesDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx" />
+    <EmbeddedResource Include="FormPlanete.resx">
+      <DependentUpon>FormPlanete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAlien.resx">
+      <DependentUpon>FormAlien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDetailAlien.resx">
+      <DependentUpon>FormDetailAlien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDetailsPlanete.resx">
+      <DependentUpon>FormDetailsPlanete.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormJdB.resx">
       <DependentUpon>FormJdB.cs</DependentUpon>
     </EmbeddedResource>
