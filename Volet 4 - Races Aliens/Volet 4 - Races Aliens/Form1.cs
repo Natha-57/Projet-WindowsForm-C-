@@ -29,11 +29,73 @@ namespace Volet_4___Races_Aliens
                 "ImagesPlanetes");
 
         private DataSet _ds = new DataSet();
-        private FlowLayoutPanel flowRaces;
+        private FlowLayoutPanelDB flowRaces;
+
+        // ── Cache images (évite de recharger depuis le disque) ─────────────────
+        private Dictionary<string, Image> _cacheImages = new Dictionary<string, Image>();
+
+        // ── Polices statiques (créées une seule fois) ──────────────────────────
+        private static readonly Font _fontBadge = new Font("Trebuchet MS", 9F, FontStyle.Bold);
+        private static readonly Font _fontNom = new Font("Trebuchet MS", 14F, FontStyle.Bold);
+        private static readonly Font _fontCouleur = new Font("Trebuchet MS", 12F);
+        private static readonly Font _fontPlanete = new Font("Trebuchet MS", 11F, FontStyle.Italic);
+        private static readonly Font _fontFallback = new Font("Trebuchet MS", 18F, FontStyle.Bold);
+
+        // ── Couleurs statiques ─────────────────────────────────────────────────
+        private static readonly Color _couleurHover = Color.FromArgb(235, 242, 255);
+        private static readonly Color _couleurNormal = Color.White;
+
+        // ── Pens statiques ─────────────────────────────────────────────────────
+        private static readonly Pen _penAllie = new Pen(Color.FromArgb(0, 150, 70), 2);
+        private static readonly Pen _penEnnemi = new Pen(Color.FromArgb(190, 30, 30), 2);
+        private static readonly Pen _penInc = new Pen(Color.FromArgb(120, 130, 150), 2);
+
+        // ── StringFormat statique ──────────────────────────────────────────────
+        private static readonly StringFormat _sfCenter = new StringFormat
+        {
+            Alignment = StringAlignment.Center,
+            LineAlignment = StringAlignment.Center
+        };
+
+        // ── Sous-classes double-bufferisées ────────────────────────────────────
+        private class FlowLayoutPanelDB : FlowLayoutPanel
+        {
+            public FlowLayoutPanelDB() { this.DoubleBuffered = true; }
+        }
+        private class PanelDB : Panel
+        {
+            public PanelDB() { this.DoubleBuffered = true; }
+        }
 
         public Form_Aliens()
         {
             InitializeComponent();
+        }
+
+        // ── Cache images ───────────────────────────────────────────────────────
+        private Image ChargerImage(string chemin)
+        {
+            if (_cacheImages.ContainsKey(chemin))
+                return _cacheImages[chemin];
+            if (System.IO.File.Exists(chemin))
+            {
+                Image img = Image.FromFile(chemin);
+                _cacheImages[chemin] = img;
+                return img;
+            }
+            return null;
+        }
+
+        // ── Précharge toutes les images au démarrage ───────────────────────────
+        private void PrechargerImages()
+        {
+            if (_ds.Tables["Races"] == null) return;
+            foreach (DataRow row in _ds.Tables["Races"].Rows)
+            {
+                string chemin = System.IO.Path.Combine(
+                    _cheminImages, row["nom"].ToString() + ".png");
+                ChargerImage(chemin);
+            }
         }
 
         // ── Centrage texte dans les ComboBox ──────────────────────────────────
@@ -41,19 +103,10 @@ namespace Volet_4___Races_Aliens
         {
             if (e.Index < 0) return;
             e.DrawBackground();
-
             ComboBox cb = (ComboBox)sender;
             string texte = cb.Items[e.Index].ToString();
-
-            using (StringFormat sf = new StringFormat
-            {
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            })
             using (SolidBrush brush = new SolidBrush(e.ForeColor))
-            {
-                e.Graphics.DrawString(texte, e.Font, brush, e.Bounds, sf);
-            }
+                e.Graphics.DrawString(texte, e.Font, brush, e.Bounds, _sfCenter);
             e.DrawFocusRectangle();
         }
 
@@ -76,7 +129,9 @@ namespace Volet_4___Races_Aliens
             button_chercher.Cursor = actif ? Cursors.Hand : Cursors.Default;
             button_reset.Cursor = actif ? Cursors.Hand : Cursors.Default;
             button_chercher.FlatStyle = actif ? FlatStyle.Standard : FlatStyle.Flat;
-            button_chercher.BackColor = actif ? Color.FromArgb(128, 255, 128) : Color.DarkGray;
+            button_chercher.BackColor = actif
+                ? Color.FromArgb(128, 255, 128)
+                : Color.DarkGray;
             button_reset.FlatStyle = actif ? FlatStyle.Standard : FlatStyle.Flat;
             button_reset.BackColor = actif ? Color.White : Color.DarkGray;
         }
@@ -87,6 +142,8 @@ namespace Volet_4___Races_Aliens
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.DoubleBuffered = true;
+
             // ── ComboBox ───────────────────────────────────────────────────────
             comboBox1.Items.AddRange(new object[] {
                 "(Toutes)", "Bleu", "Gris", "Marron",
@@ -104,7 +161,6 @@ namespace Volet_4___Races_Aliens
                 "Terre", "Uranus", "Vénus", "Origine inconnue" });
             comboBox3.SelectedIndex = 0;
 
-            // Agrandir la hauteur des items des ComboBox + centrage
             comboBox1.ItemHeight = 30;
             comboBox2.ItemHeight = 30;
             comboBox3.ItemHeight = 30;
@@ -128,8 +184,8 @@ namespace Volet_4___Races_Aliens
                 }
             };
 
-            // ── FlowLayoutPanel à droite du panel de filtres ───────────────────
-            flowRaces = new FlowLayoutPanel();
+            // ── FlowLayoutPanel double-bufferisé ───────────────────────────────
+            flowRaces = new FlowLayoutPanelDB();
             flowRaces.Location = new Point(290, 144);
             flowRaces.Size = new Size(this.ClientSize.Width - 302,
                                                this.ClientSize.Height - 154);
@@ -144,7 +200,6 @@ namespace Volet_4___Races_Aliens
             button_chercher.Click += (s, ev) => AppliquerFiltres();
             button_reset.Click += BtnReset_Click;
 
-            // Brancher la mise à jour des boutons sur chaque filtre
             textBox1.TextChanged += (s, ev) => MettreAJourBoutons();
             comboBox1.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
             comboBox2.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
@@ -155,9 +210,8 @@ namespace Volet_4___Races_Aliens
             button_retour.Cursor = Cursors.Hand;
 
             ChargerDonnees();
+            PrechargerImages();
             AppliquerFiltres();
-
-            // État initial (désactivé au démarrage)
             MettreAJourBoutons();
         }
 
@@ -261,41 +315,45 @@ namespace Volet_4___Races_Aliens
             bool allie = typeRace == "Alliée";
             bool ennemi = typeRace == "Ennemie";
 
-            Color bordure = allie ? Color.FromArgb(0, 150, 70)
-                          : ennemi ? Color.FromArgb(190, 30, 30)
-                                   : Color.FromArgb(120, 130, 150);
+            Color bordureColor = allie ? Color.FromArgb(0, 150, 70)
+                               : ennemi ? Color.FromArgb(190, 30, 30)
+                                        : Color.FromArgb(120, 130, 150);
+            Pen penBordure = allie ? _penAllie
+                               : ennemi ? _penEnnemi
+                                        : _penInc;
 
-            // --- Carte ---
-            Panel carte = new Panel();
+            // --- Carte double-bufferisée ---
+            PanelDB carte = new PanelDB();
             carte.Size = new Size(200, 270);
             carte.Margin = new Padding(7);
-            carte.BackColor = Color.White;
+            carte.BackColor = _couleurNormal;
             carte.Cursor = Cursors.Hand;
             carte.Tag = row;
             carte.Paint += (s, e) => e.Graphics.DrawRectangle(
-                                  new Pen(bordure, 2), 1, 1,
+                                  penBordure, 1, 1,
                                   carte.Width - 3, carte.Height - 3);
 
-            // --- Panel image ---
-            Panel pnlImg = new Panel();
+            // --- Panel image double-bufferisé ---
+            PanelDB pnlImg = new PanelDB();
             pnlImg.Size = new Size(165, 145);
             pnlImg.Location = new Point(17, 22);
-            pnlImg.BackColor = Color.White;
+            pnlImg.BackColor = _couleurNormal;
             pnlImg.BorderStyle = BorderStyle.None;
 
             PictureBox img = new PictureBox();
             img.Size = new Size(165, 145);
             img.Location = new Point(0, 0);
             img.SizeMode = PictureBoxSizeMode.Zoom;
-            img.BackColor = Color.White;
+            img.BackColor = _couleurNormal;
 
             string cheminImg = System.IO.Path.Combine(
                                    _cheminImages,
                                    row["nom"].ToString() + ".png");
+            Image imgCache = ChargerImage(cheminImg);
 
-            if (System.IO.File.Exists(cheminImg))
+            if (imgCache != null)
             {
-                img.Image = Image.FromFile(cheminImg);
+                img.Image = imgCache;
             }
             else
             {
@@ -305,26 +363,18 @@ namespace Volet_4___Races_Aliens
                                  : row["nom"].ToString().ToUpper();
                 img.Paint += (s, e) =>
                 {
-                    using (Font f = new Font("Trebuchet MS", 18F, FontStyle.Bold))
-                    using (StringFormat sf = new StringFormat
-                    {
-                        Alignment = StringAlignment.Center,
-                        LineAlignment = StringAlignment.Center
-                    })
-                    {
-                        e.Graphics.DrawString(initTxt, f, Brushes.White,
-                            new RectangleF(0, 0, img.Width, img.Height), sf);
-                    }
+                    e.Graphics.DrawString(initTxt, _fontFallback, Brushes.White,
+                        new RectangleF(0, 0, img.Width, img.Height), _sfCenter);
                 };
             }
             pnlImg.Controls.Add(img);
 
-            // --- Badge type ---
+            // --- Badge ---
             Label badge = new Label();
             badge.Text = allie ? "ALLIÉE" : ennemi ? "ENNEMIE" : "?";
-            badge.Font = new Font("Trebuchet MS", 9F, FontStyle.Bold);
+            badge.Font = _fontBadge;
             badge.ForeColor = Color.White;
-            badge.BackColor = bordure;
+            badge.BackColor = bordureColor;
             badge.TextAlign = ContentAlignment.MiddleCenter;
             badge.Location = new Point(0, 0);
             badge.Size = new Size(80, 22);
@@ -333,7 +383,7 @@ namespace Volet_4___Races_Aliens
             // --- Nom ---
             Label lblNom = new Label();
             lblNom.Text = row["nom"].ToString();
-            lblNom.Font = new Font("Trebuchet MS", 14F, FontStyle.Bold);
+            lblNom.Font = _fontNom;
             lblNom.ForeColor = Color.FromArgb(20, 40, 80);
             lblNom.TextAlign = ContentAlignment.MiddleCenter;
             lblNom.Location = new Point(5, 170);
@@ -343,7 +393,7 @@ namespace Volet_4___Races_Aliens
             // --- Couleur ---
             Label lblCouleur = new Label();
             lblCouleur.Text = row["couleur"].ToString();
-            lblCouleur.Font = new Font("Trebuchet MS", 12F);
+            lblCouleur.Font = _fontCouleur;
             lblCouleur.ForeColor = Color.FromArgb(90, 100, 120);
             lblCouleur.TextAlign = ContentAlignment.MiddleCenter;
             lblCouleur.Location = new Point(5, 197);
@@ -353,7 +403,7 @@ namespace Volet_4___Races_Aliens
             // --- Planètes ---
             Label lblPlanete = new Label();
             lblPlanete.Text = row["planetes"].ToString();
-            lblPlanete.Font = new Font("Trebuchet MS", 11F, FontStyle.Italic);
+            lblPlanete.Font = _fontPlanete;
             lblPlanete.ForeColor = Color.FromArgb(110, 120, 140);
             lblPlanete.TextAlign = ContentAlignment.TopCenter;
             lblPlanete.Location = new Point(5, 220);
@@ -366,61 +416,39 @@ namespace Volet_4___Races_Aliens
             // ── Hover ──────────────────────────────────────────────────────────
             Action colorerHover = () =>
             {
-                carte.BackColor = Color.FromArgb(235, 242, 255);
-                pnlImg.BackColor = Color.FromArgb(235, 242, 255);
-                img.BackColor = Color.FromArgb(235, 242, 255);
-                lblNom.BackColor = Color.FromArgb(235, 242, 255);
-                lblCouleur.BackColor = Color.FromArgb(235, 242, 255);
-                lblPlanete.BackColor = Color.FromArgb(235, 242, 255);
+                carte.BackColor = _couleurHover;
+                pnlImg.BackColor = _couleurHover;
+                img.BackColor = _couleurHover;
+                lblNom.BackColor = _couleurHover;
+                lblCouleur.BackColor = _couleurHover;
+                lblPlanete.BackColor = _couleurHover;
             };
             Action colorerNormal = () =>
             {
-                carte.BackColor = Color.White;
-                pnlImg.BackColor = Color.White;
-                img.BackColor = Color.White;
-                lblNom.BackColor = Color.White;
-                lblCouleur.BackColor = Color.White;
-                lblPlanete.BackColor = Color.White;
+                carte.BackColor = _couleurNormal;
+                pnlImg.BackColor = _couleurNormal;
+                img.BackColor = _couleurNormal;
+                lblNom.BackColor = _couleurNormal;
+                lblCouleur.BackColor = _couleurNormal;
+                lblPlanete.BackColor = _couleurNormal;
             };
 
-            carte.MouseEnter += (s, e) => colorerHover();
-            pnlImg.MouseEnter += (s, e) => colorerHover();
-            img.MouseEnter += (s, e) => colorerHover();
-            lblNom.MouseEnter += (s, e) => colorerHover();
-            lblCouleur.MouseEnter += (s, e) => colorerHover();
-            lblPlanete.MouseEnter += (s, e) => colorerHover();
-            badge.MouseEnter += (s, e) => colorerHover();
-
-            carte.MouseLeave += (s, e) => {
-                if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
-                    colorerNormal();
-            };
-            pnlImg.MouseLeave += (s, e) => {
-                if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
-                    colorerNormal();
-            };
-            img.MouseLeave += (s, e) => {
-                if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
-                    colorerNormal();
-            };
-            lblNom.MouseLeave += (s, e) => {
-                if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
-                    colorerNormal();
-            };
-            lblCouleur.MouseLeave += (s, e) => {
-                if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
-                    colorerNormal();
-            };
-            lblPlanete.MouseLeave += (s, e) => {
-                if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
-                    colorerNormal();
-            };
-            badge.MouseLeave += (s, e) => {
+            EventHandler onEnter = (s, e) => colorerHover();
+            EventHandler onLeave = (s, e) =>
+            {
                 if (!carte.ClientRectangle.Contains(carte.PointToClient(Cursor.Position)))
                     colorerNormal();
             };
 
-            // ── Clic → détail ──────────────────────────────────────────────────
+            carte.MouseEnter += onEnter; carte.MouseLeave += onLeave;
+            pnlImg.MouseEnter += onEnter; pnlImg.MouseLeave += onLeave;
+            img.MouseEnter += onEnter; img.MouseLeave += onLeave;
+            lblNom.MouseEnter += onEnter; lblNom.MouseLeave += onLeave;
+            lblCouleur.MouseEnter += onEnter; lblCouleur.MouseLeave += onLeave;
+            lblPlanete.MouseEnter += onEnter; lblPlanete.MouseLeave += onLeave;
+            badge.MouseEnter += onEnter; badge.MouseLeave += onLeave;
+
+            // ── Clic ───────────────────────────────────────────────────────────
             EventHandler clic = (s, e) => AfficherDetail(row);
             carte.Click += clic;
             pnlImg.Click += clic;
