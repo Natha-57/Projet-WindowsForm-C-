@@ -25,6 +25,15 @@ namespace Volet_4___Races_Aliens
         private FlowLayoutPanelDB flowPlanetes;
         private Dictionary<string, Image> _cacheImages = new Dictionary<string, Image>();
 
+        // ── État mémorisé des filtres après dernière recherche ─────────────────
+        private string _dernierNom = "";
+        private string _dernierValTemp = "";
+        private string _dernierValGrav = "";
+        private int _dernierOpTemp = 0;
+        private int _dernierMission = 0;
+        private int _dernierDatabaz = 0;
+        private int _dernierOpGrav = 0;
+
         private static readonly Font _fontNom = new Font("Trebuchet MS", 15F, FontStyle.Bold);
         private static readonly Font _fontTemp = new Font("Trebuchet MS", 12F);
         private static readonly Font _fontDatabaz = new Font("Trebuchet MS", 12F, FontStyle.Bold);
@@ -46,6 +55,8 @@ namespace Volet_4___Races_Aliens
         {
             InitializeComponent();
         }
+
+        // ── Cache images ───────────────────────────────────────────────────────
         private Image ChargerImage(string chemin)
         {
             if (_cacheImages.ContainsKey(chemin))
@@ -58,6 +69,8 @@ namespace Volet_4___Races_Aliens
             }
             return null;
         }
+
+        // ── Filtres par défaut ─────────────────────────────────────────────────
         private bool FiltresParDefaut()
         {
             bool tempParDefaut = comboBox1.SelectedIndex == 0 &&
@@ -75,26 +88,42 @@ namespace Volet_4___Races_Aliens
                 && comboBox2.SelectedIndex == 0
                 && comboBox3.SelectedIndex == 0;
         }
+
+        // ── Boutons actifs / inactifs ──────────────────────────────────────────
         private void MettreAJourBoutons()
         {
-            bool actif = !FiltresParDefaut();
+            bool filtresChanges =
+                textBox1.Text.Trim() != _dernierNom ||
+                textBox2.Text.Trim() != _dernierValTemp ||
+                textBox3.Text.Trim() != _dernierValGrav ||
+                comboBox1.SelectedIndex != _dernierOpTemp ||
+                comboBox2.SelectedIndex != _dernierMission ||
+                comboBox3.SelectedIndex != _dernierDatabaz ||
+                comboBox4.SelectedIndex != _dernierOpGrav;
 
-            button_chercher.Enabled = actif;
-            button_chercher.Cursor = actif ? Cursors.Hand : Cursors.Default;
-            button_chercher.FlatStyle = actif ? FlatStyle.Standard : FlatStyle.Flat;
-            button_chercher.BackColor = actif
+            bool validerActif = filtresChanges && !FiltresParDefaut();
+            bool resetActif = !FiltresParDefaut();
+
+            button_chercher.Enabled = validerActif;
+            button_chercher.Cursor = validerActif ? Cursors.Hand : Cursors.Default;
+            button_chercher.FlatStyle = validerActif ? FlatStyle.Standard : FlatStyle.Flat;
+            button_chercher.BackColor = validerActif
                 ? Color.FromArgb(128, 255, 128)
                 : Color.FromArgb(180, 180, 180);
-            button_chercher.ForeColor = actif ? Color.Black : Color.FromArgb(120, 120, 120);
-            button_chercher.FlatAppearance.BorderSize = actif ? 1 : 0;
+            button_chercher.ForeColor = validerActif ? Color.Black : Color.FromArgb(120, 120, 120);
+            button_chercher.FlatAppearance.BorderSize = validerActif ? 1 : 0;
 
-            button_reset.Enabled = actif;
-            button_reset.Cursor = actif ? Cursors.Hand : Cursors.Default;
-            button_reset.FlatStyle = actif ? FlatStyle.Standard : FlatStyle.Flat;
-            button_reset.BackColor = actif ? Color.White : Color.FromArgb(200, 200, 200);
-            button_reset.ForeColor = actif ? Color.Black : Color.FromArgb(150, 150, 150);
-            button_reset.FlatAppearance.BorderSize = actif ? 1 : 0;
+            button_reset.Enabled = resetActif;
+            button_reset.Cursor = resetActif ? Cursors.Hand : Cursors.Default;
+            button_reset.FlatStyle = resetActif ? FlatStyle.Standard : FlatStyle.Flat;
+            button_reset.BackColor = resetActif ? Color.White : Color.FromArgb(200, 200, 200);
+            button_reset.ForeColor = resetActif ? Color.Black : Color.FromArgb(150, 150, 150);
+            button_reset.FlatAppearance.BorderSize = resetActif ? 1 : 0;
         }
+
+        // ======================================================================
+        // CHARGEMENT
+        // ======================================================================
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -117,10 +146,11 @@ namespace Volet_4___Races_Aliens
             textBox1.TextChanged += (s, ev) => MettreAJourBoutons();
             textBox2.TextChanged += (s, ev) => MettreAJourBoutons();
             textBox3.TextChanged += (s, ev) => MettreAJourBoutons();
-            comboBox1.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
-            comboBox2.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
-            comboBox3.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
-            comboBox4.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
+
+            comboBox1.SelectedIndexChanged += (s, ev) => { AfficherCartes(); MettreAJourBoutons(); };
+            comboBox2.SelectedIndexChanged += (s, ev) => { AfficherCartes(); MettreAJourBoutons(); };
+            comboBox3.SelectedIndexChanged += (s, ev) => { AfficherCartes(); MettreAJourBoutons(); };
+            comboBox4.SelectedIndexChanged += (s, ev) => { AfficherCartes(); MettreAJourBoutons(); };
 
             textBox1.KeyDown += (s, ev) =>
             {
@@ -176,6 +206,10 @@ namespace Volet_4___Races_Aliens
             MettreAJourBoutons();
         }
 
+        // ======================================================================
+        // PRÉCHARGEMENT
+        // ======================================================================
+
         private void PrechargerImages()
         {
             if (_ds.Tables["Planetes"] == null) return;
@@ -186,6 +220,10 @@ namespace Volet_4___Races_Aliens
                 ChargerImage(chemin);
             }
         }
+
+        // ======================================================================
+        // CHARGEMENT EN MODE CONNECTÉ
+        // ======================================================================
 
         private void ChargerDonnees()
         {
@@ -240,6 +278,10 @@ namespace Volet_4___Races_Aliens
                     "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        // ======================================================================
+        // FILTRAGE ET AFFICHAGE (mode déconnecté)
+        // ======================================================================
 
         private void AfficherCartes()
         {
@@ -311,7 +353,20 @@ namespace Volet_4___Races_Aliens
             flowPlanetes.ResumeLayout();
 
             label4.Text = $"{lignes.Count} planète(s) trouvée(s)";
+
+            // ── Mémorise l'état des filtres ────────────────────────────────────
+            _dernierNom = textBox1.Text.Trim();
+            _dernierValTemp = textBox2.Text.Trim();
+            _dernierValGrav = textBox3.Text.Trim();
+            _dernierOpTemp = comboBox1.SelectedIndex;
+            _dernierMission = comboBox2.SelectedIndex;
+            _dernierDatabaz = comboBox3.SelectedIndex;
+            _dernierOpGrav = comboBox4.SelectedIndex;
         }
+
+        // ======================================================================
+        // CRÉATION D'UNE CARTE DE PLANÈTE
+        // ======================================================================
 
         private Panel CreerCartePlanete(DataRow row)
         {
@@ -390,7 +445,7 @@ namespace Volet_4___Races_Aliens
                                    ? Color.FromArgb(0, 128, 0)
                                    : Color.FromArgb(180, 0, 0);
             lblDatabaz.TextAlign = ContentAlignment.MiddleCenter;
-            lblDatabaz.Location = new Point(05, 249);
+            lblDatabaz.Location = new Point(5, 249);
             lblDatabaz.Size = new Size(230, 20);
             lblDatabaz.AutoSize = false;
 
@@ -483,6 +538,10 @@ namespace Volet_4___Races_Aliens
             return carte;
         }
 
+        // ======================================================================
+        // DÉTAIL AU CLIC
+        // ======================================================================
+
         private void AfficherDetail(DataRow row)
         {
             string nomPlanete = row["nom"].ToString();
@@ -499,10 +558,8 @@ namespace Volet_4___Races_Aliens
         }
 
         private void label2_Click(object sender, EventArgs e) { }
-
-        private void button_retour_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void button_retour_Click(object sender, EventArgs e) { this.Close(); }
+        private void button_chercher_Click(object sender, EventArgs e) {}
+        private void label4_Click(object sender, EventArgs e) { }
     }
 }

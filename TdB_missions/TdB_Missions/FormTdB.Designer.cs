@@ -74,11 +74,11 @@
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btCreerMission);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btStat);
             this.Controls.Add(this.btInfoPlanete);
             this.Controls.Add(this.btInfoAlien);
-            this.Controls.Add(this.btCreerMission);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormTdB";
             this.Load += new System.EventHandler(this.Form1_Load);
