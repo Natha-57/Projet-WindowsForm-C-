@@ -17,6 +17,9 @@ namespace TdB_Missions
 {
     public partial class FormTdB : Form
     {
+        private static readonly Color CouleurSurvol = Color.FromArgb(224, 238, 249);
+        private static readonly Color CouleurNormale = Color.White;
+
         public FormTdB()
         {
             InitializeComponent();
@@ -40,7 +43,6 @@ namespace TdB_Missions
                     string nomTable = row[2].ToString();
                     string sql = "SELECT * FROM " + nomTable;
                     SQLiteDataAdapter da = new SQLiteDataAdapter(sql, conn);
-                    // Évite les doublons si la table existe déjà dans le DataSet
                     if (MesDatas.DsGlobal.Tables.Contains(nomTable))
                         MesDatas.DsGlobal.Tables[nomTable].Clear();
                     da.Fill(MesDatas.DsGlobal, nomTable);
@@ -65,38 +67,79 @@ namespace TdB_Missions
             ChargerMissions();
         }
 
-        private void InitPictureBox()
+        // Lie un PictureBox à un Button :
+        //  - centre l'image horizontalement et la colle en bas du bouton
+        //  - curseur Hand sur les deux
+        //  - survol de l'un ou l'autre → fond bleu sur les deux
+        //  - clic sur l'image → déclenche le handler du bouton
+        private void LierImageBouton(PictureBox pb, Button btn, EventHandler clickHandler)
         {
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.BackColor = Color.White;
-            pictureBox1.Size = new Size(btCreerMission.Width - 10, 40);
-            pictureBox1.Location = new Point(
-                btCreerMission.Left + (btCreerMission.Width - pictureBox1.Width) / 2,
-                btCreerMission.Top + btCreerMission.Height - pictureBox1.Height - 40
+            pb.SizeMode = PictureBoxSizeMode.Zoom;
+            pb.Cursor = Cursors.Hand;
+            pb.BackColor = CouleurNormale;
+
+            // Taille : largeur du bouton moins marges, hauteur fixe
+            int pbH = pb.Height; // on garde la hauteur définie dans le designer
+            int pbW = btn.Width - 20;
+            pb.Size = new Size(pbW, pbH);
+
+            // Centré horizontalement, collé en bas du bouton (marge 8px)
+            pb.Location = new Point(
+                btn.Left + (btn.Width - pbW) / 2,
+                btn.Bottom - pbH - 8
             );
 
-            btCreerMission.MouseEnter += (s, ev) => pictureBox1.BackColor = Color.FromArgb(224, 238, 249);
-            btCreerMission.MouseLeave += (s, ev) => pictureBox1.BackColor = Color.White;
-
-            pictureBox1.MouseEnter += (s, ev) => {
-                pictureBox1.BackColor = Color.FromArgb(224, 238, 249);
-                typeof(Button).GetMethod("OnMouseEnter",
-                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                    ?.Invoke(btCreerMission, new object[] { EventArgs.Empty });
-            };
-            pictureBox1.MouseLeave += (s, ev) => {
-                pictureBox1.BackColor = Color.White;
-                typeof(Button).GetMethod("OnMouseLeave",
-                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                    ?.Invoke(btCreerMission, new object[] { EventArgs.Empty });
+            // Survol bouton → bleu image
+            btn.MouseEnter += (s, ev) => pb.BackColor = CouleurSurvol;
+            btn.MouseLeave += (s, ev) =>
+            {
+                if (!pb.ClientRectangle.Contains(pb.PointToClient(Cursor.Position)))
+                    pb.BackColor = CouleurNormale;
             };
 
-            pictureBox1.Click += (s, ev) => btCreerMission_Click(s, ev);
+            // Survol image → bleu image + redessine le bouton
+            pb.MouseEnter += (s, ev) =>
+            {
+                pb.BackColor = CouleurSurvol;
+                btn.Invalidate();
+            };
+            pb.MouseLeave += (s, ev) =>
+            {
+                if (!btn.ClientRectangle.Contains(btn.PointToClient(Cursor.Position)))
+                    pb.BackColor = CouleurNormale;
+                btn.Invalidate();
+            };
+
+            // Clic image = clic bouton
+            pb.Click += clickHandler;
+        }
+
+        private void InitPictureBox()
+        {
+            // pictureBox1 ↔ btCreerMission
+            LierImageBouton(pictureBox1, btCreerMission, (s, ev) => btCreerMission_Click(s, ev));
+
+            // pictureBox4 ↔ btInfoAlien
+            LierImageBouton(pictureBox4, btInfoAlien, (s, ev) => button1_Click(s, ev));
+
+            // pictureBox2 ↔ btInfoPlanete
+            LierImageBouton(pictureBox2, btInfoPlanete, (s, ev) => btInfoPlanete_Click(s, ev));
+
+            // pictureBox5 ↔ button1 (Statistiques)
+            LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click(s, ev));
+
+            // pictureBox3 et pictureBox6 sont des éléments décoratifs (logo + bandeau)
+            // → on ne les touche pas
         }
 
         private void ChargerMissions()
         {
+            panel1.Location = new Point(312, 96);
+            panel1.Size = new Size(1200, 824);
+            panel1.Visible = true;
+            panel1.BringToFront();
+            panel1.AutoScroll = true;
+
             if (!MesDatas.DsGlobal.Tables.Contains("mission"))
             {
                 MessageBox.Show("La table 'mission' est introuvable dans la base de données.", "Données manquantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -109,7 +152,16 @@ namespace TdB_Missions
                 return;
             }
 
-            int axeX = 25, axeY = 20, i = 0;
+            // Grille 2 colonnes adaptée à la largeur du panel (1097px)
+            int colonnes = 1;
+            int ucLargeur = 1060; // quasi toute la largeur du panel
+            int ucHauteur = 215;
+            int espX = 25;
+            int espY = 20;
+            int debutX = 20;
+            int debutY = 15;
+            int col = 0, ligne = 0;
+
             foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
             {
                 try
@@ -117,11 +169,7 @@ namespace TdB_Missions
                     string filtre = "matricule = '" + row[5].ToString() + "'";
                     DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
 
-                    if (dr.Length == 0)
-                    {
-                        MessageBox.Show("Aucun membre trouvé pour le matricule : " + row[5].ToString(), "Avertissement", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        continue;
-                    }
+                    if (dr.Length == 0) continue;
 
                     DataRow d = dr[0];
 
@@ -133,10 +181,15 @@ namespace TdB_Missions
                     );
                     uc.setNomPlanete(row[0].ToString());
                     uc.setNumeroMission(Convert.ToInt32(row[1]));
-                    uc.Location = new Point(axeX, axeY + i);
+                    uc.Location = new Point(
+                        debutX + col * (ucLargeur + espX),
+                        debutY + ligne * (ucHauteur + espY)
+                    );
                     uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
                     panel1.Controls.Add(uc);
-                    i += 225;
+
+                    col++;
+                    if (col >= colonnes) { col = 0; ligne++; }
                 }
                 catch (Exception err)
                 {
@@ -156,9 +209,7 @@ namespace TdB_Missions
         {
             FormAuthentification formAuth = new FormAuthentification();
             if (formAuth.ShowDialog() == DialogResult.OK)
-            {
                 Rafraichir();
-            }
         }
 
         public void Rafraichir()
@@ -192,35 +243,20 @@ namespace TdB_Missions
             ChargerMissions();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-        }
+        private void groupBox1_Enter(object sender, EventArgs e) { }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Form_Aliens f = new Form_Aliens();
-            f.ShowDialog();
+            f.Show();
         }
 
         private void btInfoPlanete_Click(object sender, EventArgs e)
         {
             Form_Planetes f = new Form_Planetes();
-            f.ShowDialog();
-        }
-
-        private void btStat_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormStat f = new FormStat();
-            f.ShowDialog();
+            f.Show();
         }
     }
 }
