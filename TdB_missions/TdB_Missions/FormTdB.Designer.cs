@@ -40,6 +40,7 @@
             // 
             // btCreerMission
             // 
+            this.btCreerMission.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btCreerMission, "btCreerMission");
             this.btCreerMission.Name = "btCreerMission";
             this.btCreerMission.UseVisualStyleBackColor = true;
@@ -47,6 +48,7 @@
             // 
             // btInfoAlien
             // 
+            this.btInfoAlien.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btInfoAlien, "btInfoAlien");
             this.btInfoAlien.Name = "btInfoAlien";
             this.btInfoAlien.UseVisualStyleBackColor = true;
@@ -54,6 +56,7 @@
             // 
             // btInfoPlanete
             // 
+            this.btInfoPlanete.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btInfoPlanete, "btInfoPlanete");
             this.btInfoPlanete.Name = "btInfoPlanete";
             this.btInfoPlanete.UseVisualStyleBackColor = true;
@@ -61,6 +64,7 @@
             // 
             // btStat
             // 
+            this.btStat.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btStat, "btStat");
             this.btStat.Name = "btStat";
             this.btStat.UseVisualStyleBackColor = true;
