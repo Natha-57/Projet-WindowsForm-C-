@@ -199,7 +199,7 @@ namespace _2__Creation_De_Mission
 
 
 
-            
+
         }
 
         private void txtNbMembres_TextChanged(object sender, EventArgs e)
@@ -305,6 +305,14 @@ namespace _2__Creation_De_Mission
                 cmd.Parameters.AddWithValue("@dataBaz", string.IsNullOrEmpty(txtObjDataBaz.Text) ? 0 : Convert.ToInt32(txtObjDataBaz.Text));
                 cmd.Parameters.AddWithValue("@budget", string.IsNullOrEmpty(txtBudget.Text) ? 0 : Convert.ToInt32(txtBudget.Text));
                 cmd.ExecuteNonQuery();
+
+                string sqlChef = @"INSERT INTO Composer (nomPlanete, numeroMission, matriculeMembre)
+                   VALUES (@planete, @num, @mat)";
+                SQLiteCommand cmdChef = new SQLiteCommand(sqlChef, this.cx);
+                cmdChef.Parameters.AddWithValue("@planete", this.nomPlanete);
+                cmdChef.Parameters.AddWithValue("@num", this.numeroMission);
+                cmdChef.Parameters.AddWithValue("@mat", cboChefDeMission.SelectedValue.ToString());
+                cmdChef.ExecuteNonQuery();
 
                 MessageBox.Show($"Mission {this.nomPlanete}-{this.numeroMission} créée avec succès !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
