@@ -56,6 +56,7 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
             this.pictureBox5.Image = Image.FromFile("../../../../Images_App/Icones diverses/Logo Stat.png");
             this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Icones diverses/1_Logo Planètes Infos.png");
             this.pictureBox4.Image = Image.FromFile("../../../../Images_App/Icones diverses/2_Logo Info Alien.png");
@@ -67,29 +68,22 @@ namespace TdB_Missions
             ChargerMissions();
         }
 
-        // Lie un PictureBox à un Button :
-        //  - centre l'image horizontalement et la colle en bas du bouton
-        //  - curseur Hand sur les deux
-        //  - survol de l'un ou l'autre → fond bleu sur les deux
-        //  - clic sur l'image → déclenche le handler du bouton
         private void LierImageBouton(PictureBox pb, Button btn, EventHandler clickHandler)
         {
             pb.SizeMode = PictureBoxSizeMode.Zoom;
             pb.Cursor = Cursors.Hand;
             pb.BackColor = CouleurNormale;
 
-            // Taille : largeur du bouton moins marges, hauteur fixe
-            int pbH = pb.Height; // on garde la hauteur définie dans le designer
+
+            int pbH = pb.Height; 
             int pbW = btn.Width - 20;
             pb.Size = new Size(pbW, pbH);
 
-            // Centré horizontalement, collé en bas du bouton (marge 8px)
             pb.Location = new Point(
                 btn.Left + (btn.Width - pbW) / 2,
                 btn.Bottom - pbH - 8
             );
 
-            // Survol bouton → bleu image
             btn.MouseEnter += (s, ev) => pb.BackColor = CouleurSurvol;
             btn.MouseLeave += (s, ev) =>
             {
@@ -97,7 +91,7 @@ namespace TdB_Missions
                     pb.BackColor = CouleurNormale;
             };
 
-            // Survol image → bleu image + redessine le bouton
+    
             pb.MouseEnter += (s, ev) =>
             {
                 pb.BackColor = CouleurSurvol;
@@ -110,26 +104,22 @@ namespace TdB_Missions
                 btn.Invalidate();
             };
 
-            // Clic image = clic bouton
             pb.Click += clickHandler;
         }
 
         private void InitPictureBox()
         {
-            // pictureBox1 ↔ btCreerMission
+     
             LierImageBouton(pictureBox1, btCreerMission, (s, ev) => btCreerMission_Click(s, ev));
 
-            // pictureBox4 ↔ btInfoAlien
+           
             LierImageBouton(pictureBox4, btInfoAlien, (s, ev) => button1_Click(s, ev));
 
-            // pictureBox2 ↔ btInfoPlanete
+       
             LierImageBouton(pictureBox2, btInfoPlanete, (s, ev) => btInfoPlanete_Click(s, ev));
 
-            // pictureBox5 ↔ button1 (Statistiques)
             LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click(s, ev));
 
-            // pictureBox3 et pictureBox6 sont des éléments décoratifs (logo + bandeau)
-            // → on ne les touche pas
         }
 
         private void ChargerMissions()
@@ -152,9 +142,8 @@ namespace TdB_Missions
                 return;
             }
 
-            // Grille 2 colonnes adaptée à la largeur du panel (1097px)
             int colonnes = 1;
-            int ucLargeur = 1060; // quasi toute la largeur du panel
+            int ucLargeur = 1060; 
             int ucHauteur = 215;
             int espX = 25;
             int espY = 20;
@@ -257,6 +246,12 @@ namespace TdB_Missions
         {
             Form_Planetes f = new Form_Planetes();
             f.Show();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormStat f = new FormStat();
+            f.ShowDialog();
         }
     }
 }

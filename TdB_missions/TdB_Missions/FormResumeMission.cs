@@ -15,7 +15,7 @@ namespace _3_Visualisation_et_MAJ_missions
 {
     public partial class FormResumeMission : Form
     {
-        private SQLiteConnection cx;
+        private SQLiteConnection cx = Connexion.Connec;
         private string nomPlanete;
         private int numeroMission;
 
@@ -24,7 +24,6 @@ namespace _3_Visualisation_et_MAJ_missions
             InitializeComponent();
             this.nomPlanete = nomPlanete;
             this.numeroMission = numeroMission;
-            this.cx = Connexion.Connec;
 
             try
             {

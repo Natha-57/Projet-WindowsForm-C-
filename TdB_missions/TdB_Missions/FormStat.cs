@@ -24,13 +24,14 @@ namespace TdB_Missions
 
         private void FormStat_Load(object sender, EventArgs e)
         {
+            this.Icon = new Icon("Logo Star Gate.ico");
             try
             {
                 
-                string sql = "SELECT * from membre";
+                string sql = "SELECT * from membre order by prenom";
                 new SQLiteDataAdapter(sql, Connexion.Connec).Fill(dt);
                 this.comboBox1.DataSource = dt;
-                this.comboBox1.DisplayMember = "nom";
+                this.comboBox1.DisplayMember = "prenom";
                 this.comboBox1.ValueMember = "matricule";
            
                 
