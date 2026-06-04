@@ -44,18 +44,40 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
-            int axeX = 25;
-            int axeY = 20;
-            int i = 0;
+            this.Icon = new Icon("Logo Star Gate.ico");
 
-            // Vérification : la table 'mission' doit exister dans le DataSet
-            if (!MesDatas.DsGlobal.Tables.Contains("mission"))
-            {
-                MessageBox.Show("Table 'mission' introuvable dans le DataSet. Vérifiez la base de données ou le chargement des tables.");
-                return;
-            }
+            // --- PictureBox en bas au centre de btCreerMission ---
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.BackColor = Color.White;
+            pictureBox1.Size = new Size(btCreerMission.Width - 20, 40);
+            pictureBox1.Location = new Point(
+                btCreerMission.Left + (btCreerMission.Width - pictureBox1.Width) / 2,
+                btCreerMission.Top + btCreerMission.Height - pictureBox1.Height - 40
+            );
 
+            btCreerMission.MouseEnter += (s, ev) => pictureBox1.BackColor = Color.FromArgb(224, 238, 249);
+            btCreerMission.MouseLeave += (s, ev) => pictureBox1.BackColor = Color.White;
+
+            pictureBox1.MouseEnter += (s, ev) => {
+                pictureBox1.BackColor = Color.FromArgb(224, 238, 249);
+                typeof(Button).GetMethod("OnMouseEnter",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(btCreerMission, new object[] { EventArgs.Empty });
+            };
+            pictureBox1.MouseLeave += (s, ev) => {
+                pictureBox1.BackColor = Color.White;
+                typeof(Button).GetMethod("OnMouseLeave",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                    ?.Invoke(btCreerMission, new object[] { EventArgs.Empty });
+            };
+
+            pictureBox1.Click += (s, ev) => btCreerMission_Click(s, ev);
+
+            // --- Chargement des missions ---
+            if (!MesDatas.DsGlobal.Tables.Contains("mission")) return;
+
+            int axeX = 25, axeY = 20, i = 0;
             foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
             {
                 try
@@ -64,14 +86,16 @@ namespace TdB_Missions
                     DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
                     DataRow d = dr[0];
 
-                    UserControl1 uc = new UserControl1((row[0].ToString() + row[1].ToString()), row[3].ToString(), row[4].ToString(), d[1].ToString() +" "+ d[2].ToString(), "../../../../Images_App/Planètes/Logo - " + row[0]+".png");
-                    
+                    UserControl1 uc = new UserControl1(
+                        (row[0].ToString() + row[1].ToString()),
+                        row[3].ToString(), row[4].ToString(),
+                        d[1].ToString() + " " + d[2].ToString(),
+                        "ImagesPlanetes/Logo - " + row[0] + ".png"
+                    );
                     uc.setNomPlanete(row[0].ToString());
                     uc.setNumeroMission(Convert.ToInt32(row[1]));
-                    
                     uc.Location = new Point(axeX, axeY + i);
                     uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
-                    
                     panel1.Controls.Add(uc);
                     i += 225;
                 }
