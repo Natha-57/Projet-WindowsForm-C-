@@ -127,6 +127,10 @@ namespace Volet_4___Races_Aliens
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Icon = new Icon("Logo Star Gate.ico");
+            this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
+            this.pictureBox1.Image = Image.FromFile("../../../../Images_App/Logo Star Gate.png");
+            this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Texte Stargate Planètes.png");
             this.DoubleBuffered = true;
 
             comboBox1.Items.AddRange(new object[] { "", "=", "<", "<=", ">", ">=" });
@@ -561,5 +565,10 @@ namespace Volet_4___Races_Aliens
         private void button_retour_Click(object sender, EventArgs e) { this.Close(); }
         private void button_chercher_Click(object sender, EventArgs e) {}
         private void label4_Click(object sender, EventArgs e) { }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

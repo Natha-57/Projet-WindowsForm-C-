@@ -213,7 +213,7 @@ namespace Volet_4___Races_Aliens
 
         private void FormDetailAlien_Load(object sender, EventArgs e)
         {
-
+            this.Icon = new Icon("Logo Star Gate.ico");
         }
     }
 }
