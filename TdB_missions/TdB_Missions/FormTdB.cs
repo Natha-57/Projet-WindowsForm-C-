@@ -166,7 +166,7 @@ namespace TdB_Missions
                         (row[0].ToString() + row[1].ToString()),
                         row[3].ToString(), row[4].ToString(),
                         d[1].ToString() + " " + d[2].ToString(),
-                        "ImagesPlanetes/Logo - " + row[0] + ".png"
+                        "../../../../Images_App/Planètes/Logo - " + row[0] + ".png"
                     );
                     uc.setNomPlanete(row[0].ToString());
                     uc.setNumeroMission(Convert.ToInt32(row[1]));
