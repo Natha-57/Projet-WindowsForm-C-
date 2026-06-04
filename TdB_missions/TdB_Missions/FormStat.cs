@@ -28,7 +28,7 @@ namespace TdB_Missions
             try
             {
                 
-                string sql = "SELECT * from membre";
+                string sql = "SELECT * from membre order by prenom";
                 new SQLiteDataAdapter(sql, Connexion.Connec).Fill(dt);
                 this.comboBox1.DataSource = dt;
                 this.comboBox1.DisplayMember = "prenom";
