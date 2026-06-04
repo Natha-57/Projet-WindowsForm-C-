@@ -40,6 +40,8 @@ echo .vs/ > .gitignore
 echo bin/ >> .gitignore
 echo obj/ >> .gitignore
 echo *.user >> .gitignore
+echo *.pdb >> .gitignore
+echo *.exe >> .gitignore
 ```
 On peut ensuite regarder le contenu du fichier `.gitignore` avec :
 
@@ -72,7 +74,7 @@ git commit -m "nom_commit"
 
 ```sh
 git push
-```sh
+```
 
 ###  Comment mettre à jour son clône ?
 
@@ -111,3 +113,9 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 
         4. Affichage des races aliens
         5. Affichage des planètes 
+
+    - Optimisation
+
+    - Desing principal de l'application
+
+    - Ergonomie
