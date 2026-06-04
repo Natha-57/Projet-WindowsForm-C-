@@ -38,13 +38,11 @@ namespace _3_Visualisation_et_MAJ_missions
 
             pbHome.SizeMode = PictureBoxSizeMode.CenterImage;
             pbHome.SizeMode = PictureBoxSizeMode.Zoom;
-            pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\home.png"); 
+            pbHome.Image = System.Drawing.Image.FromFile("..\\..\\..\\..\\Images_App\\Icones diverses\\home.png");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
-
             this.Close();
         }
 
@@ -77,10 +75,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
             dgvDepenses.DataSource = dt;
             lblDepenses.Text = $"Total des dépenses : {total} €";
-
         }
-
-
 
         private void ChargerContacts()
         {
@@ -178,11 +173,9 @@ namespace _3_Visualisation_et_MAJ_missions
             indexEvenement = dtEvenements.Rows.Count - 1;
             AfficherEvenement();
         }
-    
 
         private void dgvDepenses_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
         }
 
         private void FormJdB_Load(object sender, EventArgs e)
@@ -192,9 +185,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void lblEvenement_Click(object sender, EventArgs e)
         {
-
         }
-
 
         private void ChargerBilanCaptures()
         {
@@ -235,7 +226,6 @@ namespace _3_Visualisation_et_MAJ_missions
 
                 MesDatas.DsGlobal.Tables[nomTable].Rows.Add(nomEspece, objectif, nbCaptures, taux);
             }
-
         }
 
         private void btEditerUnPdf_Click(object sender, EventArgs e)
@@ -245,24 +235,64 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void LancerPDF()
         {
-            iTextSharp.text.Document doc = new iTextSharp.text.Document(
-                iTextSharp.text.PageSize.A4, 25, 25, 30, 30);
+            // ── Couleurs du thème ────────────────────────────────────
+            BaseColor NOIR = new BaseColor(10, 12, 20);
+            BaseColor CYAN = new BaseColor(0, 229, 255);
+            BaseColor OR = new BaseColor(255, 215, 0);
+            BaseColor GRIS_CLAIR = new BaseColor(180, 200, 210);
+            BaseColor GRIS_FONCE = new BaseColor(30, 40, 55);
+            BaseColor CYAN_DARK = new BaseColor(0, 60, 80);
+
+            // ── Polices ──────────────────────────────────────────────
+            iTextSharp.text.Font fTitre = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 22, CYAN);
+            iTextSharp.text.Font fSousTitre = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 11, OR);
+            iTextSharp.text.Font fBold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, CYAN);
+            iTextSharp.text.Font fNormal = FontFactory.GetFont(FontFactory.HELVETICA, 9, GRIS_CLAIR);
+            iTextSharp.text.Font fSmall = FontFactory.GetFont(FontFactory.HELVETICA, 8, GRIS_CLAIR);
+            iTextSharp.text.Font fTableHdr = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, NOIR);
+
+            // ── Document ─────────────────────────────────────────────
+            Document doc = new Document(PageSize.A4, 30, 30, 40, 40);
             string filePath = "RapportMission.pdf";
 
             try
             {
-                iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                writer.PageEvent = new StargatePdfPageEvent(NOIR, CYAN, OR);
                 doc.Open();
 
-                var fontTitre = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA_BOLD, 14);
-                var fontBold = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA_BOLD, 11);
-                var fontNormal = iTextSharp.text.FontFactory.GetFont(iTextSharp.text.FontFactory.HELVETICA, 10);
+                // ── EN-TÊTE ──────────────────────────────────────────
+                PdfPTable headerTable = new PdfPTable(1);
+                headerTable.WidthPercentage = 100;
+                headerTable.SpacingAfter = 10;
 
-                // Titre
-                doc.Add(new iTextSharp.text.Paragraph("Rapport de mission", fontTitre));
-                doc.Add(new iTextSharp.text.Paragraph(iTextSharp.text.Chunk.NEWLINE));
+                PdfPCell titleCell = new PdfPCell();
+                titleCell.BackgroundColor = NOIR;
+                titleCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                titleCell.BorderColorBottom = CYAN;
+                titleCell.BorderWidthBottom = 1.5f;
+                titleCell.PaddingBottom = 8;
 
-                // Infos mission 
+                Paragraph deco = new Paragraph("◈  ◈  ◈  STARGATE COMMAND  ◈  ◈  ◈",
+                    FontFactory.GetFont(FontFactory.HELVETICA, 8, new BaseColor(0, 140, 160)));
+                deco.Alignment = Element.ALIGN_CENTER;
+                titleCell.AddElement(deco);
+
+                Paragraph titreDoc = new Paragraph("RAPPORT DE MISSION", fTitre);
+                titreDoc.Alignment = Element.ALIGN_CENTER;
+                titleCell.AddElement(titreDoc);
+
+                Paragraph classif = new Paragraph(
+                    "CLASSIFICATION : TOP SECRET  //  SGC-INTERNAL",
+                    FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 7, OR));
+                classif.Alignment = Element.ALIGN_CENTER;
+                titleCell.AddElement(classif);
+
+                headerTable.AddCell(titleCell);
+                doc.Add(headerTable);
+                doc.Add(new Paragraph(" "));
+
+                // ── INFOS MISSION ────────────────────────────────────
                 string filtreM = $"nomPlanete = '{this.planete}' AND numero = {this.num}";
                 DataRow[] rowsM = MesDatas.DsGlobal.Tables["Mission"].Select(filtreM);
 
@@ -270,145 +300,317 @@ namespace _3_Visualisation_et_MAJ_missions
                 {
                     DataRow mission = rowsM[0];
 
-                    // Chef
                     DataRow[] rowsChef = MesDatas.DsGlobal.Tables["Membre"].Select(
                         $"matricule = '{mission["matriculeChef"]}'");
                     string chef = rowsChef.Length > 0
                         ? rowsChef[0]["nom"] + " " + rowsChef[0]["prenom"]
                         : "Inconnu";
 
-                    doc.Add(new iTextSharp.text.Paragraph(
-                        $"Départ le {mission["dateDepart"]}    Retour le {mission["dateRetour"]}", fontNormal));
-                    doc.Add(new iTextSharp.text.Paragraph(iTextSharp.text.Chunk.NEWLINE));
-                    doc.Add(new iTextSharp.text.Paragraph(
-                        "Sous la responsabilité de " + chef, fontBold));
-                    doc.Add(Chunk.NEWLINE);
+                    PdfPTable infoTbl = new PdfPTable(new float[] { 1f, 2f });
+                    infoTbl.WidthPercentage = 100;
+                    infoTbl.SpacingAfter = 8;
 
-                    // Solde
+                    Action<string, string> addInfoRow = (label, value) =>
+                    {
+                        PdfPCell lbl = new PdfPCell(new Phrase(label, fBold));
+                        lbl.BackgroundColor = GRIS_FONCE;
+                        lbl.Border = iTextSharp.text.Rectangle.LEFT_BORDER;
+                        lbl.BorderColorLeft = CYAN;
+                        lbl.BorderWidthLeft = 2f;
+                        lbl.PaddingLeft = 6; lbl.PaddingTop = 4; lbl.PaddingBottom = 4;
+
+                        PdfPCell val = new PdfPCell(new Phrase(value, fNormal));
+                        val.BackgroundColor = NOIR;
+                        val.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                        val.PaddingLeft = 6; val.PaddingTop = 4; val.PaddingBottom = 4;
+
+                        infoTbl.AddCell(lbl);
+                        infoTbl.AddCell(val);
+                    };
+
+                    addInfoRow("PLANÈTE CIBLE", this.planete.ToUpper());
+                    addInfoRow("N° MISSION", this.num.ToString());
+                    addInfoRow("DÉPART", mission["dateDepart"].ToString());
+                    addInfoRow("RETOUR", mission["dateRetour"].ToString());
+                    addInfoRow("COMMANDANT", chef.ToUpper());
+
                     string filtreD = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
                     DataRow[] deps = MesDatas.DsGlobal.Tables["Depense"].Select(filtreD);
                     int totalDep = 0;
-                    foreach (DataRow d in deps)
-                        totalDep += Convert.ToInt32(d["montant"]);
-
+                    foreach (DataRow d in deps) totalDep += Convert.ToInt32(d["montant"]);
                     int budget = Convert.ToInt32(mission["budget"]);
-                    doc.Add(new iTextSharp.text.Paragraph($"Budget initial : {budget} €", fontNormal));
-                    doc.Add(new iTextSharp.text.Paragraph($"Solde après dépenses : {budget - totalDep} €", fontNormal));
-                    doc.Add(new iTextSharp.text.Paragraph(iTextSharp.text.Chunk.NEWLINE));
-                    doc.Add(new iTextSharp.text.Paragraph("Feuille de route :", fontBold));
-                    doc.Add(Chunk.NEWLINE);
-                    doc.Add(new iTextSharp.text.Paragraph(mission["feuilleDeRoute"].ToString(), fontNormal));
+                    int solde = budget - totalDep;
+
+                    addInfoRow("BUDGET INITIAL", $"{budget} crédits");
+                    addInfoRow("SOLDE APRÈS DÉPENSES", $"{solde} crédits");
+
+                    doc.Add(infoTbl);
+
+                    doc.Add(SectionHeader("▶  FEUILLE DE ROUTE", fSousTitre, CYAN));
+                    PdfPTable frTbl = new PdfPTable(1);
+                    frTbl.WidthPercentage = 100;
+                    frTbl.SpacingAfter = 12;
+                    PdfPCell frCell = new PdfPCell(new Phrase(mission["feuilleDeRoute"].ToString(), fNormal));
+                    frCell.BackgroundColor = GRIS_FONCE;
+                    frCell.Border = iTextSharp.text.Rectangle.LEFT_BORDER;
+                    frCell.BorderColorLeft = CYAN;
+                    frCell.BorderWidthLeft = 3f;
+                    frCell.Padding = 8;
+                    frTbl.AddCell(frCell);
+                    doc.Add(frTbl);
                 }
 
-                doc.Add(new iTextSharp.text.Paragraph("\n-------------------------------------------\n"));
+                // ── MEMBRES ──────────────────────────────────────────
+                doc.Add(SectionHeader("▶  ÉQUIPE EN MISSION", fSousTitre, CYAN));
 
-                // Membres 
-                doc.Add(new iTextSharp.text.Paragraph("Liste des membres", fontBold));
-                doc.Add(Chunk.NEWLINE);
                 string filtreComp = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
                 DataRow[] rowsComp = MesDatas.DsGlobal.Tables["Composer"].Select(filtreComp);
+
+                PdfPTable memTbl = new PdfPTable(new float[] { 0.3f, 1f });
+                memTbl.WidthPercentage = 100;
+                memTbl.SpacingAfter = 12;
+
+                PdfPCell mhNum = new PdfPCell(new Phrase("#", fTableHdr));
+                PdfPCell mhName = new PdfPCell(new Phrase("MEMBRE", fTableHdr));
+                foreach (var c in new[] { mhNum, mhName })
+                {
+                    c.BackgroundColor = CYAN_DARK;
+                    c.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                    c.BorderColorBottom = CYAN;
+                    c.BorderWidthBottom = 1.5f;
+                    c.HorizontalAlignment = Element.ALIGN_CENTER;
+                    c.Padding = 5;
+                }
+                memTbl.AddCell(mhNum);
+                memTbl.AddCell(mhName);
+
+                int idx = 1;
                 foreach (DataRow row in rowsComp)
                 {
                     DataRow[] mb = MesDatas.DsGlobal.Tables["Membre"].Select(
                         $"matricule = '{row["matriculeMembre"]}'");
                     if (mb.Length > 0)
-                        doc.Add(new iTextSharp.text.Paragraph(
-                            "--> " + mb[0]["nom"] + " " + mb[0]["prenom"], fontNormal));
+                    {
+                        bool pair = idx % 2 == 0;
+                        BaseColor bg = pair ? GRIS_FONCE : NOIR;
+
+                        PdfPCell cNum = new PdfPCell(new Phrase(idx.ToString(), fSmall));
+                        PdfPCell cName = new PdfPCell(new Phrase(
+                            mb[0]["nom"] + " " + mb[0]["prenom"], fNormal));
+
+                        foreach (var c in new[] { cNum, cName })
+                        {
+                            c.BackgroundColor = bg;
+                            c.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            c.PaddingLeft = 8; c.PaddingTop = 4; c.PaddingBottom = 4;
+                        }
+                        cNum.HorizontalAlignment = Element.ALIGN_CENTER;
+                        memTbl.AddCell(cNum);
+                        memTbl.AddCell(cName);
+                        idx++;
+                    }
                 }
+                doc.Add(memTbl);
 
-                doc.Add(new iTextSharp.text.Paragraph("\n-------------------------------------------\n"));
+                // ── JOURNAL DE BORD ──────────────────────────────────
+                doc.Add(SectionHeader("▶  JOURNAL DE BORD", fSousTitre, CYAN));
 
-                // Journal de bord 
-                doc.Add(new iTextSharp.text.Paragraph("Journal de bord :", fontBold));
-                doc.Add(Chunk.NEWLINE);
                 string filtreJdb = $"nomPlanete = '{this.planete}' AND numero = {this.num}";
                 DataRow[] rowsJdb = MesDatas.DsGlobal.Tables["JournalDeBord"].Select(filtreJdb, "dateJ ASC");
+
+                PdfPTable jdbTbl = new PdfPTable(new float[] { 1f, 3f });
+                jdbTbl.WidthPercentage = 100;
+                jdbTbl.SpacingAfter = 12;
+                AddTableHeader(jdbTbl, new[] { "DATE", "ENTRÉE DE JOURNAL" }, fTableHdr, CYAN_DARK, CYAN);
+
+                idx = 1;
                 foreach (DataRow row in rowsJdb)
-                    doc.Add(new iTextSharp.text.Paragraph(
-                        $"Le {row["dateJ"]} --> {row["commentaires"]}", fontNormal));
+                {
+                    bool pair = idx % 2 == 0;
+                    BaseColor bg = pair ? GRIS_FONCE : NOIR;
 
-                doc.Add(new iTextSharp.text.Paragraph("\n-------------------------------------------\n"));
+                    PdfPCell cDate = new PdfPCell(new Phrase(row["dateJ"].ToString(), fSmall));
+                    PdfPCell cText = new PdfPCell(new Phrase(row["commentaires"].ToString(), fNormal));
+                    foreach (var c in new[] { cDate, cText })
+                    {
+                        c.BackgroundColor = bg;
+                        c.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                        c.PaddingLeft = 8; c.PaddingTop = 4; c.PaddingBottom = 4;
+                    }
+                    jdbTbl.AddCell(cDate);
+                    jdbTbl.AddCell(cText);
+                    idx++;
+                }
+                doc.Add(jdbTbl);
 
-                // Dépenses
-                doc.Add(new iTextSharp.text.Paragraph("Dépenses effectuées :", fontBold));
-                doc.Add(Chunk.NEWLINE);
+                // ── DÉPENSES ─────────────────────────────────────────
+                doc.Add(SectionHeader("▶  DÉPENSES EFFECTUÉES", fSousTitre, CYAN));
+
                 string filtreDep = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
                 DataRow[] rowsDep = MesDatas.DsGlobal.Tables["Depense"].Select(filtreDep, "dateD ASC");
-                int total = 0, i = 1;
+
+                PdfPTable depTbl = new PdfPTable(new float[] { 0.4f, 1f, 2f, 0.8f, 1f });
+                depTbl.WidthPercentage = 100;
+                depTbl.SpacingAfter = 4;
+                AddTableHeader(depTbl,
+                    new[] { "#", "DATE", "MOTIF", "MONTANT", "TYPE" },
+                    fTableHdr, CYAN_DARK, CYAN);
+
+                int total = 0; idx = 1;
                 foreach (DataRow row in rowsDep)
                 {
                     int montant = Convert.ToInt32(row["montant"]);
                     total += montant;
-
                     DataRow[] type = MesDatas.DsGlobal.Tables["TypeDepense"].Select(
                         $"id = {row["idTypeDepense"]}");
                     string libelle = type.Length > 0 ? type[0]["libelle"].ToString() : "";
 
-                    doc.Add(new iTextSharp.text.Paragraph(
-                        $"{i}) le {row["dateD"]} : {row["motif"]} -> {montant} € ({libelle})", fontNormal));
-                    i++;
+                    bool pair = idx % 2 == 0;
+                    BaseColor bg = pair ? GRIS_FONCE : NOIR;
+                    foreach (string txt in new[] {
+                        idx.ToString(), row["dateD"].ToString(),
+                        row["motif"].ToString(), montant + " €", libelle })
+                    {
+                        PdfPCell c = new PdfPCell(new Phrase(txt, fSmall));
+                        c.BackgroundColor = bg;
+                        c.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                        c.PaddingLeft = 6; c.PaddingTop = 3; c.PaddingBottom = 3;
+                        depTbl.AddCell(c);
+                    }
+                    idx++;
                 }
-                doc.Add(Chunk.NEWLINE);
-                doc.Add(new iTextSharp.text.Paragraph($"Total des dépenses : {total} €", fontBold));
+                doc.Add(depTbl);
 
-                doc.Add(new iTextSharp.text.Paragraph("\n-------------------------------------------\n"));
+                PdfPTable totDepTbl = new PdfPTable(1);
+                totDepTbl.WidthPercentage = 100;
+                totDepTbl.SpacingAfter = 12;
+                PdfPCell totDepCell = new PdfPCell(new Phrase($"TOTAL DES DÉPENSES : {total} €", fBold));
+                totDepCell.BackgroundColor = CYAN_DARK;
+                totDepCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                totDepCell.BorderColorBottom = CYAN;
+                totDepCell.BorderWidthBottom = 1.5f;
+                totDepCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                totDepCell.Padding = 5;
+                totDepTbl.AddCell(totDepCell);
+                doc.Add(totDepTbl);
 
-                // Contacts
-                doc.Add(new iTextSharp.text.Paragraph("Contacts avec les informateurs :", fontBold));
-                doc.Add(Chunk.NEWLINE);
+                // ── CONTACTS ─────────────────────────────────────────
+                doc.Add(SectionHeader("▶  CONTACTS – INFORMATEURS", fSousTitre, CYAN));
+
                 string filtreC = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
                 DataRow[] rowsC = MesDatas.DsGlobal.Tables["Contact"].Select(filtreC, "dateC ASC");
-                int totalSommes = 0;
+
+                PdfPTable cntTbl = new PdfPTable(new float[] { 0.8f, 1.5f, 0.8f, 1f });
+                cntTbl.WidthPercentage = 100;
+                cntTbl.SpacingAfter = 4;
+                AddTableHeader(cntTbl,
+                    new[] { "DATE", "INFORMATEUR", "SOMME", "APPRÉCIATION" },
+                    fTableHdr, CYAN_DARK, CYAN);
+
+                int totalSommes = 0; idx = 1;
                 foreach (DataRow row in rowsC)
                 {
                     int somme = Convert.ToInt32(row["sommeVersee"]);
                     totalSommes += somme;
-
                     DataRow[] info = MesDatas.DsGlobal.Tables["Informateur"].Select(
                         $"nomCode = '{row["nomCodeInformateur"]}'");
                     string nomInfo = info.Length > 0 ? info[0]["nom"].ToString() : "";
 
-                    doc.Add(new iTextSharp.text.Paragraph(
-                        $"Le {row["dateC"]} : rencontre avec {nomInfo} -> {somme} € ({row["appreciation"]})",
-                        fontNormal));
+                    bool pair = idx % 2 == 0;
+                    BaseColor bg = pair ? GRIS_FONCE : NOIR;
+                    foreach (string txt in new[] {
+                        row["dateC"].ToString(), nomInfo,
+                        somme + " €", row["appreciation"].ToString() })
+                    {
+                        PdfPCell c = new PdfPCell(new Phrase(txt, fSmall));
+                        c.BackgroundColor = bg;
+                        c.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                        c.PaddingLeft = 6; c.PaddingTop = 3; c.PaddingBottom = 3;
+                        cntTbl.AddCell(c);
+                    }
+                    idx++;
                 }
-                doc.Add(Chunk.NEWLINE);
-                doc.Add(new iTextSharp.text.Paragraph(
+                doc.Add(cntTbl);
 
-                    $"Total des sommes versées : {totalSommes} €", fontBold));
+                PdfPTable totCntTbl = new PdfPTable(1);
+                totCntTbl.WidthPercentage = 100;
+                totCntTbl.SpacingAfter = 12;
+                PdfPCell totCntCell = new PdfPCell(new Phrase($"TOTAL SOMMES VERSÉES : {totalSommes} €", fBold));
+                totCntCell.BackgroundColor = CYAN_DARK;
+                totCntCell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                totCntCell.BorderColorBottom = CYAN;
+                totCntCell.BorderWidthBottom = 1.5f;
+                totCntCell.HorizontalAlignment = Element.ALIGN_RIGHT;
+                totCntCell.Padding = 5;
+                totCntTbl.AddCell(totCntCell);
+                doc.Add(totCntTbl);
 
-                doc.Add(new iTextSharp.text.Paragraph("\n-------------------------------------------\n"));
+                // ── BILAN DES CAPTURES ───────────────────────────────
+                doc.Add(SectionHeader("▶  BILAN DES CAPTURES", fSousTitre, CYAN));
 
-                // Bilan des captures
-                doc.Add(new iTextSharp.text.Paragraph("Bilan des captures :", fontBold));
-                doc.Add(Chunk.NEWLINE);
                 string nomTable = $"BilanCapture{this.planete}{this.num}";
                 if (MesDatas.DsGlobal.Tables.Contains(nomTable))
                 {
-                    iTextSharp.text.pdf.PdfPTable table = new iTextSharp.text.pdf.PdfPTable(4);
-                    table.WidthPercentage = 100;
+                    PdfPTable capTbl = new PdfPTable(4);
+                    capTbl.WidthPercentage = 100;
+                    capTbl.SpacingAfter = 12;
+                    AddTableHeader(capTbl,
+                        new[] { "ESPÈCE", "OBJECTIF INITIAL", "CAPTURES RÉALISÉES", "TAUX DE RÉUSSITE (%)" },
+                        fTableHdr, CYAN_DARK, CYAN);
 
-                    // En-têtes
-                    table.AddCell(new iTextSharp.text.pdf.PdfPCell(
-                        new iTextSharp.text.Phrase("Nom de l'espèce", fontBold)));
-                    table.AddCell(new iTextSharp.text.pdf.PdfPCell(
-                        new iTextSharp.text.Phrase("Objectif initial", fontBold)));
-                    table.AddCell(new iTextSharp.text.pdf.PdfPCell(
-                        new iTextSharp.text.Phrase("Captures réalisées", fontBold)));
-                    table.AddCell(new iTextSharp.text.pdf.PdfPCell(
-                        new iTextSharp.text.Phrase("Taux de réussite (%)", fontBold)));
-
-                    // Données
+                    idx = 1;
                     foreach (DataRow row in MesDatas.DsGlobal.Tables[nomTable].Rows)
                     {
-                        table.AddCell(row["Nom de l'espèce"].ToString());
-                        table.AddCell(row["Objectif initial"].ToString());
-                        table.AddCell(row["Captures réalisées"].ToString());
-                        table.AddCell(row["Taux de réussite (%)"].ToString());
-                    }
+                        bool pair = idx % 2 == 0;
+                        BaseColor bg = pair ? GRIS_FONCE : NOIR;
 
-                    doc.Add(table);
+                        string tauxStr = row["Taux de réussite (%)"].ToString();
+                        float taux = 0;
+                        float.TryParse(tauxStr, out taux);
+                        BaseColor tauxColor = taux >= 80 ? new BaseColor(0, 200, 100)
+                                            : taux >= 50 ? OR
+                                            : new BaseColor(220, 60, 60);
+
+                        // CORRECTION : tableau de (string txt, bool isLast) avec var
+                        var colonnes = new (string txt, bool isLast)[]
+                        {
+                            (row["Nom de l'espèce"].ToString(),    false),
+                            (row["Objectif initial"].ToString(),    false),
+                            (row["Captures réalisées"].ToString(), false),
+                            (tauxStr,                               true)
+                        };
+
+                        foreach (var col in colonnes)
+                        {
+                            iTextSharp.text.Font f = col.isLast
+                                ? FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, tauxColor)
+                                : fSmall;
+                            PdfPCell c = new PdfPCell(new Phrase(col.txt, f));
+                            c.BackgroundColor = bg;
+                            c.Border = iTextSharp.text.Rectangle.NO_BORDER;
+                            c.PaddingLeft = 6; c.PaddingTop = 3; c.PaddingBottom = 3;
+                            c.HorizontalAlignment = Element.ALIGN_CENTER;
+                            capTbl.AddCell(c);
+                        }
+                        idx++;
+                    }
+                    doc.Add(capTbl);
                 }
+
+                // ── PIED DE PAGE FINAL ───────────────────────────────
+                PdfPTable footTbl = new PdfPTable(1);
+                footTbl.WidthPercentage = 100;
+                PdfPCell footCell = new PdfPCell(new Phrase(
+                    "◈  FIN DU RAPPORT  ◈  SGC – DOCUMENT CLASSIFIÉ  ◈",
+                    FontFactory.GetFont(FontFactory.HELVETICA_OBLIQUE, 8, new BaseColor(0, 140, 160))));
+                footCell.BackgroundColor = NOIR;
+                footCell.Border = iTextSharp.text.Rectangle.TOP_BORDER;
+                footCell.BorderColorTop = CYAN;
+                footCell.BorderWidthTop = 1f;
+                footCell.HorizontalAlignment = Element.ALIGN_CENTER;
+                footCell.PaddingTop = 6;
+                footTbl.AddCell(footCell);
+                doc.Add(footTbl);
             }
             catch (Exception ex)
             {
@@ -421,5 +623,104 @@ namespace _3_Visualisation_et_MAJ_missions
             }
         }
 
+        // ── Helpers ──────────────────────────────────────────────────
+
+        private static PdfPTable SectionHeader(string texte, iTextSharp.text.Font font, BaseColor couleurBarre)
+        {
+            PdfPTable t = new PdfPTable(1);
+            t.WidthPercentage = 100;
+            t.SpacingBefore = 10;
+            t.SpacingAfter = 4;
+
+            PdfPCell cell = new PdfPCell(new Phrase(texte, font));
+            cell.BackgroundColor = new BaseColor(20, 30, 45);
+            cell.Border = iTextSharp.text.Rectangle.LEFT_BORDER | iTextSharp.text.Rectangle.BOTTOM_BORDER;
+            cell.BorderColorLeft = couleurBarre;
+            cell.BorderWidthLeft = 4f;
+            cell.BorderColorBottom = couleurBarre;
+            cell.BorderWidthBottom = 0.5f;
+            cell.PaddingLeft = 8;
+            cell.PaddingTop = 5;
+            cell.PaddingBottom = 5;
+            t.AddCell(cell);
+            return t;
+        }
+
+        private static void AddTableHeader(
+            PdfPTable table, string[] headers,
+            iTextSharp.text.Font font, BaseColor bgColor, BaseColor borderColor)
+        {
+            foreach (string h in headers)
+            {
+                PdfPCell cell = new PdfPCell(new Phrase(h, font));
+                cell.BackgroundColor = bgColor;
+                cell.Border = iTextSharp.text.Rectangle.BOTTOM_BORDER;
+                cell.BorderColorBottom = borderColor;
+                cell.BorderWidthBottom = 1.5f;
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell.Padding = 5;
+                table.AddCell(cell);
+            }
+        }
+
+        // ── PageEvent Stargate ────────────────────────────────────────
+
+        public class StargatePdfPageEvent : PdfPageEventHelper
+        {
+            private readonly BaseColor _fondNoir;
+            private readonly BaseColor _cyan;
+            private readonly BaseColor _or;
+
+            public StargatePdfPageEvent(BaseColor fondNoir, BaseColor cyan, BaseColor or)
+            {
+                _fondNoir = fondNoir;
+                _cyan = cyan;
+                _or = or;
+            }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                PdfContentByte cb = writer.DirectContentUnder;
+
+                cb.SetColorFill(_fondNoir);
+                cb.Rectangle(0, 0, document.PageSize.Width, document.PageSize.Height);
+                cb.Fill();
+
+                cb.SetColorStroke(_cyan);
+                cb.SetLineWidth(1.2f);
+                cb.Rectangle(15, 15, document.PageSize.Width - 30, document.PageSize.Height - 30);
+                cb.Stroke();
+
+                DrawCorner(cb, 15, 15, _or, 0);
+                DrawCorner(cb, document.PageSize.Width - 15, 15, _or, 90);
+                DrawCorner(cb, document.PageSize.Width - 15, document.PageSize.Height - 15, _or, 180);
+                DrawCorner(cb, 15, document.PageSize.Height - 15, _or, 270);
+
+                cb.BeginText();
+                cb.SetColorFill(_cyan);
+                cb.SetFontAndSize(BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false), 7);
+                string pageNum = $"PAGE {writer.PageNumber}  //  CONFIDENTIEL SGC";
+                cb.ShowTextAligned(Element.ALIGN_CENTER, pageNum, document.PageSize.Width / 2, 20, 0);
+                cb.EndText();
+            }
+
+            private static void DrawCorner(
+                PdfContentByte cb, float x, float y, BaseColor color, float angle)
+            {
+                cb.SaveState();
+                cb.SetColorStroke(color);
+                cb.SetLineWidth(1.5f);
+                cb.ConcatCTM(
+                    (float)Math.Cos(angle * Math.PI / 180),
+                   -(float)Math.Sin(angle * Math.PI / 180),
+                    (float)Math.Sin(angle * Math.PI / 180),
+                    (float)Math.Cos(angle * Math.PI / 180),
+                    x, y);
+                cb.MoveTo(0, 0); cb.LineTo(12, 0);
+                cb.MoveTo(0, 0); cb.LineTo(0, 12);
+                cb.Stroke();
+                cb.RestoreState();
+            }
+        }
     }
 }
