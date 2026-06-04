@@ -67,6 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connexion.cs" />
+    <Compile Include="Form11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Form1.resx</DependentUpon>
+    </Compile>
     <Compile Include="FormStat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,7 +133,10 @@
     <Compile Include="mesDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx" />
+    <EmbeddedResource Include="Form1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Form11.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPlanete.resx">
       <DependentUpon>FormPlanete.cs</DependentUpon>
     </EmbeddedResource>
