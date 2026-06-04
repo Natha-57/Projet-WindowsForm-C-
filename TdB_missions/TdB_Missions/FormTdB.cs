@@ -54,6 +54,7 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.pictureBox1.Image = Image.FromFile("../../../../Images_App/Icones diverses/3_Logo +.png");
             this.Icon = new Icon("Logo Star Gate.ico");
             InitPictureBox();
             ChargerMissions();

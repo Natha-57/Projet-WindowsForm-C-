@@ -199,7 +199,7 @@ namespace _2__Creation_De_Mission
 
 
 
-            ChargerChefDeMission();
+            
         }
 
         private void txtNbMembres_TextChanged(object sender, EventArgs e)
@@ -541,6 +541,16 @@ namespace _2__Creation_De_Mission
                 ChargerChefDeMission();
             if (cboAjtMembre.Visible)
                 ChargerMembres();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btValiderDates_Click(object sender, EventArgs e)
+        {
+            ChargerChefDeMission();
         }
     }
 }

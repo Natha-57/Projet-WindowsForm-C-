@@ -13,7 +13,6 @@
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDetailsPlanete));
             this.button_fermer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -26,15 +25,14 @@
             this.button_fermer.TabIndex = 0;
             this.button_fermer.Text = "Fermer";
             // 
-            // FormDetails
+            // FormDetailsPlanete
             // 
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(620, 590);
             this.Controls.Add(this.button_fermer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "FormDetails";
+            this.Name = "FormDetailsPlanete";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Détails";
             this.Load += new System.EventHandler(this.FormDetails_Load);

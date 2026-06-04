@@ -17,7 +17,6 @@ namespace Volet_4___Races_Aliens
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDetailAlien));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_fermer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -50,7 +49,6 @@ namespace Volet_4___Races_Aliens
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button_fermer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormDetailAlien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
