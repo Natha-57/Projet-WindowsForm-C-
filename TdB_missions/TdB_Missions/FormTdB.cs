@@ -54,6 +54,11 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.pictureBox5.Image = Image.FromFile("../../../../Images_App/Icones diverses/Logo Stat.png");
+            this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Icones diverses/1_Logo Planètes Infos.png");
+            this.pictureBox4.Image = Image.FromFile("../../../../Images_App/Icones diverses/2_Logo Info Alien.png");
+            this.pictureBox6.Image = Image.FromFile("../../../../Images_App/Texte Stargate TDB.png");
+            this.pictureBox3.Image = Image.FromFile("../../../../Images_App/Logo Star Gate.png");
             this.pictureBox1.Image = Image.FromFile("../../../../Images_App/Icones diverses/3_Logo +.png");
             this.Icon = new Icon("Logo Star Gate.ico");
             InitPictureBox();
@@ -92,12 +97,6 @@ namespace TdB_Missions
 
         private void ChargerMissions()
         {
-            panel1.Location = new Point(312, 11);
-            panel1.Size = new Size(1015, 612);
-            panel1.Visible = true;
-            panel1.BringToFront();
-            panel1.AutoScroll = true;
-
             if (!MesDatas.DsGlobal.Tables.Contains("mission"))
             {
                 MessageBox.Show("La table 'mission' est introuvable dans la base de données.", "Données manquantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -211,6 +210,11 @@ namespace TdB_Missions
         {
             Form_Planetes f = new Form_Planetes();
             f.Show();
+        }
+
+        private void btStat_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
