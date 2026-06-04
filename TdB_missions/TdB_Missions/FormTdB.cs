@@ -56,6 +56,7 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
             this.pictureBox5.Image = Image.FromFile("../../../../Images_App/Icones diverses/Logo Stat.png");
             this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Icones diverses/1_Logo Planètes Infos.png");
             this.pictureBox4.Image = Image.FromFile("../../../../Images_App/Icones diverses/2_Logo Info Alien.png");
