@@ -137,7 +137,7 @@ namespace _3_Visualisation_et_MAJ_missions
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Location = new Point(10, 5)
                 };
-                string cheminPhoto = $"..\\..\\..\\..\\Images App\\Membres\\Logo - {type}.png";
+                string cheminPhoto = $"Membres\\Logo - {type}.png";
                 if (File.Exists(cheminPhoto))
                     pb.Image = Image.FromFile(cheminPhoto);
 
@@ -173,6 +173,8 @@ namespace _3_Visualisation_et_MAJ_missions
             grpNouvelEvenement.Hide();
             grpNouvelleDepense.Hide();
             grpNouveauContact.Show();
+            var (dateDepart, _) = GetDatesMission();
+            dtpNouveauContact.Value = dateDepart;
             ChargerMembresSimplifie();
             ChargerEspeces();
         }
@@ -181,6 +183,8 @@ namespace _3_Visualisation_et_MAJ_missions
         {
             grpNouvelEvenement.Hide();
             grpNouveauContact.Hide();
+            var (dateDepart, _) = GetDatesMission();
+            dtpNouvelleDepense.Value = dateDepart;
             grpNouvelleDepense.Show();
             ChargerTypesDepenses();
         }
@@ -190,6 +194,8 @@ namespace _3_Visualisation_et_MAJ_missions
             grpNouveauContact.Hide();
             grpNouvelleDepense.Hide();
             grpNouvelEvenement.Show();
+            var (dateDepart, _) = GetDatesMission();
+            dtpNouvelEvenement.Value = dateDepart;
         }
 
         private void ChargerMembresSimplifie()
@@ -390,31 +396,24 @@ namespace _3_Visualisation_et_MAJ_missions
                 return;
             }
 
-            try
-            {
-                string sql = @"INSERT INTO Depense 
-                               (nomPlanete, numeroMission, dateD, montant, motif, idTypeDepense)
-                               VALUES 
-                               (@planete, @num, @date, @montant, @motif, @type)";
-                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
-                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
-                cmd.Parameters.AddWithValue("@num", this.numeroMission);
-                cmd.Parameters.AddWithValue("@date", dtpNouvelleDepense.Value.ToString("yyyy-MM-dd"));
-                cmd.Parameters.AddWithValue("@montant", Convert.ToInt32(txtNouvelleDepense.Text));
-                cmd.Parameters.AddWithValue("@motif", txtCommentaireDepense.Text.Trim());
-                cmd.Parameters.AddWithValue("@type", cboMembre1.SelectedValue);
-                cmd.ExecuteNonQuery();
+            string filtreMission = $"nomPlanete = '{this.nomPlanete.Replace("'", "''")}' AND numero = {this.numeroMission}";
+            DataRow[] rowsMission = MesDatas.DsGlobal.Tables["Mission"].Select(filtreMission);
+            int budget = Convert.ToInt32(rowsMission[0]["budget"]);
 
-                RafraichirDataSet();
+            string filtreDepense = $"nomPlanete = '{this.nomPlanete.Replace("'", "''")}' AND numeroMission = {this.numeroMission}";
+            DataRow[] depenses = MesDatas.DsGlobal.Tables["Depense"].Select(filtreDepense);
+            int totalDepenses = 0;
+            foreach (DataRow d in depenses)
+                totalDepenses += Convert.ToInt32(d["montant"]);
 
-                MessageBox.Show("Dépense ajoutée !", "Succès",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                grpNouvelleDepense.Visible = false;
-                ChargerMission();
-            }
-            catch (Exception ex)
+            int soldeActuel = budget - totalDepenses;
+            int montantSaisi = Convert.ToInt32(txtNouvelleDepense.Text);
+
+            if (montantSaisi > soldeActuel)
             {
-                MessageBox.Show("Erreur : " + ex.Message);
+                MessageBox.Show($"Impossible d'ajouter cette dépense.\nMontant saisi : {montantSaisi} €\nSolde disponible : {soldeActuel} €",
+                    "Solde insuffisant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
         }
 
@@ -455,6 +454,38 @@ namespace _3_Visualisation_et_MAJ_missions
         private void txtNouveauContact_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void flpMembres_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dtpNouvelleDepense_ValueChanged(object sender, EventArgs e)
+        {
+            var (dateDepart, dateRetour) = GetDatesMission();
+            if (dtpNouvelleDepense.Value < dateDepart)
+                dtpNouvelleDepense.Value = dateDepart;
+            else if (dtpNouvelleDepense.Value > dateRetour)
+                dtpNouvelleDepense.Value = dateRetour;
+        }
+
+        private void dptNouveauContact_ValueChanged(object sender, EventArgs e)
+        {
+            var (dateDepart, dateRetour) = GetDatesMission();
+            if (dtpNouvelleDepense.Value < dateDepart)
+                dtpNouvelleDepense.Value = dateDepart;
+            else if (dtpNouvelleDepense.Value > dateRetour)
+                dtpNouvelleDepense.Value = dateRetour;
+        }
+
+        private void dtpNouvelEvenement_ValueChanged(object sender, EventArgs e)
+        {
+            var (dateDepart, dateRetour) = GetDatesMission();
+            if (dtpNouvelleDepense.Value < dateDepart)
+                dtpNouvelleDepense.Value = dateDepart;
+            else if (dtpNouvelleDepense.Value > dateRetour)
+                dtpNouvelleDepense.Value = dateRetour;
         }
     }
 }

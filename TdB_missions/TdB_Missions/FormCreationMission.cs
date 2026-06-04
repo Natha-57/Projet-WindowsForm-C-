@@ -35,7 +35,7 @@ namespace _2__Creation_De_Mission
 
 
             try
-            {         
+            {
                 this.cx = Connexion.Connec;
                 this.ds = new DataSet();
                 this.da = new SQLiteDataAdapter();
@@ -81,7 +81,20 @@ namespace _2__Creation_De_Mission
                        FROM   Membre m
                        JOIN   Militaire mil ON mil.matriculeMembre = m.matricule
                        ORDER  BY m.nom, m.prenom";
-                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+
+                dt.Columns.Add("matricule");
+                dt.Columns.Add("affichage");
+
+                while (reader.Read())
+                {
+                    string matricule = reader["matricule"].ToString();
+                    if (MembreDisponible(matricule))
+                        dt.Rows.Add(matricule, reader["affichage"]);
+                }
+                reader.Close();
+
                 cboChefDeMission.DataSource = dt;
                 cboChefDeMission.DisplayMember = "affichage";
                 cboChefDeMission.ValueMember = "matricule";
@@ -98,23 +111,36 @@ namespace _2__Creation_De_Mission
             {
                 DataTable dt = new DataTable();
                 string sql = @"SELECT m.matricule,
-                             m.nom || ' ' || m.prenom || ' - ' ||
-                            CASE WHEN mil.matriculeMembre IS NOT NULL
-                            THEN 'Militaire : ' || mil.grade
-                            ELSE 'Civil : ' || c.Specialite
-                            END AS affichage
-                            FROM   Membre m
-                            LEFT JOIN Militaire mil ON mil.matriculeMembre = m.matricule
-                            LEFT JOIN Civil c   ON c.matriculeMembre = m.matricule
-                            ORDER BY m.nom, m.prenom";
-                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                              m.nom || ' ' || m.prenom || ' - ' ||
+                              CASE WHEN mil.matriculeMembre IS NOT NULL
+                                   THEN 'Militaire : ' || mil.grade
+                                   ELSE 'Civil : '    || c.Specialite
+                              END AS affichage
+                       FROM   Membre m
+                       LEFT JOIN Militaire mil ON mil.matriculeMembre = m.matricule
+                       LEFT JOIN Civil     c   ON c.matriculeMembre   = m.matricule
+                       ORDER  BY m.nom, m.prenom";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+
+                dt.Columns.Add("matricule");
+                dt.Columns.Add("affichage");
+
+                while (reader.Read())
+                {
+                    string matricule = reader["matricule"].ToString();
+                    if (MembreDisponible(matricule))
+                        dt.Rows.Add(matricule, reader["affichage"]);
+                }
+                reader.Close();
+
                 cboAjtMembre.DataSource = dt;
                 cboAjtMembre.DisplayMember = "affichage";
                 cboAjtMembre.ValueMember = "matricule";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur chargement membres  : " + ex.Message);
+                MessageBox.Show("Erreur chargement membres : " + ex.Message);
             }
         }
 
@@ -322,9 +348,9 @@ namespace _2__Creation_De_Mission
                 return;
             }
 
-            int idEspece = Convert.ToInt32(cboAliens.SelectedValue); 
-            int objectif = Convert.ToInt32(txtNbAliens.Text);        
-            listeCaptures.Add((idEspece, objectif));                
+            int idEspece = Convert.ToInt32(cboAliens.SelectedValue);
+            int objectif = Convert.ToInt32(txtNbAliens.Text);
+            listeCaptures.Add((idEspece, objectif));
 
             string affichage = cboAliens.Text + " --> objectif de captures : " + txtNbAliens.Text;
             lstObj.Items.Add(affichage);
@@ -415,8 +441,8 @@ namespace _2__Creation_De_Mission
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur ajout membre : " + ex.Message, "Erreur",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vous avez déjà ajouté ce membre.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -441,6 +467,43 @@ namespace _2__Creation_De_Mission
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+
+        private bool MembreDisponible(string matricule)
+        {
+            // Vérifie si le membre est déjà dans une mission 
+
+            string sql1 = @"SELECT COUNT(*) FROM Composer comp
+                    JOIN Mission m ON m.nomPlanete = comp.nomPlanete 
+                    AND m.numero = comp.numeroMission
+                    WHERE comp.matriculeMembre = @mat
+                    AND m.dateDepart <= @ret
+                    AND m.dateRetour >= @dep";
+
+            // Vérifie aussi s'il est chef d'une autre mission
+            string sql2 = @"SELECT COUNT(*) FROM Mission m
+                    WHERE m.matriculeChef = @mat
+                    AND m.dateDepart <= @ret
+                    AND m.dateRetour >= @dep";
+
+            SQLiteCommand cmd1 = new SQLiteCommand(sql1, this.cx);
+            cmd1.Parameters.AddWithValue("@mat", matricule);
+            cmd1.Parameters.AddWithValue("@dep", dateTimeDepart.Value.ToString("yyyy-MM-dd"));
+            cmd1.Parameters.AddWithValue("@ret", dateTimeRetour.Value.ToString("yyyy-MM-dd"));
+
+            SQLiteCommand cmd2 = new SQLiteCommand(sql2, this.cx);
+            cmd2.Parameters.AddWithValue("@mat", matricule);
+            cmd2.Parameters.AddWithValue("@dep", dateTimeDepart.Value.ToString("yyyy-MM-dd"));
+            cmd2.Parameters.AddWithValue("@ret", dateTimeRetour.Value.ToString("yyyy-MM-dd"));
+
+            return Convert.ToInt32(cmd1.ExecuteScalar()) == 0
+                && Convert.ToInt32(cmd2.ExecuteScalar()) == 0;
+
+            // ca enleve des combo box les membres deja en mission
+        }
+
+
+
+
         private void grpNouvelleMission_Enter(object sender, EventArgs e)
         {
 
@@ -454,6 +517,30 @@ namespace _2__Creation_De_Mission
         private void cboChefDeMission_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void dateTimeDepart_VisibleChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimeDepart_ValueChanged(object sender, EventArgs e)
+        {
+            if (cboChefDeMission.Visible)
+                ChargerChefDeMission();
+            if (cboAjtMembre.Visible)
+                ChargerMembres();
+        }
+
+        private void dateTimeRetour_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimeRetour.Value = dateTimeDepart.Value.AddMonths(6);
+
+
+            if (cboChefDeMission.Visible)
+                ChargerChefDeMission();
+            if (cboAjtMembre.Visible)
+                ChargerMembres();
         }
     }
 }

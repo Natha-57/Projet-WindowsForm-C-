@@ -581,6 +581,7 @@
             this.dtpNouvelleDepense.Name = "dtpNouvelleDepense";
             this.dtpNouvelleDepense.Size = new System.Drawing.Size(350, 31);
             this.dtpNouvelleDepense.TabIndex = 18;
+            this.dtpNouvelleDepense.ValueChanged += new System.EventHandler(this.dtpNouvelleDepense_ValueChanged);
             // 
             // btAnnulerNouvelleDepense
             // 
