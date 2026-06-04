@@ -24,7 +24,7 @@ namespace TdB_Missions
 
         private void FormStat_Load(object sender, EventArgs e)
         {
-            this.Icon = new Icon("Logo Star Gate.ico");
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
             try
             {
                 

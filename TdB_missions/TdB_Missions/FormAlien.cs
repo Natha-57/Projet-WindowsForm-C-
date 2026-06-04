@@ -161,7 +161,7 @@ namespace Volet_4___Races_Aliens
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Icon = new Icon("Logo Star Gate.ico");
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
             this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
             this.pictureBox1.Image = Image.FromFile("../../../../Images_App/Logo Star Gate.png");
             this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Texte Stargate Aliens.png");

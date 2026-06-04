@@ -56,14 +56,14 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png")
+            this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
             this.pictureBox5.Image = Image.FromFile("../../../../Images_App/Icones diverses/Logo Stat.png");
             this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Icones diverses/1_Logo Planètes Infos.png");
             this.pictureBox4.Image = Image.FromFile("../../../../Images_App/Icones diverses/2_Logo Info Alien.png");
             this.pictureBox6.Image = Image.FromFile("../../../../Images_App/Texte Stargate TDB.png");
             this.pictureBox3.Image = Image.FromFile("../../../../Images_App/Logo Star Gate.png");
             this.pictureBox1.Image = Image.FromFile("../../../../Images_App/Icones diverses/3_Logo +.png");
-            this.Icon = new Icon("Logo Star Gate.ico");
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
             InitPictureBox();
             ChargerMissions();
         }
@@ -118,7 +118,7 @@ namespace TdB_Missions
        
             LierImageBouton(pictureBox2, btInfoPlanete, (s, ev) => btInfoPlanete_Click(s, ev));
 
-            LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click(s, ev));
+            LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click_1(s, ev));
 
         }
 
