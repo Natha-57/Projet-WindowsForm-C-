@@ -64,11 +64,15 @@
             this.btValiderPlanete = new System.Windows.Forms.Button();
             this.cboNomPlanete = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.btValiderDates = new System.Windows.Forms.Button();
             this.grpNouvelleMission.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpNouvelleMission
             // 
+            this.grpNouvelleMission.Controls.Add(this.btValiderDates);
+            this.grpNouvelleMission.Controls.Add(this.label16);
             this.grpNouvelleMission.Controls.Add(this.txtFeuilleDeRoute);
             this.grpNouvelleMission.Controls.Add(this.lstMembres);
             this.grpNouvelleMission.Controls.Add(this.lstObj);
@@ -117,7 +121,7 @@
             // 
             // txtFeuilleDeRoute
             // 
-            this.txtFeuilleDeRoute.Location = new System.Drawing.Point(263, 507);
+            this.txtFeuilleDeRoute.Location = new System.Drawing.Point(307, 528);
             this.txtFeuilleDeRoute.Name = "txtFeuilleDeRoute";
             this.txtFeuilleDeRoute.Size = new System.Drawing.Size(354, 158);
             this.txtFeuilleDeRoute.TabIndex = 37;
@@ -292,7 +296,7 @@
             // 
             // dateTimeRetour
             // 
-            this.dateTimeRetour.Location = new System.Drawing.Point(239, 433);
+            this.dateTimeRetour.Location = new System.Drawing.Point(307, 337);
             this.dateTimeRetour.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.dateTimeRetour.Name = "dateTimeRetour";
             this.dateTimeRetour.Size = new System.Drawing.Size(377, 47);
@@ -300,7 +304,7 @@
             // 
             // dateTimeDepart
             // 
-            this.dateTimeDepart.Location = new System.Drawing.Point(239, 361);
+            this.dateTimeDepart.Location = new System.Drawing.Point(307, 272);
             this.dateTimeDepart.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.dateTimeDepart.Name = "dateTimeDepart";
             this.dateTimeDepart.Size = new System.Drawing.Size(377, 47);
@@ -309,7 +313,7 @@
             // cboChefDeMission
             // 
             this.cboChefDeMission.FormattingEnabled = true;
-            this.cboChefDeMission.Location = new System.Drawing.Point(415, 216);
+            this.cboChefDeMission.Location = new System.Drawing.Point(307, 450);
             this.cboChefDeMission.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cboChefDeMission.Name = "cboChefDeMission";
             this.cboChefDeMission.Size = new System.Drawing.Size(373, 47);
@@ -376,7 +380,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(47, 507);
+            this.label6.Location = new System.Drawing.Point(47, 528);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(218, 39);
@@ -386,7 +390,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(47, 433);
+            this.label5.Location = new System.Drawing.Point(47, 343);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(170, 39);
@@ -396,17 +400,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(47, 361);
+            this.label4.Location = new System.Drawing.Point(47, 278);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(172, 39);
             this.label4.TabIndex = 6;
             this.label4.Text = "Date Départ";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 296);
+            this.label3.Location = new System.Drawing.Point(26, 399);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(386, 39);
@@ -419,9 +424,9 @@
             this.label2.Location = new System.Drawing.Point(26, 219);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(379, 39);
+            this.label2.Size = new System.Drawing.Size(260, 39);
             this.label2.TabIndex = 4;
-            this.label2.Text = "2 - Choix du chef de mission";
+            this.label2.Text = "2 - Choix des dates";
             // 
             // txtNbMembres
             // 
@@ -447,7 +452,7 @@
             // cboNomPlanete
             // 
             this.cboNomPlanete.FormattingEnabled = true;
-            this.cboNomPlanete.Location = new System.Drawing.Point(317, 64);
+            this.cboNomPlanete.Location = new System.Drawing.Point(337, 61);
             this.cboNomPlanete.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cboNomPlanete.Name = "cboNomPlanete";
             this.cboNomPlanete.Size = new System.Drawing.Size(289, 47);
@@ -463,6 +468,25 @@
             this.label1.Size = new System.Drawing.Size(291, 39);
             this.label1.TabIndex = 0;
             this.label1.Text = "1- Choix de la planète";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(52, 453);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(226, 39);
+            this.label16.TabIndex = 38;
+            this.label16.Text = "Chef de mission";
+            // 
+            // btValiderDates
+            // 
+            this.btValiderDates.Location = new System.Drawing.Point(692, 305);
+            this.btValiderDates.Name = "btValiderDates";
+            this.btValiderDates.Size = new System.Drawing.Size(223, 47);
+            this.btValiderDates.TabIndex = 39;
+            this.btValiderDates.Text = "Valider ";
+            this.btValiderDates.UseVisualStyleBackColor = true;
+            this.btValiderDates.Click += new System.EventHandler(this.btValiderDates_Click);
             // 
             // FormCreationMission
             // 
@@ -519,6 +543,8 @@
         private System.Windows.Forms.ListBox lstObj;
         private System.Windows.Forms.ListBox lstMembres;
         private System.Windows.Forms.RichTextBox txtFeuilleDeRoute;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btValiderDates;
     }
 }
 
