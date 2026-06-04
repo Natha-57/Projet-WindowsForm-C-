@@ -67,15 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connexion.cs" />
-    <Compile Include="Form11.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Form1.resx</DependentUpon>
-    </Compile>
-    <Compile Include="FormStat.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs" />
     <Compile Include="FormPlanete.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +103,12 @@
     <Compile Include="FormResumeMission.Designer.cs">
       <DependentUpon>FormResumeMission.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStat.Designer.cs">
+      <DependentUpon>FormStat.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTdB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,10 +130,6 @@
     <Compile Include="mesDatas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Form11.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormPlanete.resx">
       <DependentUpon>FormPlanete.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormResumeMission.resx">
       <DependentUpon>FormResumeMission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStat.resx">
+      <DependentUpon>FormStat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTdB.resx">
       <DependentUpon>FormTdB.cs</DependentUpon>

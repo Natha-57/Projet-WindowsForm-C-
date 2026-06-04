@@ -203,18 +203,24 @@ namespace TdB_Missions
         private void button1_Click(object sender, EventArgs e)
         {
             Form_Aliens f = new Form_Aliens();
-            f.Show();
+            f.ShowDialog();
         }
 
         private void btInfoPlanete_Click(object sender, EventArgs e)
         {
             Form_Planetes f = new Form_Planetes();
-            f.Show();
+            f.ShowDialog();
         }
 
         private void btStat_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormStat f = new FormStat();
+            f.ShowDialog();
         }
     }
 }
