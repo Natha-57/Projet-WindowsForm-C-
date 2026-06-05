@@ -23,11 +23,18 @@ namespace _2__Creation_De_Mission
         private string nomPlanete;
         private int numeroMission;
         private List<(int idEspece, int objectif)> listeCaptures = new List<(int, int)>();
-
+        private bool tabControl_navigationManuelle = false;
 
         public FormCreationMission()
         {
             InitializeComponent();
+
+            tabControlMission.Selecting += (s, e) =>
+            {
+                if (!tabControl_navigationManuelle)
+                    e.Cancel = true;
+            };
+
             this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(800, 600);
 
@@ -52,6 +59,13 @@ namespace _2__Creation_De_Mission
 
 
 
+        }
+
+        private void AllerOnglet(int index)
+        {
+            tabControl_navigationManuelle = true;
+            tabControlMission.SelectedIndex = index;
+            tabControl_navigationManuelle = false;
         }
 
         private void ChargerPlanetes()
@@ -172,23 +186,10 @@ namespace _2__Creation_De_Mission
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-
-            if (cboNomPlanete.SelectedItem == null)
-            {
-                MessageBox.Show("Veuillez sélectionner une planète.", "Attention",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (cboNomPlanete.SelectedItem == null) return;
 
             string planete = cboNomPlanete.SelectedValue.ToString();
-
-            string sql = "SELECT COALESCE(MAX(numero), 0) + 1 FROM Mission WHERE nomPlanete = @planete"; // COALESCE pour gérer le cas où il n'y a aucune mission pour cette planète
+            string sql = "SELECT COALESCE(MAX(numero), 0) + 1 FROM Mission WHERE nomPlanete = @planete";
             SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
             cmd.Parameters.AddWithValue("@planete", planete);
             int numero = Convert.ToInt32(cmd.ExecuteScalar());
@@ -197,7 +198,10 @@ namespace _2__Creation_De_Mission
             lblNomMission.Text = $"Nom de la mission : {planete} - {numero}";
 
 
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
 
 
         }
@@ -278,6 +282,18 @@ namespace _2__Creation_De_Mission
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (string.IsNullOrEmpty(txtObjDataBaz.Text))
+            {
+                MessageBox.Show("Veuillez saisir un objectif de données Baz.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrEmpty(txtBudget.Text))
+            {
+                MessageBox.Show("Veuillez saisir un budget.", "Attention",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (dateTimeRetour.Value <= dateTimeDepart.Value)
             {
                 MessageBox.Show("La date de retour doit être après la date de départ.", "Attention",
@@ -325,8 +341,7 @@ namespace _2__Creation_De_Mission
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
-
+            AllerOnglet(2);
             ChargerMembres();
         }
 
@@ -473,6 +488,8 @@ namespace _2__Creation_De_Mission
 
             MessageBox.Show("Membres validés !", "Succès",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            AllerOnglet(3);
         }
 
 
@@ -558,6 +575,9 @@ namespace _2__Creation_De_Mission
 
         private void btValiderDates_Click(object sender, EventArgs e)
         {
+
+            AllerOnglet(1);
+
             ChargerChefDeMission();
         }
     }
