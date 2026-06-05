@@ -65,26 +65,26 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControlMission = new System.Windows.Forms.TabControl();
             this.Initialisation = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.Paramètres = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.Affectation = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.Objectifs = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.Panel();
             this.button_retour = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControlMission.SuspendLayout();
             this.Initialisation.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.Paramètres.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.Affectation.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.Objectifs.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btValiderDates
@@ -109,7 +109,7 @@
             this.label16.Location = new System.Drawing.Point(59, 141);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(290, 49);
+            this.label16.Size = new System.Drawing.Size(143, 24);
             this.label16.TabIndex = 38;
             this.label16.Text = "Chef de mission";
             // 
@@ -128,11 +128,11 @@
             this.lstMembres.BackColor = System.Drawing.Color.Azure;
             this.lstMembres.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMembres.FormattingEnabled = true;
-            this.lstMembres.ItemHeight = 46;
+            this.lstMembres.ItemHeight = 24;
             this.lstMembres.Location = new System.Drawing.Point(77, 237);
             this.lstMembres.Margin = new System.Windows.Forms.Padding(4);
             this.lstMembres.Name = "lstMembres";
-            this.lstMembres.Size = new System.Drawing.Size(714, 372);
+            this.lstMembres.Size = new System.Drawing.Size(714, 364);
             this.lstMembres.TabIndex = 36;
             this.lstMembres.SelectedIndexChanged += new System.EventHandler(this.lstMembres_SelectedIndexChanged);
             // 
@@ -141,11 +141,11 @@
             this.lstObj.BackColor = System.Drawing.Color.Azure;
             this.lstObj.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstObj.FormattingEnabled = true;
-            this.lstObj.ItemHeight = 46;
+            this.lstObj.ItemHeight = 24;
             this.lstObj.Location = new System.Drawing.Point(77, 228);
             this.lstObj.Margin = new System.Windows.Forms.Padding(4);
             this.lstObj.Name = "lstObj";
-            this.lstObj.Size = new System.Drawing.Size(714, 372);
+            this.lstObj.Size = new System.Drawing.Size(714, 364);
             this.lstObj.TabIndex = 35;
             this.lstObj.SelectedIndexChanged += new System.EventHandler(this.lstObj_SelectedIndexChanged);
             // 
@@ -183,7 +183,7 @@
             this.txtNbAliens.Location = new System.Drawing.Point(489, 125);
             this.txtNbAliens.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtNbAliens.Name = "txtNbAliens";
-            this.txtNbAliens.Size = new System.Drawing.Size(96, 38);
+            this.txtNbAliens.Size = new System.Drawing.Size(96, 23);
             this.txtNbAliens.TabIndex = 31;
             this.txtNbAliens.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNbAliens_KeyPress);
             // 
@@ -194,7 +194,7 @@
             this.cboAliens.Location = new System.Drawing.Point(77, 125);
             this.cboAliens.Margin = new System.Windows.Forms.Padding(4);
             this.cboAliens.Name = "cboAliens";
-            this.cboAliens.Size = new System.Drawing.Size(360, 43);
+            this.cboAliens.Size = new System.Drawing.Size(360, 26);
             this.cboAliens.TabIndex = 30;
             this.cboAliens.SelectedIndexChanged += new System.EventHandler(this.cboAliens_SelectedIndexChanged);
             // 
@@ -206,7 +206,7 @@
             this.label15.Location = new System.Drawing.Point(4, 19);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(523, 54);
+            this.label15.Size = new System.Drawing.Size(269, 27);
             this.label15.TabIndex = 29;
             this.label15.Text = "5 - Objectifs de captures";
             this.label15.Click += new System.EventHandler(this.label15_Click);
@@ -246,7 +246,7 @@
             this.cboAjtMembre.Location = new System.Drawing.Point(77, 125);
             this.cboAjtMembre.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cboAjtMembre.Name = "cboAjtMembre";
-            this.cboAjtMembre.Size = new System.Drawing.Size(500, 43);
+            this.cboAjtMembre.Size = new System.Drawing.Size(500, 26);
             this.cboAjtMembre.TabIndex = 25;
             this.cboAjtMembre.SelectedIndexChanged += new System.EventHandler(this.cboAjtMembre_SelectedIndexChanged);
             // 
@@ -258,7 +258,7 @@
             this.label14.Location = new System.Drawing.Point(7, 15);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(594, 54);
+            this.label14.Size = new System.Drawing.Size(306, 27);
             this.label14.TabIndex = 24;
             this.label14.Text = "4 - Affectation des membres";
             this.label14.Click += new System.EventHandler(this.label14_Click);
@@ -272,7 +272,7 @@
             this.lblNomMission.Location = new System.Drawing.Point(448, 129);
             this.lblNomMission.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomMission.Name = "lblNomMission";
-            this.lblNomMission.Size = new System.Drawing.Size(218, 49);
+            this.lblNomMission.Size = new System.Drawing.Size(108, 24);
             this.lblNomMission.TabIndex = 23;
             this.lblNomMission.Text = "NomMission";
             this.lblNomMission.Click += new System.EventHandler(this.lblNomMission_Click);
@@ -298,7 +298,7 @@
             this.label13.Location = new System.Drawing.Point(583, 712);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 35);
+            this.label13.Size = new System.Drawing.Size(15, 18);
             this.label13.TabIndex = 21;
             this.label13.Text = "€";
             // 
@@ -310,7 +310,7 @@
             this.label12.Location = new System.Drawing.Point(583, 628);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(135, 49);
+            this.label12.Size = new System.Drawing.Size(66, 24);
             this.label12.TabIndex = 20;
             this.label12.Text = "tonnes";
             // 
@@ -322,7 +322,7 @@
             this.label11.Location = new System.Drawing.Point(576, 539);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(192, 49);
+            this.label11.Size = new System.Drawing.Size(94, 24);
             this.label11.TabIndex = 19;
             this.label11.Text = "personnes";
             // 
@@ -333,7 +333,7 @@
             this.dateTimeRetour.Location = new System.Drawing.Point(336, 460);
             this.dateTimeRetour.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dateTimeRetour.Name = "dateTimeRetour";
-            this.dateTimeRetour.Size = new System.Drawing.Size(426, 51);
+            this.dateTimeRetour.Size = new System.Drawing.Size(426, 29);
             this.dateTimeRetour.TabIndex = 17;
             // 
             // dateTimeDepart
@@ -344,7 +344,7 @@
             this.dateTimeDepart.Location = new System.Drawing.Point(336, 375);
             this.dateTimeDepart.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.dateTimeDepart.Name = "dateTimeDepart";
-            this.dateTimeDepart.Size = new System.Drawing.Size(426, 51);
+            this.dateTimeDepart.Size = new System.Drawing.Size(426, 29);
             this.dateTimeDepart.TabIndex = 16;
             // 
             // cboChefDeMission
@@ -354,7 +354,7 @@
             this.cboChefDeMission.Location = new System.Drawing.Point(347, 141);
             this.cboChefDeMission.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cboChefDeMission.Name = "cboChefDeMission";
-            this.cboChefDeMission.Size = new System.Drawing.Size(414, 43);
+            this.cboChefDeMission.Size = new System.Drawing.Size(414, 26);
             this.cboChefDeMission.TabIndex = 15;
             this.cboChefDeMission.SelectedIndexChanged += new System.EventHandler(this.cboChefDeMission_SelectedIndexChanged);
             // 
@@ -364,7 +364,7 @@
             this.txtBudget.Location = new System.Drawing.Point(408, 709);
             this.txtBudget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtBudget.Name = "txtBudget";
-            this.txtBudget.Size = new System.Drawing.Size(167, 38);
+            this.txtBudget.Size = new System.Drawing.Size(167, 23);
             this.txtBudget.TabIndex = 14;
             this.txtBudget.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBudget_KeyPress);
             // 
@@ -374,7 +374,7 @@
             this.txtObjDataBaz.Location = new System.Drawing.Point(408, 628);
             this.txtObjDataBaz.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtObjDataBaz.Name = "txtObjDataBaz";
-            this.txtObjDataBaz.Size = new System.Drawing.Size(167, 38);
+            this.txtObjDataBaz.Size = new System.Drawing.Size(167, 23);
             this.txtObjDataBaz.TabIndex = 13;
             this.txtObjDataBaz.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtObjDataBaz_KeyPress);
             // 
@@ -386,7 +386,7 @@
             this.label9.Location = new System.Drawing.Point(59, 709);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(177, 49);
+            this.label9.Size = new System.Drawing.Size(89, 24);
             this.label9.TabIndex = 11;
             this.label9.Text = "Budget : ";
             // 
@@ -398,7 +398,7 @@
             this.label8.Location = new System.Drawing.Point(59, 628);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(337, 49);
+            this.label8.Size = new System.Drawing.Size(169, 24);
             this.label8.TabIndex = 10;
             this.label8.Text = "ObjectifDataBaz : ";
             // 
@@ -410,7 +410,7 @@
             this.label7.Location = new System.Drawing.Point(59, 535);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(359, 49);
+            this.label7.Size = new System.Drawing.Size(179, 24);
             this.label7.TabIndex = 9;
             this.label7.Text = "Nombre membres : ";
             // 
@@ -422,7 +422,7 @@
             this.label6.Location = new System.Drawing.Point(59, 257);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(294, 49);
+            this.label6.Size = new System.Drawing.Size(145, 24);
             this.label6.TabIndex = 8;
             this.label6.Text = "Feuille de route";
             // 
@@ -434,7 +434,7 @@
             this.label5.Location = new System.Drawing.Point(52, 460);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(260, 49);
+            this.label5.Size = new System.Drawing.Size(130, 24);
             this.label5.TabIndex = 7;
             this.label5.Text = "Date Retour : ";
             // 
@@ -446,7 +446,7 @@
             this.label4.Location = new System.Drawing.Point(52, 375);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(263, 49);
+            this.label4.Size = new System.Drawing.Size(133, 24);
             this.label4.TabIndex = 6;
             this.label4.Text = "Date Départ : ";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -459,7 +459,7 @@
             this.label3.Location = new System.Drawing.Point(6, 11);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(592, 54);
+            this.label3.Size = new System.Drawing.Size(304, 27);
             this.label3.TabIndex = 5;
             this.label3.Text = "3 - Paramètres de la mission";
             // 
@@ -471,7 +471,7 @@
             this.label2.Location = new System.Drawing.Point(7, 265);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(406, 54);
+            this.label2.Size = new System.Drawing.Size(209, 27);
             this.label2.TabIndex = 4;
             this.label2.Text = "2 - Choix des dates";
             // 
@@ -481,7 +481,7 @@
             this.txtNbMembres.Location = new System.Drawing.Point(408, 535);
             this.txtNbMembres.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtNbMembres.Name = "txtNbMembres";
-            this.txtNbMembres.Size = new System.Drawing.Size(167, 38);
+            this.txtNbMembres.Size = new System.Drawing.Size(167, 23);
             this.txtNbMembres.TabIndex = 3;
             this.txtNbMembres.TextChanged += new System.EventHandler(this.txtNbMembres_TextChanged);
             this.txtNbMembres.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNbMembres_KeyPress);
@@ -489,11 +489,12 @@
             // cboNomPlanete
             // 
             this.cboNomPlanete.BackColor = System.Drawing.Color.Azure;
+            this.cboNomPlanete.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboNomPlanete.FormattingEnabled = true;
             this.cboNomPlanete.Location = new System.Drawing.Point(60, 126);
             this.cboNomPlanete.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cboNomPlanete.Name = "cboNomPlanete";
-            this.cboNomPlanete.Size = new System.Drawing.Size(291, 43);
+            this.cboNomPlanete.Size = new System.Drawing.Size(291, 32);
             this.cboNomPlanete.TabIndex = 1;
             this.cboNomPlanete.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -505,7 +506,7 @@
             this.label1.Location = new System.Drawing.Point(6, 13);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(467, 54);
+            this.label1.Size = new System.Drawing.Size(241, 27);
             this.label1.TabIndex = 0;
             this.label1.Text = "1- Choix de la planète";
             // 
@@ -535,14 +536,37 @@
             this.Initialisation.Controls.Add(this.dateTimeDepart);
             this.Initialisation.Controls.Add(this.dateTimeRetour);
             this.Initialisation.Controls.Add(this.panel1);
-            this.Initialisation.Location = new System.Drawing.Point(8, 49);
+            this.Initialisation.Location = new System.Drawing.Point(4, 27);
             this.Initialisation.Margin = new System.Windows.Forms.Padding(2);
             this.Initialisation.Name = "Initialisation";
             this.Initialisation.Padding = new System.Windows.Forms.Padding(2);
-            this.Initialisation.Size = new System.Drawing.Size(922, 981);
+            this.Initialisation.Size = new System.Drawing.Size(930, 1007);
             this.Initialisation.TabIndex = 0;
             this.Initialisation.Text = "Initialisation";
             this.Initialisation.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(857, 764);
+            this.panel1.TabIndex = 40;
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(50, 1248);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(438, 144);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Revenir sur le tableau de bord\r\n🏠";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Paramètres
             // 
@@ -562,14 +586,37 @@
             this.Paramètres.Controls.Add(this.label13);
             this.Paramètres.Controls.Add(this.txtBudget);
             this.Paramètres.Controls.Add(this.panel2);
-            this.Paramètres.Location = new System.Drawing.Point(8, 49);
+            this.Paramètres.Location = new System.Drawing.Point(4, 27);
             this.Paramètres.Margin = new System.Windows.Forms.Padding(2);
             this.Paramètres.Name = "Paramètres";
             this.Paramètres.Padding = new System.Windows.Forms.Padding(2);
-            this.Paramètres.Size = new System.Drawing.Size(922, 981);
+            this.Paramètres.Size = new System.Drawing.Size(930, 1007);
             this.Paramètres.TabIndex = 1;
             this.Paramètres.Text = "Paramètres";
             this.Paramètres.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(6);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(857, 964);
+            this.panel2.TabIndex = 41;
+            // 
+            // button2
+            // 
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(50, 1248);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(438, 144);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Revenir sur le tableau de bord\r\n🏠";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Affectation
             // 
@@ -579,13 +626,36 @@
             this.Affectation.Controls.Add(this.btAjtMembres);
             this.Affectation.Controls.Add(this.btValdierMembres);
             this.Affectation.Controls.Add(this.panel3);
-            this.Affectation.Location = new System.Drawing.Point(8, 49);
+            this.Affectation.Location = new System.Drawing.Point(4, 27);
             this.Affectation.Name = "Affectation";
             this.Affectation.Padding = new System.Windows.Forms.Padding(3);
-            this.Affectation.Size = new System.Drawing.Size(922, 981);
+            this.Affectation.Size = new System.Drawing.Size(930, 1007);
             this.Affectation.TabIndex = 2;
             this.Affectation.Text = "Affectation";
             this.Affectation.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
+            this.panel3.Controls.Add(this.button3);
+            this.panel3.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(6);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(857, 848);
+            this.panel3.TabIndex = 41;
+            // 
+            // button3
+            // 
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(50, 1248);
+            this.button3.Margin = new System.Windows.Forms.Padding(6);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(438, 144);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Revenir sur le tableau de bord\r\n🏠";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Objectifs
             // 
@@ -596,10 +666,10 @@
             this.Objectifs.Controls.Add(this.btAjtObjCapture);
             this.Objectifs.Controls.Add(this.txtNbAliens);
             this.Objectifs.Controls.Add(this.groupBox1);
-            this.Objectifs.Location = new System.Drawing.Point(8, 49);
+            this.Objectifs.Location = new System.Drawing.Point(4, 27);
             this.Objectifs.Name = "Objectifs";
             this.Objectifs.Padding = new System.Windows.Forms.Padding(3);
-            this.Objectifs.Size = new System.Drawing.Size(922, 981);
+            this.Objectifs.Size = new System.Drawing.Size(930, 1007);
             this.Objectifs.TabIndex = 3;
             this.Objectifs.Text = "Objectifs";
             this.Objectifs.UseVisualStyleBackColor = true;
@@ -628,78 +698,9 @@
             this.button_retour.Text = "Revenir sur le tableau de bord\r\n🏠";
             this.button_retour.UseVisualStyleBackColor = true;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(857, 764);
-            this.panel1.TabIndex = 40;
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(50, 1248);
-            this.button1.Margin = new System.Windows.Forms.Padding(6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(438, 144);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Revenir sur le tableau de bord\r\n🏠";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(6);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(857, 964);
-            this.panel2.TabIndex = 41;
-            // 
-            // button2
-            // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(50, 1248);
-            this.button2.Margin = new System.Windows.Forms.Padding(6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(438, 144);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Revenir sur le tableau de bord\r\n🏠";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
-            this.panel3.Controls.Add(this.button3);
-            this.panel3.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(6);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(857, 848);
-            this.panel3.TabIndex = 41;
-            // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(50, 1248);
-            this.button3.Margin = new System.Windows.Forms.Padding(6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(438, 144);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Revenir sur le tableau de bord\r\n🏠";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // FormCreationMission
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(20F, 46F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(875, 1060);
             this.Controls.Add(this.tabControlMission);
@@ -712,16 +713,16 @@
             this.tabControlMission.ResumeLayout(false);
             this.Initialisation.ResumeLayout(false);
             this.Initialisation.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.Paramètres.ResumeLayout(false);
             this.Paramètres.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.Affectation.ResumeLayout(false);
             this.Affectation.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.Objectifs.ResumeLayout(false);
             this.Objectifs.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
