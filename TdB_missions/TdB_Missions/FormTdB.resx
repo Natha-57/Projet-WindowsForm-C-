@@ -473,10 +473,10 @@
   </data>
   <data name="&gt;&gt;pictureBox6.ZOrder" xml:space="preserve">
 <<<<<<< HEAD
-    <value>8</value>
-=======
     <value>9</value>
->>>>>>> dd766de6ca38e2e956c8fd33b83d3f67fa201e5e
+=======
+    <value>8</value>
+>>>>>>> 99cbf00e6fbd6dbc28c5e267dde24bc7399158f4
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -939,10 +939,10 @@
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
 <<<<<<< HEAD
-    <value>7</value>
-=======
     <value>8</value>
->>>>>>> dd766de6ca38e2e956c8fd33b83d3f67fa201e5e
+=======
+    <value>7</value>
+>>>>>>> 99cbf00e6fbd6dbc28c5e267dde24bc7399158f4
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
