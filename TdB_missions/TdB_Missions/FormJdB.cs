@@ -19,7 +19,6 @@ namespace _3_Visualisation_et_MAJ_missions
 {
     public partial class FormJdB : Form
     {
-        private SQLiteConnection cx;
         private string planete;
         private int num;
         private DataTable dtEvenements;

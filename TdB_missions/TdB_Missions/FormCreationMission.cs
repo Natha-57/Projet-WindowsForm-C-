@@ -24,16 +24,41 @@ namespace _2__Creation_De_Mission
         private int numeroMission;
         private List<(int idEspece, int objectif)> listeCaptures = new List<(int, int)>();
         private bool tabControl_navigationManuelle = false;
-
+        private List<string> listeMembresAjoutes = new List<string>();
         public FormCreationMission()
         {
             InitializeComponent();
             this.MaximizeBox = false;
 
+
             tabControlMission.Selecting += (s, e) =>
             {
                 if (!tabControl_navigationManuelle)
                     e.Cancel = true;
+            };
+
+            this.Load += (s, e) =>
+            {
+                Image fond = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
+                this.BackgroundImage = fond;
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+
+                // Supprime les bords blancs du TabControl
+                tabControlMission.Padding = new Point(0, 0);
+                tabControlMission.Margin = new Padding(0);
+                tabControlMission.BackColor = Color.Transparent;
+
+                foreach (TabPage tab in tabControlMission.TabPages)
+                {
+                    tab.BackgroundImage = fond;
+                    tab.BackgroundImageLayout = ImageLayout.Stretch;
+                    tab.BackColor = Color.Transparent;
+                    tab.Padding = new Padding(0);
+                    tab.Margin = new Padding(0);
+                }
+
+                // Force le redessinage
+                tabControlMission.Invalidate();
             };
 
             this.AutoScroll = true;
@@ -184,7 +209,38 @@ namespace _2__Creation_De_Mission
 
         private void FormCreationMission_Load(object sender, EventArgs e)
         {
+            if (DesignMode) return;
+
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
+
+
+            lstMembres.DoubleClick += (s, e1) =>
+            {
+                if (lstMembres.SelectedIndex < 0) return;
+
+                int index = lstMembres.SelectedIndex;
+                string matricule = listeMembresAjoutes[index];
+
+                string sql = @"DELETE FROM Composer 
+                   WHERE nomPlanete = @planete AND numeroMission = @num AND matriculeMembre = @mat";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
+                cmd.Parameters.AddWithValue("@num", this.numeroMission);
+                cmd.Parameters.AddWithValue("@mat", matricule);
+                cmd.ExecuteNonQuery();
+
+                listeMembresAjoutes.RemoveAt(index);
+                lstMembres.Items.RemoveAt(index);
+            };
+
+            lstObj.DoubleClick += (s, e2) =>
+            {
+                if (lstObj.SelectedIndex < 0) return;
+                int index = lstObj.SelectedIndex;
+                listeCaptures.RemoveAt(index);
+                lstObj.Items.RemoveAt(index);
+            };
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -464,6 +520,7 @@ namespace _2__Creation_De_Mission
                 cmd.Parameters.AddWithValue("@mat", cboAjtMembre.SelectedValue.ToString());
                 cmd.ExecuteNonQuery();
                 lstMembres.Items.Add(cboAjtMembre.Text);
+                listeMembresAjoutes.Add(cboAjtMembre.SelectedValue.ToString());
             }
             catch (Exception ex)
             {
@@ -585,6 +642,11 @@ namespace _2__Creation_De_Mission
         }
 
         private void lblNomMission_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Objectifs_BackgroundImageChanged(object sender, EventArgs e)
         {
 
         }
