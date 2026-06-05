@@ -254,7 +254,7 @@ namespace _3_Visualisation_et_MAJ_missions
             iTextSharp.text.Font fTableHdr = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, NOIR);
 
             Document doc = new Document(PageSize.A4, 30, 30, 40, 40);
-            string filePath = "RapportMission.pdf";
+            string filePath = $"Rapport_{this.planete}_{this.num}.pdf";
 
             try
             {
