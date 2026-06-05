@@ -19,6 +19,7 @@ namespace TdB_Missions
     {
         private static readonly Color CouleurSurvol = Color.FromArgb(224, 238, 249);
         private static readonly Color CouleurNormale = Color.White;
+        private string[] _derniersFiltres = null;
 
         public FormTdB()
         {
@@ -35,7 +36,6 @@ namespace TdB_Missions
                 MessageBox.Show("Impossible d'ouvrir la connexion à la base de données.", "Erreur de connexion", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             try
             {
                 DataTable schemaTable = conn.GetSchema("Tables");
@@ -77,40 +77,68 @@ namespace TdB_Missions
         //  FILTRES
         // ─────────────────────────────────────────────
 
-        private bool FiltresParDefaut()
+        private string[] EtatFiltresActuels() => new[]
         {
-            return textBox1.Text.Trim() == ""
-                && comboBox1.SelectedIndex == 0
-                && comboBox2.SelectedIndex == 0
-                && comboBox4.SelectedIndex == 0
-                && comboBox5.SelectedIndex == 0
-                && textBox3.Text.Trim() == ""
-                && textBox2.Text.Trim() == "";
+            textBox1.Text.Trim(),
+            comboBox1.SelectedIndex.ToString(),
+            comboBox2.SelectedIndex.ToString(),
+            comboBox4.SelectedIndex.ToString(),
+            comboBox5.SelectedIndex.ToString(),
+            textBox3.Text.Trim(),
+            textBox2.Text.Trim()
+        };
+
+        private bool AuMoinsUnFiltreComplet()
+        {
+            bool budgetValide = !string.IsNullOrEmpty(comboBox4.SelectedItem?.ToString())
+                                && !string.IsNullOrEmpty(textBox3.Text.Trim());
+            bool dureeValide = !string.IsNullOrEmpty(comboBox5.SelectedItem?.ToString())
+                                && !string.IsNullOrEmpty(textBox2.Text.Trim());
+            bool autreFiltre = textBox1.Text.Trim() != ""
+                                || comboBox1.SelectedIndex != 0
+                                || comboBox2.SelectedIndex != 0;
+            return autreFiltre || budgetValide || dureeValide;
+        }
+
+        private bool AuMoinsUnControleActif()
+        {
+            return textBox1.Text.Trim() != ""
+                || comboBox1.SelectedIndex != 0
+                || comboBox2.SelectedIndex != 0
+                || comboBox4.SelectedIndex != 0
+                || comboBox5.SelectedIndex != 0
+                || textBox3.Text.Trim() != ""
+                || textBox2.Text.Trim() != "";
         }
 
         private void MettreAJourBoutons()
         {
-            bool parDefaut = FiltresParDefaut();
+            bool filtreComplet = AuMoinsUnFiltreComplet();
 
-            button_chercher.Enabled = !parDefaut;
+            bool chercherActif;
+            if (!filtreComplet)
+                chercherActif = false;
+            else if (_derniersFiltres == null)
+                chercherActif = true;
+            else
+                chercherActif = !EtatFiltresActuels().SequenceEqual(_derniersFiltres);
+
+            button_chercher.Enabled = chercherActif;
             button_chercher.FlatStyle = FlatStyle.Flat;
-            button_chercher.BackColor = parDefaut
-                ? Color.FromArgb(180, 180, 180)
-                : Color.FromArgb(128, 255, 128);
-            button_chercher.ForeColor = parDefaut ? Color.FromArgb(120, 120, 120) : Color.Black;
-            button_chercher.FlatAppearance.BorderColor = parDefaut
-                ? Color.FromArgb(150, 150, 150)
-                : Color.FromArgb(80, 200, 80);
+            button_chercher.BackColor = chercherActif ? Color.FromArgb(128, 255, 128) : Color.FromArgb(180, 180, 180);
+            button_chercher.ForeColor = chercherActif ? Color.Black : Color.FromArgb(120, 120, 120);
+            button_chercher.FlatAppearance.BorderColor = chercherActif
+                ? Color.FromArgb(80, 200, 80)
+                : Color.FromArgb(150, 150, 150);
 
-            button_reset.Enabled = !parDefaut;
+            bool resetActif = AuMoinsUnControleActif();
+            button_reset.Enabled = resetActif;
             button_reset.FlatStyle = FlatStyle.Flat;
-            button_reset.BackColor = parDefaut
-                ? Color.FromArgb(180, 180, 180)
-                : Color.White;
-            button_reset.ForeColor = parDefaut ? Color.FromArgb(120, 120, 120) : Color.Black;
-            button_reset.FlatAppearance.BorderColor = parDefaut
-                ? Color.FromArgb(150, 150, 150)
-                : Color.FromArgb(200, 200, 200);
+            button_reset.BackColor = resetActif ? Color.White : Color.FromArgb(180, 180, 180);
+            button_reset.ForeColor = resetActif ? Color.Black : Color.FromArgb(120, 120, 120);
+            button_reset.FlatAppearance.BorderColor = resetActif
+                ? Color.FromArgb(200, 200, 200)
+                : Color.FromArgb(150, 150, 150);
         }
 
         private void InitFiltres()
@@ -130,44 +158,104 @@ namespace TdB_Missions
             comboBox2.Items.AddRange(new[] { "Tous", "À venir", "En cours", "Terminée" });
             comboBox2.SelectedIndex = 0;
 
-            // comboBox4 — Opérateur budget (vide par défaut)
+            // comboBox4 — Opérateur budget
             comboBox4.Items.Clear();
             comboBox4.Items.AddRange(new[] { "", "<", "≤", "=", "≥", ">" });
             comboBox4.SelectedIndex = 0;
 
-            // comboBox5 — Opérateur durée (vide par défaut)
+            // comboBox5 — Opérateur durée
             comboBox5.Items.Clear();
             comboBox5.Items.AddRange(new[] { "", "<", "≤", "=", "≥", ">" });
             comboBox5.SelectedIndex = 0;
 
-            // Entrée dans textBox1 → recherche
+            // textBox1 — Entrée → recherche
             textBox1.KeyDown += (s, ev) =>
             {
                 if (ev.KeyCode == Keys.Enter)
                 {
                     ev.SuppressKeyPress = true;
+                    if (!AuMoinsUnFiltreComplet()) return;
                     AppliquerFiltres();
-                    button_chercher.Enabled = false;
+                    _derniersFiltres = EtatFiltresActuels();
+                    MettreAJourBoutons();
                 }
             };
-
-            // Mise à jour des boutons à chaque changement
             textBox1.TextChanged += (s, ev) => MettreAJourBoutons();
+
+            // textBox3 — budget
+            textBox3.KeyDown += (s, ev) =>
+            {
+                if (ev.KeyCode == Keys.Enter)
+                {
+                    ev.SuppressKeyPress = true;
+                    if (string.IsNullOrEmpty(comboBox4.SelectedItem?.ToString()))
+                    {
+                        MessageBox.Show("Veuillez sélectionner un comparateur pour le budget.", "Comparateur manquant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    AppliquerFiltres();
+                    _derniersFiltres = EtatFiltresActuels();
+                    MettreAJourBoutons();
+                }
+            };
             textBox3.TextChanged += (s, ev) => MettreAJourBoutons();
+
+            // textBox2 — durée
+            textBox2.KeyDown += (s, ev) =>
+            {
+                if (ev.KeyCode == Keys.Enter)
+                {
+                    ev.SuppressKeyPress = true;
+                    if (string.IsNullOrEmpty(comboBox5.SelectedItem?.ToString()))
+                    {
+                        MessageBox.Show("Veuillez sélectionner un comparateur pour la durée.", "Comparateur manquant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    AppliquerFiltres();
+                    _derniersFiltres = EtatFiltresActuels();
+                    MettreAJourBoutons();
+                }
+            };
             textBox2.TextChanged += (s, ev) => MettreAJourBoutons();
 
-            comboBox4.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
-            comboBox5.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
-
-            // Recherche auto sur sélection planète / état
-            comboBox1.SelectedIndexChanged += (s, ev) => { MettreAJourBoutons(); AppliquerFiltres(); };
-            comboBox2.SelectedIndexChanged += (s, ev) => { MettreAJourBoutons(); AppliquerFiltres(); };
-
-            // Bouton chercher — grisé après clic
-            button_chercher.Click += (s, ev) =>
+            // comboBox1 planète → recherche auto
+            comboBox1.SelectedIndexChanged += (s, ev) =>
             {
                 AppliquerFiltres();
-                button_chercher.Enabled = false;
+                _derniersFiltres = EtatFiltresActuels();
+                MettreAJourBoutons();
+            };
+
+            // comboBox2 état → recherche auto
+            comboBox2.SelectedIndexChanged += (s, ev) =>
+            {
+                AppliquerFiltres();
+                _derniersFiltres = EtatFiltresActuels();
+                MettreAJourBoutons();
+            };
+
+            // comboBox4 opérateur budget → recherche auto si paire complète
+            comboBox4.SelectedIndexChanged += (s, ev) =>
+            {
+                if (!string.IsNullOrEmpty(comboBox4.SelectedItem?.ToString())
+                    && !string.IsNullOrEmpty(textBox3.Text.Trim()))
+                {
+                    AppliquerFiltres();
+                    _derniersFiltres = EtatFiltresActuels();
+                }
+                MettreAJourBoutons();
+            };
+
+            // comboBox5 opérateur durée → recherche auto si paire complète
+            comboBox5.SelectedIndexChanged += (s, ev) =>
+            {
+                if (!string.IsNullOrEmpty(comboBox5.SelectedItem?.ToString())
+                    && !string.IsNullOrEmpty(textBox2.Text.Trim()))
+                {
+                    AppliquerFiltres();
+                    _derniersFiltres = EtatFiltresActuels();
+                }
+                MettreAJourBoutons();
             };
 
             // Bouton reset
@@ -179,6 +267,7 @@ namespace TdB_Missions
 
         private void ResetFiltres()
         {
+            _derniersFiltres = null;
             textBox1.Text = "";
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
@@ -219,44 +308,29 @@ namespace TdB_Missions
             {
                 try
                 {
-                    // ── Filtre planète ──
                     if (!string.IsNullOrEmpty(planeteSelectionnee) &&
                         row[0].ToString() != planeteSelectionnee) continue;
 
-                    string matricule = row[5].ToString();
-                    DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select("matricule = '" + matricule + "'");
+                    DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select("matricule = '" + row[5] + "'");
                     if (dr.Length == 0) continue;
 
                     DataRow d = dr[0];
                     string nomChef = d[1].ToString() + " " + d[2].ToString();
 
-                    // ── Filtre texte libre chef ──
                     if (!string.IsNullOrEmpty(rechercheChef) &&
                         !nomChef.ToLower().Contains(rechercheChef)) continue;
 
-                    // ── Filtre état ──
-                    if (!string.IsNullOrEmpty(etatSelectionne))
-                    {
-                        string etat = CalculerEtat(row[3].ToString(), row[4].ToString());
-                        if (etat != etatSelectionne) continue;
-                    }
+                    if (!string.IsNullOrEmpty(etatSelectionne) &&
+                        CalculerEtat(row[3].ToString(), row[4].ToString()) != etatSelectionne) continue;
 
-                    // ── Filtre budget ──
                     if (filtrerBudget && int.TryParse(row[8].ToString(), out int budget))
-                    {
                         if (!CompareValeur(budget, opBudget, valBudget)) continue;
-                    }
 
-                    // ── Filtre durée ──
                     if (filtrerDuree &&
                         DateTime.TryParse(row[3].ToString(), out DateTime dep) &&
                         DateTime.TryParse(row[4].ToString(), out DateTime fin))
-                    {
-                        int nbJours = (int)(fin - dep).TotalDays;
-                        if (!CompareValeur(nbJours, opDuree, valDuree)) continue;
-                    }
+                        if (!CompareValeur((int)(fin - dep).TotalDays, opDuree, valDuree)) continue;
 
-                    // ── Mission retenue → afficher ──
                     UserControl1 uc = new UserControl1(
                         (row[0].ToString() + row[1].ToString()),
                         row[3].ToString(), row[4].ToString(),
@@ -286,7 +360,6 @@ namespace TdB_Missions
             if (!DateTime.TryParse(dateDep, out DateTime dep) ||
                 !DateTime.TryParse(dateRetour, out DateTime fin))
                 return "Inconnu";
-
             DateTime today = DateTime.Today;
             if (today < dep) return "À venir";
             if (today <= fin) return "En cours";
@@ -305,10 +378,6 @@ namespace TdB_Missions
                 default: return true;
             }
         }
-
-        // ─────────────────────────────────────────────
-        //  CHARGEMENT INITIAL
-        // ─────────────────────────────────────────────
 
         private void LierImageBouton(PictureBox pb, Button btn, EventHandler clickHandler)
         {
@@ -348,6 +417,9 @@ namespace TdB_Missions
         private void InitPictureBox()
         {
             LierImageBouton(pictureBox1, btCreerMission, (s, ev) => btCreerMission_Click(s, ev));
+            pictureBox1.Location = new Point(
+                pictureBox1.Location.X,
+                pictureBox1.Location.Y - 50);
             LierImageBouton(pictureBox4, btInfoAlien, (s, ev) => button1_Click(s, ev));
             LierImageBouton(pictureBox2, btInfoPlanete, (s, ev) => btInfoPlanete_Click(s, ev));
             LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click_1(s, ev));
@@ -381,8 +453,7 @@ namespace TdB_Missions
             {
                 try
                 {
-                    string filtre = "matricule = '" + row[5].ToString() + "'";
-                    DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
+                    DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select("matricule = '" + row[5] + "'");
                     if (dr.Length == 0) continue;
 
                     DataRow d = dr[0];
@@ -438,7 +509,6 @@ namespace TdB_Missions
                     MessageBox.Show("Connexion à la base de données perdue.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
                 DataTable schemaTable = conn.GetSchema("Tables");
                 foreach (DataRow row in schemaTable.Rows)
                 {
@@ -475,6 +545,13 @@ namespace TdB_Missions
         {
             FormStat f = new FormStat();
             f.ShowDialog();
+        }
+
+        private void button_chercher_Click(object sender, EventArgs e)
+        {
+            AppliquerFiltres();
+            _derniersFiltres = EtatFiltresActuels();
+            MettreAJourBoutons();
         }
     }
 }

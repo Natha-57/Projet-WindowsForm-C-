@@ -255,6 +255,7 @@
             resources.ApplyResources(this.button_chercher, "button_chercher");
             this.button_chercher.Name = "button_chercher";
             this.button_chercher.UseVisualStyleBackColor = false;
+            this.button_chercher.Click += new System.EventHandler(this.button_chercher_Click);
             // 
             // label3
             // 
