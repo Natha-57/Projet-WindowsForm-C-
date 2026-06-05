@@ -416,6 +416,31 @@ namespace _3_Visualisation_et_MAJ_missions
                     "Solde insuffisant", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            try
+            {
+                string sql = @"INSERT INTO Depense 
+                   (nomPlanete, numeroMission, dateD, montant, motif, idTypeDepense)
+                   VALUES 
+                   (@planete, @num, @date, @montant, @motif, @type)";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
+                cmd.Parameters.AddWithValue("@num", this.numeroMission);
+                cmd.Parameters.AddWithValue("@date", dtpNouvelleDepense.Value.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@montant", montantSaisi);
+                cmd.Parameters.AddWithValue("@motif", txtCommentaireDepense.Text.Trim());
+                cmd.Parameters.AddWithValue("@type", cboMembre1.SelectedValue);
+                cmd.ExecuteNonQuery();
+                RafraichirDataSet();
+                MessageBox.Show("Dépense ajoutée !", "Succès",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                grpNouvelleDepense.Visible = false;
+                ChargerMission();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur : " + ex.Message);
+            }
         }
 
 
@@ -495,6 +520,16 @@ namespace _3_Visualisation_et_MAJ_missions
         }
 
         private void grpNouvelleDepense_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
