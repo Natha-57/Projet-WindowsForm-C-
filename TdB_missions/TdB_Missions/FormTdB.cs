@@ -450,6 +450,9 @@ namespace TdB_Missions
             LierImageBouton(pictureBox4, btInfoAlien, (s, ev) => button1_Click(s, ev));
             LierImageBouton(pictureBox2, btInfoPlanete, (s, ev) => btInfoPlanete_Click(s, ev));
             LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click_1(s, ev));
+
+            button1.Click -= new EventHandler(button1_Click);
+            button1.Click += (s, ev) => button1_Click_1(s, ev);
         }
 
         private void ChargerMissions()
