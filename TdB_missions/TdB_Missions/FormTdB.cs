@@ -69,6 +69,33 @@ namespace TdB_Missions
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
 
             InitPictureBox();
+
+            this.MouseMove += (s, ev) =>
+            {
+                foreach (Control ctrl in this.Controls)
+                {
+                    if (ctrl is Button btn && btn != button_chercher && btn != button_reset && btn != btStat)
+                        if (!btn.ClientRectangle.Contains(btn.PointToClient(Cursor.Position)))
+                            btn.BackColor = CouleurNormale;
+
+                    if (ctrl is PictureBox pb && pb != pictureBox3 && pb != pictureBox6)
+                        if (!pb.ClientRectangle.Contains(pb.PointToClient(Cursor.Position)))
+                            pb.BackColor = CouleurNormale;
+                }
+            };
+
+            this.Activated += (s, ev) =>
+            {
+                foreach (Control ctrl in this.Controls)
+                {
+                    if (ctrl is Button btn && btn != button_chercher && btn != button_reset && btn != btStat)
+                        btn.BackColor = CouleurNormale;
+
+                    if (ctrl is PictureBox pb && pb != pictureBox3 && pb != pictureBox6)
+                        pb.BackColor = CouleurNormale;
+                }
+            };
+
             InitFiltres();
             ChargerMissions();
         }
@@ -552,6 +579,11 @@ namespace TdB_Missions
             AppliquerFiltres();
             _derniersFiltres = EtatFiltresActuels();
             MettreAJourBoutons();
+        }
+
+        private void btStat_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

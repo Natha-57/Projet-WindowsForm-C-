@@ -481,7 +481,7 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 445</value>
+    <value>273, 347</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 24</value>
@@ -505,7 +505,7 @@
     <value>0</value>
   </data>
   <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 442</value>
+    <value>179, 344</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 30</value>
@@ -532,7 +532,7 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 445</value>
+    <value>12, 347</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 24</value>
@@ -559,7 +559,7 @@
     <value>False</value>
   </data>
   <data name="comboBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 440</value>
+    <value>103, 342</value>
   </data>
   <data name="comboBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 32</value>
@@ -586,7 +586,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 387</value>
+    <value>273, 289</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>21, 24</value>
@@ -610,7 +610,7 @@
     <value>4</value>
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>190, 384</value>
+    <value>179, 286</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 30</value>
@@ -634,7 +634,7 @@
     <value>True</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 387</value>
+    <value>12, 289</value>
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 24</value>
@@ -661,7 +661,7 @@
     <value>False</value>
   </data>
   <data name="comboBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 384</value>
+    <value>103, 286</value>
   </data>
   <data name="comboBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 32</value>
@@ -715,7 +715,7 @@
     <value>Trebuchet MS, 14.25pt</value>
   </data>
   <data name="button_reset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 546</value>
+    <value>16, 510</value>
   </data>
   <data name="button_reset.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 35</value>
@@ -742,7 +742,7 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 215</value>
+    <value>12, 117</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 24</value>
@@ -766,7 +766,7 @@
     <value>10</value>
   </data>
   <data name="button_chercher.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 124</value>
+    <value>16, 413</value>
   </data>
   <data name="button_chercher.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 67</value>
@@ -793,7 +793,7 @@
     <value>True</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 293</value>
+    <value>12, 195</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 24</value>
@@ -841,7 +841,7 @@
     <value>False</value>
   </data>
   <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 242</value>
+    <value>16, 144</value>
   </data>
   <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 32</value>
@@ -892,7 +892,7 @@
     <value>False</value>
   </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 320</value>
+    <value>16, 222</value>
   </data>
   <data name="comboBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 32</value>

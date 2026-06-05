@@ -213,7 +213,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(162)))), ((int)(((byte)(255)))));
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.HotTrack;
             this.pictureBox2.Location = new System.Drawing.Point(111, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(1488, 96);

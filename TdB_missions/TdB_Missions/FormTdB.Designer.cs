@@ -99,6 +99,7 @@
             resources.ApplyResources(this.btStat, "btStat");
             this.btStat.Name = "btStat";
             this.btStat.UseVisualStyleBackColor = true;
+            this.btStat.Click += new System.EventHandler(this.btStat_Click);
             // 
             // panel1
             // 
