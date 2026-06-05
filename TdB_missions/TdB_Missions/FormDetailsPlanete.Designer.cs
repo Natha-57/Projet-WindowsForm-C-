@@ -33,7 +33,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormDetailsPlanete";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Détails";
             this.Load += new System.EventHandler(this.FormDetails_Load);
             this.ResumeLayout(false);

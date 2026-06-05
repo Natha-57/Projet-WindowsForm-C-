@@ -193,17 +193,21 @@ namespace _2__Creation_De_Mission
                 DataTable dt = new DataTable();
                 string sql = @"SELECT e.id,
                              e.nom || ' - ' || e.couleur AS affichage
-                             FROM   Espece e
-                             JOIN   Ennemi en ON en.idEspece = e.id
-                             ORDER  BY e.nom";
-                new SQLiteDataAdapter(sql, this.cx).Fill(dt);
+                       FROM   Espece e
+                       JOIN   Ennemi  en ON en.idEspece  = e.id
+                       JOIN   Habiter h  ON h.idEspece   = e.id
+                       WHERE  h.nomPlanete = @planete
+                       ORDER  BY e.nom";
+                SQLiteCommand cmd = new SQLiteCommand(sql, this.cx);
+                cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
+                new SQLiteDataAdapter(cmd).Fill(dt);
                 cboAliens.DataSource = dt;
                 cboAliens.DisplayMember = "affichage";
                 cboAliens.ValueMember = "id";
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erreur chargement aliens  : " + ex.Message);
+                MessageBox.Show("Erreur chargement aliens : " + ex.Message);
             }
         }
 
@@ -440,23 +444,22 @@ namespace _2__Creation_De_Mission
 
         private void btValiderObjCapture_Click(object sender, EventArgs e)
         {
-            if (lstObj.Items.Count == 0)
+            if (lstObj.Items.Count == 0 && cboAliens.Items.Count > 0)
             {
                 MessageBox.Show("Aucun objectif défini.", "Attention",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Si pas d'espèces ou si des objectifs sont définis → on continue directement
             SQLiteTransaction transaction = this.cx.BeginTransaction();
             try
             {
                 foreach (var (idEspece, objectif) in listeCaptures)
                 {
                     string sql = @"INSERT INTO ObjectifCapture 
-                               (nomPlanete, numeroMission, idEspeceEnnemi, objectif)
-                           VALUES 
-                               (@planete, @num, @idE, @obj)";
-
+                           (nomPlanete, numeroMission, idEspeceEnnemi, objectif)
+                           VALUES (@planete, @num, @idE, @obj)";
                     SQLiteCommand cmd = new SQLiteCommand(sql, this.cx, transaction);
                     cmd.Parameters.AddWithValue("@planete", this.nomPlanete);
                     cmd.Parameters.AddWithValue("@num", this.numeroMission);
@@ -466,7 +469,7 @@ namespace _2__Creation_De_Mission
                 }
 
                 transaction.Commit();
-                MessageBox.Show("Objectifs enregistrés avec succès !", "Succès",
+                MessageBox.Show("Mission enregistrée avec succès !", "Succès",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -477,6 +480,7 @@ namespace _2__Creation_De_Mission
                 MessageBox.Show("Erreur, aucune capture enregistrée : " + ex.Message,
                     "Transaction annulée", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         private void lstMembres_SelectedIndexChanged(object sender, EventArgs e)
@@ -549,6 +553,14 @@ namespace _2__Creation_De_Mission
             MessageBox.Show("Membres validés !", "Succès",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+
+            if (cboAliens.Items.Count == 0)
+            {
+                MessageBox.Show("Aucune espèce ennemie répertoriée sur cette planète.\nVous pouvez directement valider la mission.",
+                    "Pas d'espèces ennemies", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            
             AllerOnglet(3);
         }
 

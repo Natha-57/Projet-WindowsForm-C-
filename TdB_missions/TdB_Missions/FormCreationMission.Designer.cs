@@ -116,10 +116,11 @@
             // txtFeuilleDeRoute
             // 
             this.txtFeuilleDeRoute.BackColor = System.Drawing.Color.Azure;
-            this.txtFeuilleDeRoute.Location = new System.Drawing.Point(67, 332);
+            this.txtFeuilleDeRoute.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFeuilleDeRoute.Location = new System.Drawing.Point(57, 332);
             this.txtFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(2);
             this.txtFeuilleDeRoute.Name = "txtFeuilleDeRoute";
-            this.txtFeuilleDeRoute.Size = new System.Drawing.Size(694, 154);
+            this.txtFeuilleDeRoute.Size = new System.Drawing.Size(704, 154);
             this.txtFeuilleDeRoute.TabIndex = 37;
             this.txtFeuilleDeRoute.Text = "";
             // 
@@ -180,21 +181,23 @@
             // txtNbAliens
             // 
             this.txtNbAliens.BackColor = System.Drawing.Color.Azure;
-            this.txtNbAliens.Location = new System.Drawing.Point(489, 125);
+            this.txtNbAliens.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNbAliens.Location = new System.Drawing.Point(486, 128);
             this.txtNbAliens.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtNbAliens.Name = "txtNbAliens";
-            this.txtNbAliens.Size = new System.Drawing.Size(96, 38);
+            this.txtNbAliens.Size = new System.Drawing.Size(96, 51);
             this.txtNbAliens.TabIndex = 31;
             this.txtNbAliens.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNbAliens_KeyPress);
             // 
             // cboAliens
             // 
             this.cboAliens.BackColor = System.Drawing.Color.Azure;
+            this.cboAliens.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboAliens.FormattingEnabled = true;
             this.cboAliens.Location = new System.Drawing.Point(77, 125);
             this.cboAliens.Margin = new System.Windows.Forms.Padding(4);
             this.cboAliens.Name = "cboAliens";
-            this.cboAliens.Size = new System.Drawing.Size(360, 43);
+            this.cboAliens.Size = new System.Drawing.Size(360, 54);
             this.cboAliens.TabIndex = 30;
             this.cboAliens.SelectedIndexChanged += new System.EventHandler(this.cboAliens_SelectedIndexChanged);
             // 
@@ -242,11 +245,12 @@
             // cboAjtMembre
             // 
             this.cboAjtMembre.BackColor = System.Drawing.Color.Azure;
+            this.cboAjtMembre.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboAjtMembre.FormattingEnabled = true;
             this.cboAjtMembre.Location = new System.Drawing.Point(77, 125);
             this.cboAjtMembre.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cboAjtMembre.Name = "cboAjtMembre";
-            this.cboAjtMembre.Size = new System.Drawing.Size(500, 43);
+            this.cboAjtMembre.Size = new System.Drawing.Size(500, 54);
             this.cboAjtMembre.TabIndex = 25;
             this.cboAjtMembre.SelectedIndexChanged += new System.EventHandler(this.cboAjtMembre_SelectedIndexChanged);
             // 
@@ -295,10 +299,11 @@
             // 
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.label13.Location = new System.Drawing.Point(583, 712);
+            this.label13.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(604, 709);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 35);
+            this.label13.Size = new System.Drawing.Size(44, 49);
             this.label13.TabIndex = 21;
             this.label13.Text = "€";
             // 
@@ -307,7 +312,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label12.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(583, 628);
+            this.label12.Location = new System.Drawing.Point(601, 628);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 49);
@@ -319,7 +324,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.LightSteelBlue;
             this.label11.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(576, 539);
+            this.label11.Location = new System.Drawing.Point(601, 532);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(192, 49);
@@ -350,31 +355,34 @@
             // cboChefDeMission
             // 
             this.cboChefDeMission.BackColor = System.Drawing.Color.Azure;
+            this.cboChefDeMission.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboChefDeMission.FormattingEnabled = true;
             this.cboChefDeMission.Location = new System.Drawing.Point(347, 141);
             this.cboChefDeMission.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cboChefDeMission.Name = "cboChefDeMission";
-            this.cboChefDeMission.Size = new System.Drawing.Size(414, 43);
+            this.cboChefDeMission.Size = new System.Drawing.Size(414, 54);
             this.cboChefDeMission.TabIndex = 15;
             this.cboChefDeMission.SelectedIndexChanged += new System.EventHandler(this.cboChefDeMission_SelectedIndexChanged);
             // 
             // txtBudget
             // 
             this.txtBudget.BackColor = System.Drawing.Color.Azure;
-            this.txtBudget.Location = new System.Drawing.Point(408, 709);
+            this.txtBudget.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBudget.Location = new System.Drawing.Point(426, 709);
             this.txtBudget.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtBudget.Name = "txtBudget";
-            this.txtBudget.Size = new System.Drawing.Size(167, 38);
+            this.txtBudget.Size = new System.Drawing.Size(170, 51);
             this.txtBudget.TabIndex = 14;
             this.txtBudget.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBudget_KeyPress);
             // 
             // txtObjDataBaz
             // 
             this.txtObjDataBaz.BackColor = System.Drawing.Color.Azure;
-            this.txtObjDataBaz.Location = new System.Drawing.Point(408, 628);
+            this.txtObjDataBaz.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtObjDataBaz.Location = new System.Drawing.Point(426, 625);
             this.txtObjDataBaz.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtObjDataBaz.Name = "txtObjDataBaz";
-            this.txtObjDataBaz.Size = new System.Drawing.Size(167, 38);
+            this.txtObjDataBaz.Size = new System.Drawing.Size(172, 51);
             this.txtObjDataBaz.TabIndex = 13;
             this.txtObjDataBaz.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtObjDataBaz_KeyPress);
             // 
@@ -478,10 +486,11 @@
             // txtNbMembres
             // 
             this.txtNbMembres.BackColor = System.Drawing.Color.Azure;
-            this.txtNbMembres.Location = new System.Drawing.Point(408, 535);
+            this.txtNbMembres.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNbMembres.Location = new System.Drawing.Point(426, 532);
             this.txtNbMembres.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txtNbMembres.Name = "txtNbMembres";
-            this.txtNbMembres.Size = new System.Drawing.Size(167, 38);
+            this.txtNbMembres.Size = new System.Drawing.Size(167, 51);
             this.txtNbMembres.TabIndex = 3;
             this.txtNbMembres.TextChanged += new System.EventHandler(this.txtNbMembres_TextChanged);
             this.txtNbMembres.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNbMembres_KeyPress);
@@ -489,11 +498,12 @@
             // cboNomPlanete
             // 
             this.cboNomPlanete.BackColor = System.Drawing.Color.Azure;
+            this.cboNomPlanete.Font = new System.Drawing.Font("Trebuchet MS", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboNomPlanete.FormattingEnabled = true;
             this.cboNomPlanete.Location = new System.Drawing.Point(60, 126);
             this.cboNomPlanete.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.cboNomPlanete.Name = "cboNomPlanete";
-            this.cboNomPlanete.Size = new System.Drawing.Size(291, 43);
+            this.cboNomPlanete.Size = new System.Drawing.Size(291, 54);
             this.cboNomPlanete.TabIndex = 1;
             this.cboNomPlanete.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -552,14 +562,9 @@
             this.Paramètres.Controls.Add(this.cboChefDeMission);
             this.Paramètres.Controls.Add(this.label6);
             this.Paramètres.Controls.Add(this.label7);
-            this.Paramètres.Controls.Add(this.txtNbMembres);
-            this.Paramètres.Controls.Add(this.label11);
             this.Paramètres.Controls.Add(this.label8);
-            this.Paramètres.Controls.Add(this.txtObjDataBaz);
-            this.Paramètres.Controls.Add(this.label12);
             this.Paramètres.Controls.Add(this.btValiderLaMission);
             this.Paramètres.Controls.Add(this.label9);
-            this.Paramètres.Controls.Add(this.label13);
             this.Paramètres.Controls.Add(this.txtBudget);
             this.Paramètres.Controls.Add(this.panel2);
             this.Paramètres.Location = new System.Drawing.Point(8, 49);
@@ -594,7 +599,6 @@
             this.Objectifs.Controls.Add(this.label15);
             this.Objectifs.Controls.Add(this.cboAliens);
             this.Objectifs.Controls.Add(this.btAjtObjCapture);
-            this.Objectifs.Controls.Add(this.txtNbAliens);
             this.Objectifs.Controls.Add(this.groupBox1);
             this.Objectifs.Location = new System.Drawing.Point(8, 49);
             this.Objectifs.Name = "Objectifs";
@@ -609,6 +613,7 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
             this.groupBox1.Controls.Add(this.button_retour);
+            this.groupBox1.Controls.Add(this.txtNbAliens);
             this.groupBox1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
@@ -655,6 +660,11 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
             this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.txtNbMembres);
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.txtObjDataBaz);
+            this.panel2.Controls.Add(this.label13);
             this.panel2.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(6);
@@ -719,8 +729,10 @@
             this.Objectifs.ResumeLayout(false);
             this.Objectifs.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
