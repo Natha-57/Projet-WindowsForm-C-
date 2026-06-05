@@ -27,6 +27,7 @@ namespace _3_Visualisation_et_MAJ_missions
         public FormJdB(string planete, int num)
         {
             InitializeComponent();
+            this.MaximizeBox = false;
             this.planete = planete;
             this.num = num;
 
@@ -235,7 +236,7 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void LancerPDF()
         {
-            // ── Couleurs du thème ────────────────────────────────────
+            // Couleurs / Thème Stargate pour le pdf
             BaseColor NOIR = new BaseColor(10, 12, 20);
             BaseColor CYAN = new BaseColor(0, 229, 255);
             BaseColor OR = new BaseColor(255, 215, 0);
@@ -243,7 +244,7 @@ namespace _3_Visualisation_et_MAJ_missions
             BaseColor GRIS_FONCE = new BaseColor(30, 40, 55);
             BaseColor CYAN_DARK = new BaseColor(0, 60, 80);
 
-            // ── Polices ──────────────────────────────────────────────
+            // Polices d'écriture
             iTextSharp.text.Font fTitre = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 22, CYAN);
             iTextSharp.text.Font fSousTitre = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 11, OR);
             iTextSharp.text.Font fBold = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10, CYAN);
@@ -251,7 +252,6 @@ namespace _3_Visualisation_et_MAJ_missions
             iTextSharp.text.Font fSmall = FontFactory.GetFont(FontFactory.HELVETICA, 8, GRIS_CLAIR);
             iTextSharp.text.Font fTableHdr = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, NOIR);
 
-            // ── Document ─────────────────────────────────────────────
             Document doc = new Document(PageSize.A4, 30, 30, 40, 40);
             string filePath = "RapportMission.pdf";
 
@@ -261,7 +261,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 writer.PageEvent = new StargatePdfPageEvent(NOIR, CYAN, OR);
                 doc.Open();
 
-                // ── EN-TÊTE ──────────────────────────────────────────
+                // En-tête du document
                 PdfPTable headerTable = new PdfPTable(1);
                 headerTable.WidthPercentage = 100;
                 headerTable.SpacingAfter = 10;
@@ -292,7 +292,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 doc.Add(headerTable);
                 doc.Add(new Paragraph(" "));
 
-                // ── INFOS MISSION ────────────────────────────────────
+                // Infos Mission
                 string filtreM = $"nomPlanete = '{this.planete}' AND numero = {this.num}";
                 DataRow[] rowsM = MesDatas.DsGlobal.Tables["Mission"].Select(filtreM);
 
@@ -360,7 +360,7 @@ namespace _3_Visualisation_et_MAJ_missions
                     doc.Add(frTbl);
                 }
 
-                // ── MEMBRES ──────────────────────────────────────────
+                // Membres
                 doc.Add(SectionHeader("▶  ÉQUIPE EN MISSION", fSousTitre, CYAN));
 
                 string filtreComp = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
@@ -412,7 +412,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 }
                 doc.Add(memTbl);
 
-                // ── JOURNAL DE BORD ──────────────────────────────────
+                // Journal de bord
                 doc.Add(SectionHeader("▶  JOURNAL DE BORD", fSousTitre, CYAN));
 
                 string filtreJdb = $"nomPlanete = '{this.planete}' AND numero = {this.num}";
@@ -443,7 +443,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 }
                 doc.Add(jdbTbl);
 
-                // ── DÉPENSES ─────────────────────────────────────────
+                // Dépenses
                 doc.Add(SectionHeader("▶  DÉPENSES EFFECTUÉES", fSousTitre, CYAN));
 
                 string filtreDep = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
@@ -494,7 +494,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 totDepTbl.AddCell(totDepCell);
                 doc.Add(totDepTbl);
 
-                // ── CONTACTS ─────────────────────────────────────────
+                // Contacts
                 doc.Add(SectionHeader("▶  CONTACTS – INFORMATEURS", fSousTitre, CYAN));
 
                 string filtreC = $"nomPlanete = '{this.planete}' AND numeroMission = {this.num}";
@@ -545,7 +545,7 @@ namespace _3_Visualisation_et_MAJ_missions
                 totCntTbl.AddCell(totCntCell);
                 doc.Add(totCntTbl);
 
-                // ── BILAN DES CAPTURES ───────────────────────────────
+                // Bilan des captures
                 doc.Add(SectionHeader("▶  BILAN DES CAPTURES", fSousTitre, CYAN));
 
                 string nomTable = $"BilanCapture{this.planete}{this.num}";
@@ -571,7 +571,6 @@ namespace _3_Visualisation_et_MAJ_missions
                                             : taux >= 50 ? OR
                                             : new BaseColor(220, 60, 60);
 
-                        // CORRECTION : tableau de (string txt, bool isLast) avec var
                         var colonnes = new (string txt, bool isLast)[]
                         {
                             (row["Nom de l'espèce"].ToString(),    false),
@@ -597,7 +596,7 @@ namespace _3_Visualisation_et_MAJ_missions
                     doc.Add(capTbl);
                 }
 
-                // ── PIED DE PAGE FINAL ───────────────────────────────
+                // Pied de page final
                 PdfPTable footTbl = new PdfPTable(1);
                 footTbl.WidthPercentage = 100;
                 PdfPCell footCell = new PdfPCell(new Phrase(
@@ -623,7 +622,7 @@ namespace _3_Visualisation_et_MAJ_missions
             }
         }
 
-        // ── Helpers ──────────────────────────────────────────────────
+        // Esthétique : barre colorée + fond sombre pour les titres de sections
 
         private static PdfPTable SectionHeader(string texte, iTextSharp.text.Font font, BaseColor couleurBarre)
         {
@@ -663,7 +662,7 @@ namespace _3_Visualisation_et_MAJ_missions
             }
         }
 
-        // ── PageEvent Stargate ────────────────────────────────────────
+        // Esthétique : fond sombre + bordure cyan + coins décorés en or + pied de page avec numéro de page et classification
 
         public class StargatePdfPageEvent : PdfPageEventHelper
         {

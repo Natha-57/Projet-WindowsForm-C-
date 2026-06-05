@@ -22,6 +22,8 @@ namespace _3_Visualisation_et_MAJ_missions
         public FormResumeMission(string nomPlanete, int numeroMission)
         {
             InitializeComponent();
+            this.MaximizeBox = false;
+
             this.nomPlanete = nomPlanete;
             this.numeroMission = numeroMission;
 
