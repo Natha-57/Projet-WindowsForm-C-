@@ -28,6 +28,7 @@ namespace _2__Creation_De_Mission
         public FormCreationMission()
         {
             InitializeComponent();
+            this.MaximizeBox = false;
 
             tabControlMission.Selecting += (s, e) =>
             {
@@ -50,6 +51,8 @@ namespace _2__Creation_De_Mission
             catch (SQLiteException er) { MessageBox.Show(er.Message); }
 
             ChargerPlanetes();
+            cboNomPlanete.SelectedIndex = -1;
+            lblNomMission.Text = "";
             ChargerAliens();
 
             dateTimeDepart.Value = DateTime.Today;
@@ -579,6 +582,11 @@ namespace _2__Creation_De_Mission
             AllerOnglet(1);
 
             ChargerChefDeMission();
+        }
+
+        private void lblNomMission_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
