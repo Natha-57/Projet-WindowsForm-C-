@@ -77,8 +77,9 @@
             // 
             // btValiderDates
             // 
+            this.btValiderDates.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btValiderDates.Location = new System.Drawing.Point(471, 590);
-            this.btValiderDates.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btValiderDates.Margin = new System.Windows.Forms.Padding(2);
             this.btValiderDates.Name = "btValiderDates";
             this.btValiderDates.Size = new System.Drawing.Size(291, 109);
             this.btValiderDates.TabIndex = 39;
@@ -99,7 +100,7 @@
             // txtFeuilleDeRoute
             // 
             this.txtFeuilleDeRoute.Location = new System.Drawing.Point(159, 361);
-            this.txtFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFeuilleDeRoute.Margin = new System.Windows.Forms.Padding(2);
             this.txtFeuilleDeRoute.Name = "txtFeuilleDeRoute";
             this.txtFeuilleDeRoute.Size = new System.Drawing.Size(602, 113);
             this.txtFeuilleDeRoute.TabIndex = 37;
@@ -110,7 +111,7 @@
             this.lstMembres.FormattingEnabled = true;
             this.lstMembres.ItemHeight = 46;
             this.lstMembres.Location = new System.Drawing.Point(77, 237);
-            this.lstMembres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstMembres.Margin = new System.Windows.Forms.Padding(4);
             this.lstMembres.Name = "lstMembres";
             this.lstMembres.Size = new System.Drawing.Size(714, 372);
             this.lstMembres.TabIndex = 36;
@@ -121,7 +122,7 @@
             this.lstObj.FormattingEnabled = true;
             this.lstObj.ItemHeight = 46;
             this.lstObj.Location = new System.Drawing.Point(77, 228);
-            this.lstObj.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstObj.Margin = new System.Windows.Forms.Padding(4);
             this.lstObj.Name = "lstObj";
             this.lstObj.Size = new System.Drawing.Size(714, 372);
             this.lstObj.TabIndex = 35;
@@ -129,6 +130,7 @@
             // 
             // btValiderObjCapture
             // 
+            this.btValiderObjCapture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btValiderObjCapture.Location = new System.Drawing.Point(500, 648);
             this.btValiderObjCapture.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btValiderObjCapture.Name = "btValiderObjCapture";
@@ -140,6 +142,7 @@
             // 
             // btAjtObjCapture
             // 
+            this.btAjtObjCapture.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btAjtObjCapture.Location = new System.Drawing.Point(626, 125);
             this.btAjtObjCapture.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btAjtObjCapture.Name = "btAjtObjCapture";
@@ -162,7 +165,7 @@
             // 
             this.cboAliens.FormattingEnabled = true;
             this.cboAliens.Location = new System.Drawing.Point(77, 125);
-            this.cboAliens.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboAliens.Margin = new System.Windows.Forms.Padding(4);
             this.cboAliens.Name = "cboAliens";
             this.cboAliens.Size = new System.Drawing.Size(360, 54);
             this.cboAliens.TabIndex = 30;
@@ -181,6 +184,7 @@
             // 
             // btValdierMembres
             // 
+            this.btValdierMembres.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btValdierMembres.Location = new System.Drawing.Point(500, 673);
             this.btValdierMembres.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btValdierMembres.Name = "btValdierMembres";
@@ -192,6 +196,7 @@
             // 
             // btAjtMembres
             // 
+            this.btAjtMembres.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btAjtMembres.Location = new System.Drawing.Point(626, 125);
             this.btAjtMembres.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btAjtMembres.Name = "btAjtMembres";
@@ -234,6 +239,7 @@
             // 
             // btValiderLaMission
             // 
+            this.btValiderLaMission.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btValiderLaMission.Location = new System.Drawing.Point(470, 812);
             this.btValiderLaMission.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.btValiderLaMission.Name = "btValiderLaMission";
@@ -435,7 +441,7 @@
             this.tabControlMission.Controls.Add(this.Affectation);
             this.tabControlMission.Controls.Add(this.Objectifs);
             this.tabControlMission.Location = new System.Drawing.Point(11, 11);
-            this.tabControlMission.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControlMission.Margin = new System.Windows.Forms.Padding(2);
             this.tabControlMission.Name = "tabControlMission";
             this.tabControlMission.SelectedIndex = 0;
             this.tabControlMission.Size = new System.Drawing.Size(858, 1017);
@@ -453,9 +459,9 @@
             this.Initialisation.Controls.Add(this.dateTimeDepart);
             this.Initialisation.Controls.Add(this.dateTimeRetour);
             this.Initialisation.Location = new System.Drawing.Point(8, 60);
-            this.Initialisation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Initialisation.Margin = new System.Windows.Forms.Padding(2);
             this.Initialisation.Name = "Initialisation";
-            this.Initialisation.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Initialisation.Padding = new System.Windows.Forms.Padding(2);
             this.Initialisation.Size = new System.Drawing.Size(842, 949);
             this.Initialisation.TabIndex = 0;
             this.Initialisation.Text = "Initialisation";
@@ -479,9 +485,9 @@
             this.Paramètres.Controls.Add(this.label13);
             this.Paramètres.Controls.Add(this.txtBudget);
             this.Paramètres.Location = new System.Drawing.Point(8, 60);
-            this.Paramètres.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Paramètres.Margin = new System.Windows.Forms.Padding(2);
             this.Paramètres.Name = "Paramètres";
-            this.Paramètres.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Paramètres.Padding = new System.Windows.Forms.Padding(2);
             this.Paramètres.Size = new System.Drawing.Size(842, 949);
             this.Paramètres.TabIndex = 1;
             this.Paramètres.Text = "Paramètres";
