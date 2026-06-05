@@ -102,6 +102,7 @@
             // 
             // btSuivant
             // 
+            this.btSuivant.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btSuivant.Location = new System.Drawing.Point(310, 212);
             this.btSuivant.Margin = new System.Windows.Forms.Padding(4);
             this.btSuivant.Name = "btSuivant";
@@ -113,6 +114,7 @@
             // 
             // btAllerToutAlaFin
             // 
+            this.btAllerToutAlaFin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btAllerToutAlaFin.Location = new System.Drawing.Point(396, 212);
             this.btAllerToutAlaFin.Margin = new System.Windows.Forms.Padding(4);
             this.btAllerToutAlaFin.Name = "btAllerToutAlaFin";
@@ -124,6 +126,7 @@
             // 
             // btRevenir1foisEnArriere
             // 
+            this.btRevenir1foisEnArriere.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btRevenir1foisEnArriere.Location = new System.Drawing.Point(92, 212);
             this.btRevenir1foisEnArriere.Margin = new System.Windows.Forms.Padding(4);
             this.btRevenir1foisEnArriere.Name = "btRevenir1foisEnArriere";
@@ -135,6 +138,7 @@
             // 
             // btToutDebut
             // 
+            this.btToutDebut.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btToutDebut.Location = new System.Drawing.Point(6, 212);
             this.btToutDebut.Margin = new System.Windows.Forms.Padding(4);
             this.btToutDebut.Name = "btToutDebut";
@@ -196,6 +200,7 @@
             // 
             // btEditerUnPdf
             // 
+            this.btEditerUnPdf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btEditerUnPdf.Location = new System.Drawing.Point(80, 846);
             this.btEditerUnPdf.Margin = new System.Windows.Forms.Padding(4);
             this.btEditerUnPdf.Name = "btEditerUnPdf";
