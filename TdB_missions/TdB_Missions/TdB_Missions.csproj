@@ -153,6 +153,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTdB.resx">
       <DependentUpon>FormTdB.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAuthentification.resx">
       <DependentUpon>FormAuthentification.cs</DependentUpon>

@@ -23,7 +23,8 @@ namespace TdB_Missions
         public FormTdB()
         {
             InitializeComponent();
-            ChargerDonneesBDD();
+            if (!DesignMode)
+                ChargerDonneesBDD();
         }
 
         private void ChargerDonneesBDD()
@@ -56,17 +57,258 @@ namespace TdB_Missions
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (DesignMode) return;
+
             this.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
-            this.pictureBox5.Image = Image.FromFile("../../../../Images_App/Icones diverses/Logo Stat.png");
+            this.pictureBox5.Image = Image.FromFile("../../../../Images_App/Icones diverses/Logo Coop.png");
             this.pictureBox2.Image = Image.FromFile("../../../../Images_App/Icones diverses/1_Logo Planètes Infos.png");
             this.pictureBox4.Image = Image.FromFile("../../../../Images_App/Icones diverses/2_Logo Info Alien.png");
             this.pictureBox6.Image = Image.FromFile("../../../../Images_App/Texte Stargate TDB.png");
             this.pictureBox3.Image = Image.FromFile("../../../../Images_App/Logo Star Gate.png");
             this.pictureBox1.Image = Image.FromFile("../../../../Images_App/Icones diverses/3_Logo +.png");
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
+
             InitPictureBox();
+            InitFiltres();
             ChargerMissions();
         }
+
+        // ─────────────────────────────────────────────
+        //  FILTRES
+        // ─────────────────────────────────────────────
+
+        private bool FiltresParDefaut()
+        {
+            return textBox1.Text.Trim() == ""
+                && comboBox1.SelectedIndex == 0
+                && comboBox2.SelectedIndex == 0
+                && comboBox4.SelectedIndex == 0
+                && comboBox5.SelectedIndex == 0
+                && textBox3.Text.Trim() == ""
+                && textBox2.Text.Trim() == "";
+        }
+
+        private void MettreAJourBoutons()
+        {
+            bool parDefaut = FiltresParDefaut();
+
+            button_chercher.Enabled = !parDefaut;
+            button_chercher.FlatStyle = FlatStyle.Flat;
+            button_chercher.BackColor = parDefaut
+                ? Color.FromArgb(180, 180, 180)
+                : Color.FromArgb(128, 255, 128);
+            button_chercher.ForeColor = parDefaut ? Color.FromArgb(120, 120, 120) : Color.Black;
+            button_chercher.FlatAppearance.BorderColor = parDefaut
+                ? Color.FromArgb(150, 150, 150)
+                : Color.FromArgb(80, 200, 80);
+
+            button_reset.Enabled = !parDefaut;
+            button_reset.FlatStyle = FlatStyle.Flat;
+            button_reset.BackColor = parDefaut
+                ? Color.FromArgb(180, 180, 180)
+                : Color.White;
+            button_reset.ForeColor = parDefaut ? Color.FromArgb(120, 120, 120) : Color.Black;
+            button_reset.FlatAppearance.BorderColor = parDefaut
+                ? Color.FromArgb(150, 150, 150)
+                : Color.FromArgb(200, 200, 200);
+        }
+
+        private void InitFiltres()
+        {
+            // comboBox1 — Planète
+            comboBox1.Items.Clear();
+            comboBox1.Items.Add("Toutes");
+            if (MesDatas.DsGlobal.Tables.Contains("planete"))
+            {
+                foreach (DataRow row in MesDatas.DsGlobal.Tables["planete"].Rows)
+                    comboBox1.Items.Add(row[0].ToString());
+            }
+            comboBox1.SelectedIndex = 0;
+
+            // comboBox2 — État
+            comboBox2.Items.Clear();
+            comboBox2.Items.AddRange(new[] { "Tous", "À venir", "En cours", "Terminée" });
+            comboBox2.SelectedIndex = 0;
+
+            // comboBox4 — Opérateur budget (vide par défaut)
+            comboBox4.Items.Clear();
+            comboBox4.Items.AddRange(new[] { "", "<", "≤", "=", "≥", ">" });
+            comboBox4.SelectedIndex = 0;
+
+            // comboBox5 — Opérateur durée (vide par défaut)
+            comboBox5.Items.Clear();
+            comboBox5.Items.AddRange(new[] { "", "<", "≤", "=", "≥", ">" });
+            comboBox5.SelectedIndex = 0;
+
+            // Entrée dans textBox1 → recherche
+            textBox1.KeyDown += (s, ev) =>
+            {
+                if (ev.KeyCode == Keys.Enter)
+                {
+                    ev.SuppressKeyPress = true;
+                    AppliquerFiltres();
+                    button_chercher.Enabled = false;
+                }
+            };
+
+            // Mise à jour des boutons à chaque changement
+            textBox1.TextChanged += (s, ev) => MettreAJourBoutons();
+            textBox3.TextChanged += (s, ev) => MettreAJourBoutons();
+            textBox2.TextChanged += (s, ev) => MettreAJourBoutons();
+
+            comboBox4.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
+            comboBox5.SelectedIndexChanged += (s, ev) => MettreAJourBoutons();
+
+            // Recherche auto sur sélection planète / état
+            comboBox1.SelectedIndexChanged += (s, ev) => { MettreAJourBoutons(); AppliquerFiltres(); };
+            comboBox2.SelectedIndexChanged += (s, ev) => { MettreAJourBoutons(); AppliquerFiltres(); };
+
+            // Bouton chercher — grisé après clic
+            button_chercher.Click += (s, ev) =>
+            {
+                AppliquerFiltres();
+                button_chercher.Enabled = false;
+            };
+
+            // Bouton reset
+            button_reset.Click += (s, ev) => ResetFiltres();
+
+            // État initial
+            MettreAJourBoutons();
+        }
+
+        private void ResetFiltres()
+        {
+            textBox1.Text = "";
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox4.SelectedIndex = 0;
+            comboBox5.SelectedIndex = 0;
+            textBox3.Text = "";
+            textBox2.Text = "";
+            panel1.Controls.Clear();
+            ChargerMissions();
+            MettreAJourBoutons();
+        }
+
+        private void AppliquerFiltres()
+        {
+            panel1.Controls.Clear();
+
+            if (!MesDatas.DsGlobal.Tables.Contains("mission") ||
+                !MesDatas.DsGlobal.Tables.Contains("membre")) return;
+
+            string rechercheChef = textBox1.Text.Trim().ToLower();
+            string planeteSelectionnee = comboBox1.SelectedIndex > 0 ? comboBox1.SelectedItem.ToString() : "";
+            string etatSelectionne = comboBox2.SelectedIndex > 0 ? comboBox2.SelectedItem.ToString() : "";
+            string opBudget = comboBox4.SelectedItem?.ToString() ?? "";
+            string opDuree = comboBox5.SelectedItem?.ToString() ?? "";
+            int.TryParse(textBox3.Text.Trim(), out int valBudget);
+            int.TryParse(textBox2.Text.Trim(), out int valDuree);
+            bool filtrerBudget = !string.IsNullOrEmpty(opBudget) && !string.IsNullOrEmpty(textBox3.Text.Trim());
+            bool filtrerDuree = !string.IsNullOrEmpty(opDuree) && !string.IsNullOrEmpty(textBox2.Text.Trim());
+
+            int marge = 20;
+            int espY = 15;
+            int ucHauteur = 215;
+            int ucLargeur = panel1.ClientSize.Width - marge * 2 - SystemInformation.VerticalScrollBarWidth;
+            int y = marge;
+            int count = 0;
+
+            foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
+            {
+                try
+                {
+                    // ── Filtre planète ──
+                    if (!string.IsNullOrEmpty(planeteSelectionnee) &&
+                        row[0].ToString() != planeteSelectionnee) continue;
+
+                    string matricule = row[5].ToString();
+                    DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select("matricule = '" + matricule + "'");
+                    if (dr.Length == 0) continue;
+
+                    DataRow d = dr[0];
+                    string nomChef = d[1].ToString() + " " + d[2].ToString();
+
+                    // ── Filtre texte libre chef ──
+                    if (!string.IsNullOrEmpty(rechercheChef) &&
+                        !nomChef.ToLower().Contains(rechercheChef)) continue;
+
+                    // ── Filtre état ──
+                    if (!string.IsNullOrEmpty(etatSelectionne))
+                    {
+                        string etat = CalculerEtat(row[3].ToString(), row[4].ToString());
+                        if (etat != etatSelectionne) continue;
+                    }
+
+                    // ── Filtre budget ──
+                    if (filtrerBudget && int.TryParse(row[8].ToString(), out int budget))
+                    {
+                        if (!CompareValeur(budget, opBudget, valBudget)) continue;
+                    }
+
+                    // ── Filtre durée ──
+                    if (filtrerDuree &&
+                        DateTime.TryParse(row[3].ToString(), out DateTime dep) &&
+                        DateTime.TryParse(row[4].ToString(), out DateTime fin))
+                    {
+                        int nbJours = (int)(fin - dep).TotalDays;
+                        if (!CompareValeur(nbJours, opDuree, valDuree)) continue;
+                    }
+
+                    // ── Mission retenue → afficher ──
+                    UserControl1 uc = new UserControl1(
+                        (row[0].ToString() + row[1].ToString()),
+                        row[3].ToString(), row[4].ToString(),
+                        nomChef,
+                        "../../../../Images_App/Planètes/Logo - " + row[0] + ".png",
+                        row[8].ToString(),
+                        row[3].ToString(),
+                        row[4].ToString()
+                    );
+                    uc.setNomPlanete(row[0].ToString());
+                    uc.setNumeroMission(Convert.ToInt32(row[1]));
+                    uc.Size = new Size(ucLargeur, ucHauteur);
+                    uc.Location = new Point(marge, y);
+                    uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
+                    panel1.Controls.Add(uc);
+                    y += ucHauteur + espY;
+                    count++;
+                }
+                catch { }
+            }
+
+            label4.Text = count + " mission(s) trouvée(s)";
+        }
+
+        private string CalculerEtat(string dateDep, string dateRetour)
+        {
+            if (!DateTime.TryParse(dateDep, out DateTime dep) ||
+                !DateTime.TryParse(dateRetour, out DateTime fin))
+                return "Inconnu";
+
+            DateTime today = DateTime.Today;
+            if (today < dep) return "À venir";
+            if (today <= fin) return "En cours";
+            return "Terminée";
+        }
+
+        private bool CompareValeur(int valeur, string op, int reference)
+        {
+            switch (op)
+            {
+                case "<": return valeur < reference;
+                case "≤": return valeur <= reference;
+                case "=": return valeur == reference;
+                case "≥": return valeur >= reference;
+                case ">": return valeur > reference;
+                default: return true;
+            }
+        }
+
+        // ─────────────────────────────────────────────
+        //  CHARGEMENT INITIAL
+        // ─────────────────────────────────────────────
 
         private void LierImageBouton(PictureBox pb, Button btn, EventHandler clickHandler)
         {
@@ -74,58 +316,45 @@ namespace TdB_Missions
             pb.Cursor = Cursors.Hand;
             pb.BackColor = CouleurNormale;
 
-
-            int pbH = pb.Height; 
+            int pbH = pb.Height;
             int pbW = btn.Width - 20;
             pb.Size = new Size(pbW, pbH);
-
             pb.Location = new Point(
                 btn.Left + (btn.Width - pbW) / 2,
                 btn.Bottom - pbH - 8
             );
 
-            btn.MouseEnter += (s, ev) => pb.BackColor = CouleurSurvol;
-            btn.MouseLeave += (s, ev) =>
+            Timer leaveTimer = new Timer { Interval = 15 };
+            leaveTimer.Tick += (s, ev) =>
             {
-                if (!pb.ClientRectangle.Contains(pb.PointToClient(Cursor.Position)))
+                leaveTimer.Stop();
+                bool surBtn = btn.ClientRectangle.Contains(btn.PointToClient(Cursor.Position));
+                bool surPb = pb.ClientRectangle.Contains(pb.PointToClient(Cursor.Position));
+                if (!surBtn && !surPb)
+                {
                     pb.BackColor = CouleurNormale;
+                    btn.BackColor = CouleurNormale;
+                }
             };
 
-    
-            pb.MouseEnter += (s, ev) =>
-            {
-                pb.BackColor = CouleurSurvol;
-                btn.Invalidate();
-            };
-            pb.MouseLeave += (s, ev) =>
-            {
-                if (!btn.ClientRectangle.Contains(btn.PointToClient(Cursor.Position)))
-                    pb.BackColor = CouleurNormale;
-                btn.Invalidate();
-            };
+            btn.MouseEnter += (s, ev) => { leaveTimer.Stop(); pb.BackColor = CouleurSurvol; btn.BackColor = CouleurSurvol; };
+            btn.MouseLeave += (s, ev) => leaveTimer.Start();
+            pb.MouseEnter += (s, ev) => { leaveTimer.Stop(); pb.BackColor = CouleurSurvol; btn.BackColor = CouleurSurvol; };
+            pb.MouseLeave += (s, ev) => leaveTimer.Start();
 
             pb.Click += clickHandler;
         }
 
         private void InitPictureBox()
         {
-     
             LierImageBouton(pictureBox1, btCreerMission, (s, ev) => btCreerMission_Click(s, ev));
-
-           
             LierImageBouton(pictureBox4, btInfoAlien, (s, ev) => button1_Click(s, ev));
-
-       
             LierImageBouton(pictureBox2, btInfoPlanete, (s, ev) => btInfoPlanete_Click(s, ev));
-
             LierImageBouton(pictureBox5, button1, (s, ev) => button1_Click_1(s, ev));
-
         }
 
         private void ChargerMissions()
         {
-            panel1.Location = new Point(312, 96);
-            panel1.Size = new Size(1200, 824);
             panel1.Visible = true;
             panel1.BringToFront();
             panel1.AutoScroll = true;
@@ -135,21 +364,18 @@ namespace TdB_Missions
                 MessageBox.Show("La table 'mission' est introuvable dans la base de données.", "Données manquantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             if (!MesDatas.DsGlobal.Tables.Contains("membre"))
             {
                 MessageBox.Show("La table 'membre' est introuvable dans la base de données.", "Données manquantes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int colonnes = 1;
-            int ucLargeur = 1060; 
+            int marge = 20;
+            int espY = 15;
             int ucHauteur = 215;
-            int espX = 25;
-            int espY = 20;
-            int debutX = 20;
-            int debutY = 15;
-            int col = 0, ligne = 0;
+            int ucLargeur = panel1.ClientSize.Width - marge * 2 - SystemInformation.VerticalScrollBarWidth;
+            int y = marge;
+            int count = 0;
 
             foreach (DataRow row in MesDatas.DsGlobal.Tables["mission"].Rows)
             {
@@ -157,7 +383,6 @@ namespace TdB_Missions
                 {
                     string filtre = "matricule = '" + row[5].ToString() + "'";
                     DataRow[] dr = MesDatas.DsGlobal.Tables["membre"].Select(filtre);
-
                     if (dr.Length == 0) continue;
 
                     DataRow d = dr[0];
@@ -166,25 +391,27 @@ namespace TdB_Missions
                         (row[0].ToString() + row[1].ToString()),
                         row[3].ToString(), row[4].ToString(),
                         d[1].ToString() + " " + d[2].ToString(),
-                        "../../../../Images_App/Planètes/Logo - " + row[0] + ".png"
+                        "../../../../Images_App/Planètes/Logo - " + row[0] + ".png",
+                        row[8].ToString(),
+                        row[3].ToString(),
+                        row[4].ToString()
                     );
                     uc.setNomPlanete(row[0].ToString());
                     uc.setNumeroMission(Convert.ToInt32(row[1]));
-                    uc.Location = new Point(
-                        debutX + col * (ucLargeur + espX),
-                        debutY + ligne * (ucHauteur + espY)
-                    );
+                    uc.Size = new Size(ucLargeur, ucHauteur);
+                    uc.Location = new Point(marge, y);
                     uc.OuvrirFormulaire += UserControl1_OuvrirFormulaire;
                     panel1.Controls.Add(uc);
-
-                    col++;
-                    if (col >= colonnes) { col = 0; ligne++; }
+                    y += ucHauteur + espY;
+                    count++;
                 }
                 catch (Exception err)
                 {
                     MessageBox.Show("Erreur lors du chargement d'une mission :\n" + err.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
+            label4.Text = count + " mission(s) trouvée(s)";
         }
 
         private void UserControl1_OuvrirFormulaire(object sender, EventArgs e)
@@ -223,17 +450,13 @@ namespace TdB_Missions
                     da.Fill(MesDatas.DsGlobal, nomTable);
                 }
             }
-            catch (SQLiteException err)
-            {
-                MessageBox.Show(err.Message);
-            }
+            catch (SQLiteException err) { MessageBox.Show(err.Message); }
 
             panel1.Controls.Clear();
             ChargerMissions();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e) { }
-
         private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         private void button1_Click(object sender, EventArgs e)
