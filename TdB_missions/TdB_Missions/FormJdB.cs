@@ -181,6 +181,8 @@ namespace _3_Visualisation_et_MAJ_missions
         private void FormJdB_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
+            this.BackgroundImage = System.Drawing.Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
+
         }
 
         private void lblEvenement_Click(object sender, EventArgs e)
