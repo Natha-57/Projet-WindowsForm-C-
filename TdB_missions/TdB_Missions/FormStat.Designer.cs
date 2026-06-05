@@ -166,6 +166,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "FormStat";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormStat";
             this.Load += new System.EventHandler(this.FormStat_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

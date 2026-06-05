@@ -166,7 +166,7 @@
             // 
             // dgvDepenses
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SkyBlue;
             this.dgvDepenses.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDepenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDepenses.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -272,6 +272,7 @@
             this.MaximumSize = new System.Drawing.Size(1000, 800);
             this.MinimumSize = new System.Drawing.Size(1000, 800);
             this.Name = "FormJdB";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Journal de Board";
             this.Load += new System.EventHandler(this.FormJdB_Load);
             this.grpEvenement.ResumeLayout(false);

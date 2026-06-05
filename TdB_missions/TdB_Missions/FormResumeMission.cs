@@ -171,9 +171,9 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void pbContact_Click(object sender, EventArgs e)
         {
-            grpNouvelEvenement.Hide();
-            grpNouvelleDepense.Hide();
-            grpNouveauContact.Show();
+            grpNouvelEvenement.Visible = false;
+            grpNouvelleDepense.Visible = false;
+            grpNouveauContact.Visible = true;
             var (dateDepart, _) = GetDatesMission();
             dtpNouveauContact.Value = dateDepart;
             ChargerMembresSimplifie();
@@ -182,19 +182,19 @@ namespace _3_Visualisation_et_MAJ_missions
 
         private void pbDepense_Click(object sender, EventArgs e)
         {
-            grpNouvelEvenement.Hide();
-            grpNouveauContact.Hide();
+            grpNouvelEvenement.Visible = false;
+            grpNouveauContact.Visible = false;
             var (dateDepart, _) = GetDatesMission();
             dtpNouvelleDepense.Value = dateDepart;
-            grpNouvelleDepense.Show();
+            grpNouvelleDepense.Visible = true;
             ChargerTypesDepenses();
         }
 
         private void pbEvenement_Click(object sender, EventArgs e)
         {
-            grpNouveauContact.Hide();
-            grpNouvelleDepense.Hide();
-            grpNouvelEvenement.Show();
+            grpNouveauContact.Visible =false;
+            grpNouvelleDepense.Visible = false;
+            grpNouvelEvenement.Visible = true;
             var (dateDepart, _) = GetDatesMission();
             dtpNouvelEvenement.Value = dateDepart;
         }
@@ -487,6 +487,16 @@ namespace _3_Visualisation_et_MAJ_missions
                 dtpNouvelleDepense.Value = dateDepart;
             else if (dtpNouvelleDepense.Value > dateRetour)
                 dtpNouvelleDepense.Value = dateRetour;
+        }
+
+        private void txtFeuilleRoute_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grpNouvelleDepense_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
