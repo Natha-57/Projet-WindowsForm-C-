@@ -59,8 +59,7 @@ namespace Volet_4___Races_Aliens
             img.SizeMode = PictureBoxSizeMode.Zoom;
             img.BackColor = Color.WhiteSmoke;
 
-            string cheminImg = Path.Combine(_cheminImages,
-                                            "Logo - " + nomPlanete + ".png");
+            string cheminImg = "../../../../Images_App/Planètes/Logo - " + nomPlanete + ".png";
             if (File.Exists(cheminImg))
                 img.Image = Image.FromFile(cheminImg);
             this.Controls.Add(img);
@@ -186,7 +185,7 @@ namespace Volet_4___Races_Aliens
 
         private void FormDetails_Load(object sender, EventArgs e)
         {
-            this.Icon = new Icon("Logo Star Gate.ico");
+            this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
         }
     }
 }

@@ -57,7 +57,7 @@ namespace _3_Visualisation_et_MAJ_missions
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
-            this.BackgroundImage = System.Drawing.Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
+            this.panel1.BackgroundImage = Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
 
         }
 
