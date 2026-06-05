@@ -106,17 +106,19 @@ namespace TdB_Missions
 
             // A des missions → cherche les coéquipiers
             string sql = @"
-        SELECT 
-            m.matricule, 
-            m.nom, 
-            m.prenom,
-            c.nomPlanete || c.numeroMission AS mission
-        FROM Membre m
-        JOIN Composer c ON m.matricule = c.matriculeMembre
-        WHERE m.matricule != '" + matricule + @"'
-        AND c.nomPlanete IN (SELECT nomPlanete FROM Composer WHERE matriculeMembre = '" + matricule + @"')
-        AND c.numeroMission IN (SELECT numeroMission FROM Composer WHERE matriculeMembre = '" + matricule + @"')
-        ORDER BY m.nom, c.nomPlanete, c.numeroMission";
+    SELECT 
+        m.matricule, 
+        m.nom, 
+        m.prenom,
+        COALESCE(mil.grade, 'Civil') AS grade,
+        c.nomPlanete || c.numeroMission AS mission
+    FROM Membre m
+    JOIN Composer c ON m.matricule = c.matriculeMembre
+    LEFT JOIN Militaire mil ON m.matricule = mil.matriculeMembre
+    WHERE m.matricule != '" + matricule + @"'
+    AND c.nomPlanete IN (SELECT nomPlanete FROM Composer WHERE matriculeMembre = '" + matricule + @"')
+    AND c.numeroMission IN (SELECT numeroMission FROM Composer WHERE matriculeMembre = '" + matricule + @"')
+    ORDER BY m.nom, c.nomPlanete, c.numeroMission";
 
             dt1.Clear();
             new SQLiteDataAdapter(sql, Connexion.Connec).Fill(dt1);
@@ -135,10 +137,12 @@ namespace TdB_Missions
             // Renomme les colonnes
             if (this.dataGridView1.Columns.Contains("matricule"))
                 this.dataGridView1.Columns["matricule"].HeaderText = "Matricule";
-            if (this.dataGridView1.Columns.Contains("nom"))
-                this.dataGridView1.Columns["nom"].HeaderText = "Nom";
             if (this.dataGridView1.Columns.Contains("prenom"))
                 this.dataGridView1.Columns["prenom"].HeaderText = "Prénom";
+            if (this.dataGridView1.Columns.Contains("nom"))
+                this.dataGridView1.Columns["nom"].HeaderText = "Nom";
+            if (this.dataGridView1.Columns.Contains("specialite"))
+                this.dataGridView1.Columns["grade"].HeaderText = "Grade";
             if (this.dataGridView1.Columns.Contains("mission"))
                 this.dataGridView1.Columns["mission"].HeaderText = "Mission commune";
 

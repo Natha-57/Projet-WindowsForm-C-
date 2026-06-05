@@ -36,14 +36,17 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.labelMessage = new System.Windows.Forms.Label();
             this.button_retour = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(306, 66);
+            this.comboBox1.Location = new System.Drawing.Point(373, 85);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(310, 32);
             this.comboBox1.TabIndex = 0;
@@ -53,7 +56,8 @@
             // 
             this.labelTitre.AutoSize = true;
             this.labelTitre.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitre.Location = new System.Drawing.Point(98, 9);
+            this.labelTitre.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelTitre.Location = new System.Drawing.Point(195, 9);
             this.labelTitre.Name = "labelTitre";
             this.labelTitre.Size = new System.Drawing.Size(603, 35);
             this.labelTitre.TabIndex = 1;
@@ -63,7 +67,8 @@
             // 
             this.labelPrenom.AutoSize = true;
             this.labelPrenom.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPrenom.Location = new System.Drawing.Point(209, 69);
+            this.labelPrenom.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelPrenom.Location = new System.Drawing.Point(276, 88);
             this.labelPrenom.Name = "labelPrenom";
             this.labelPrenom.Size = new System.Drawing.Size(86, 24);
             this.labelPrenom.TabIndex = 2;
@@ -73,8 +78,9 @@
             // 
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.CadetBlue;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 170);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 181);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(962, 549);
             this.dataGridView1.TabIndex = 3;
@@ -84,7 +90,8 @@
             // 
             this.labelNom.AutoSize = true;
             this.labelNom.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNom.Location = new System.Drawing.Point(209, 116);
+            this.labelNom.ForeColor = System.Drawing.SystemColors.Control;
+            this.labelNom.Location = new System.Drawing.Point(276, 135);
             this.labelNom.Name = "labelNom";
             this.labelNom.Size = new System.Drawing.Size(61, 24);
             this.labelNom.TabIndex = 5;
@@ -94,7 +101,7 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(306, 113);
+            this.comboBox2.Location = new System.Drawing.Point(373, 132);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(310, 32);
             this.comboBox2.TabIndex = 4;
@@ -102,7 +109,9 @@
             // labelMessage
             // 
             this.labelMessage.AutoSize = true;
+            this.labelMessage.BackColor = System.Drawing.Color.MidnightBlue;
             this.labelMessage.Font = new System.Drawing.Font("Trebuchet MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMessage.ForeColor = System.Drawing.SystemColors.Control;
             this.labelMessage.Location = new System.Drawing.Point(451, 431);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(25, 35);
@@ -114,7 +123,7 @@
             // 
             this.button_retour.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_retour.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_retour.Location = new System.Drawing.Point(12, 725);
+            this.button_retour.Location = new System.Drawing.Point(12, 736);
             this.button_retour.Name = "button_retour";
             this.button_retour.Size = new System.Drawing.Size(283, 52);
             this.button_retour.TabIndex = 11;
@@ -122,23 +131,46 @@
             this.button_retour.UseVisualStyleBackColor = true;
             this.button_retour.Click += new System.EventHandler(this.button_retour_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.groupBox1.Controls.Add(this.labelTitre);
+            this.groupBox1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(962, 59);
+            this.groupBox1.TabIndex = 12;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(12, 181);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(962, 10);
+            this.panel1.TabIndex = 13;
+            // 
             // FormStat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(986, 789);
+            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.ClientSize = new System.Drawing.Size(986, 800);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button_retour);
             this.Controls.Add(this.labelMessage);
             this.Controls.Add(this.labelNom);
             this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.labelPrenom);
-            this.Controls.Add(this.labelTitre);
             this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.dataGridView1);
             this.Name = "FormStat";
             this.Text = "FormStat";
             this.Load += new System.EventHandler(this.FormStat_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +186,7 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label labelMessage;
         private System.Windows.Forms.Button button_retour;
+        private System.Windows.Forms.Panel groupBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
