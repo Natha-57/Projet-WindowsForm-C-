@@ -101,13 +101,13 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 
 ### Nathan WEISS
 
-#### **Volets :**
+#### **Volets**
 
     4)      Affichage des races aliens
     5)      Affichage des planètes
     7.1)    Afficher les cooéquipers d'un membre
 
-#### **Création des images de l'application (sur Canva) :**
+#### **Création des images de l'application (sur Canva)**
 
     [✓] Logo 'Stargate' + Icône d'application + Typo
     [✓] Logo des boutons du tableau de bord (4)
