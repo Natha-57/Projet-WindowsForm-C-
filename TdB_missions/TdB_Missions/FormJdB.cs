@@ -181,6 +181,8 @@ namespace _3_Visualisation_et_MAJ_missions
         private void FormJdB_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon("../../../../Images_App/Logo Star Gate.ico");
+            this.BackgroundImage = System.Drawing.Image.FromFile("../../../../Images_App/Fond étoilé - Planètes.png");
+
         }
 
         private void lblEvenement_Click(object sender, EventArgs e)
@@ -252,7 +254,7 @@ namespace _3_Visualisation_et_MAJ_missions
             iTextSharp.text.Font fTableHdr = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 9, NOIR);
 
             Document doc = new Document(PageSize.A4, 30, 30, 40, 40);
-            string filePath = "RapportMission.pdf";
+            string filePath = $"Rapport_{this.planete}_{this.num}.pdf";
 
             try
             {

@@ -56,6 +56,7 @@
             // 
             // grpEvenement
             // 
+            this.grpEvenement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
             this.grpEvenement.Controls.Add(this.lblCompteurPages);
             this.grpEvenement.Controls.Add(this.lblEvenement);
             this.grpEvenement.Controls.Add(this.lblDateEvenement);
@@ -76,6 +77,7 @@
             // lblCompteurPages
             // 
             this.lblCompteurPages.AutoSize = true;
+            this.lblCompteurPages.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblCompteurPages.Location = new System.Drawing.Point(107, 200);
             this.lblCompteurPages.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCompteurPages.Name = "lblCompteurPages";
@@ -85,6 +87,7 @@
             // 
             // lblEvenement
             // 
+            this.lblEvenement.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblEvenement.Location = new System.Drawing.Point(8, 97);
             this.lblEvenement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEvenement.Name = "lblEvenement";
@@ -96,6 +99,7 @@
             // lblDateEvenement
             // 
             this.lblDateEvenement.AutoSize = true;
+            this.lblDateEvenement.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblDateEvenement.Location = new System.Drawing.Point(8, 21);
             this.lblDateEvenement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDateEvenement.Name = "lblDateEvenement";
@@ -105,6 +109,7 @@
             // 
             // btSuivant
             // 
+            this.btSuivant.BackColor = System.Drawing.Color.Khaki;
             this.btSuivant.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btSuivant.Location = new System.Drawing.Point(190, 195);
             this.btSuivant.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -112,11 +117,12 @@
             this.btSuivant.Size = new System.Drawing.Size(40, 35);
             this.btSuivant.TabIndex = 3;
             this.btSuivant.Text = ">";
-            this.btSuivant.UseVisualStyleBackColor = true;
+            this.btSuivant.UseVisualStyleBackColor = false;
             this.btSuivant.Click += new System.EventHandler(this.btSuivant_Click);
             // 
             // btAllerToutAlaFin
             // 
+            this.btAllerToutAlaFin.BackColor = System.Drawing.Color.Khaki;
             this.btAllerToutAlaFin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btAllerToutAlaFin.Location = new System.Drawing.Point(233, 195);
             this.btAllerToutAlaFin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -124,11 +130,12 @@
             this.btAllerToutAlaFin.Size = new System.Drawing.Size(40, 35);
             this.btAllerToutAlaFin.TabIndex = 2;
             this.btAllerToutAlaFin.Text = ">>";
-            this.btAllerToutAlaFin.UseVisualStyleBackColor = true;
+            this.btAllerToutAlaFin.UseVisualStyleBackColor = false;
             this.btAllerToutAlaFin.Click += new System.EventHandler(this.btAllerToutAlaFin_Click);
             // 
             // btRevenir1foisEnArriere
             // 
+            this.btRevenir1foisEnArriere.BackColor = System.Drawing.Color.Khaki;
             this.btRevenir1foisEnArriere.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btRevenir1foisEnArriere.Location = new System.Drawing.Point(48, 195);
             this.btRevenir1foisEnArriere.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -136,11 +143,12 @@
             this.btRevenir1foisEnArriere.Size = new System.Drawing.Size(40, 35);
             this.btRevenir1foisEnArriere.TabIndex = 1;
             this.btRevenir1foisEnArriere.Text = "<";
-            this.btRevenir1foisEnArriere.UseVisualStyleBackColor = true;
+            this.btRevenir1foisEnArriere.UseVisualStyleBackColor = false;
             this.btRevenir1foisEnArriere.Click += new System.EventHandler(this.btRevenir1foisEnArriere_Click);
             // 
             // btToutDebut
             // 
+            this.btToutDebut.BackColor = System.Drawing.Color.Khaki;
             this.btToutDebut.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btToutDebut.Location = new System.Drawing.Point(5, 195);
             this.btToutDebut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -148,11 +156,12 @@
             this.btToutDebut.Size = new System.Drawing.Size(40, 35);
             this.btToutDebut.TabIndex = 0;
             this.btToutDebut.Text = "<<";
-            this.btToutDebut.UseVisualStyleBackColor = true;
+            this.btToutDebut.UseVisualStyleBackColor = false;
             this.btToutDebut.Click += new System.EventHandler(this.btToutDebut_Click);
             // 
             // grpDepenses
             // 
+            this.grpDepenses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
             this.grpDepenses.Controls.Add(this.dgvDepenses);
             this.grpDepenses.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDepenses.Location = new System.Drawing.Point(31, 281);
@@ -183,6 +192,7 @@
             // 
             // grpContact
             // 
+            this.grpContact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(90)))), ((int)(((byte)(200)))));
             this.grpContact.Controls.Add(this.dgvContacts);
             this.grpContact.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpContact.Location = new System.Drawing.Point(343, 18);
@@ -212,6 +222,7 @@
             // 
             // btEditerUnPdf
             // 
+            this.btEditerUnPdf.BackColor = System.Drawing.Color.Khaki;
             this.btEditerUnPdf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btEditerUnPdf.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btEditerUnPdf.Location = new System.Drawing.Point(160, 709);
@@ -220,12 +231,13 @@
             this.btEditerUnPdf.Size = new System.Drawing.Size(650, 41);
             this.btEditerUnPdf.TabIndex = 3;
             this.btEditerUnPdf.Text = "Editer un PDF";
-            this.btEditerUnPdf.UseVisualStyleBackColor = true;
+            this.btEditerUnPdf.UseVisualStyleBackColor = false;
             this.btEditerUnPdf.Click += new System.EventHandler(this.btEditerUnPdf_Click);
             // 
             // lblSommesVersées
             // 
             this.lblSommesVersées.AutoSize = true;
+            this.lblSommesVersées.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblSommesVersées.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSommesVersées.Location = new System.Drawing.Point(340, 266);
             this.lblSommesVersées.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -237,6 +249,7 @@
             // lblDepenses
             // 
             this.lblDepenses.AutoSize = true;
+            this.lblDepenses.BackColor = System.Drawing.Color.LightSteelBlue;
             this.lblDepenses.Font = new System.Drawing.Font("Trebuchet MS", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDepenses.Location = new System.Drawing.Point(28, 675);
             this.lblDepenses.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -260,7 +273,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 761);
+            this.ClientSize = new System.Drawing.Size(979, 746);
             this.Controls.Add(this.pbHome);
             this.Controls.Add(this.lblDepenses);
             this.Controls.Add(this.lblSommesVersées);
@@ -269,8 +282,8 @@
             this.Controls.Add(this.grpDepenses);
             this.Controls.Add(this.grpEvenement);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MaximumSize = new System.Drawing.Size(1000, 800);
-            this.MinimumSize = new System.Drawing.Size(1000, 800);
+            this.MaximumSize = new System.Drawing.Size(995, 785);
+            this.MinimumSize = new System.Drawing.Size(995, 785);
             this.Name = "FormJdB";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Journal de Board";
