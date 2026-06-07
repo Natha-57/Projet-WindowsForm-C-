@@ -89,11 +89,28 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
 
 ### Nathan WILHELM
 
-    - Volets :
+#### **Volets**
 
-        2) Création d’une nouvelle mission puis affectation des membres et objectifs
-        3) Récapitulatif complet des informations sur une mission
-        4) Visualisation en mode 1 à 1 des événements survenus lors d’une mission donnée
+    2) Création d’une nouvelle mission puis affectation des membres et objectifs
+    3) Récapitulatif complet des informations sur une mission
+    4) Visualisation en mode 1 à 1 des événements survenus lors d’une mission donnée
+    
+### **Eléments diverses**
+
+    [✓] Création du PDF
+    [✓] Ajout d'évènements / dépenses / contacts
+
+### **Optimisation des volets**
+
+    [✓] Ergonomie de la page Création de mission avec un tabControl
+    [✓] Ajustement de certaines tailles de form 
+    [✓] Application de notre charte graphique à diverses volets
+
+### **Design** 
+
+    [✓] Design du volet Creatio de mission
+    [✓] Design  du volet Résumé Mission avec Oscar Magoules
+    [✓] Design du Journal de Bord
 
 ### Oscar MAGOULES
 
@@ -122,12 +139,12 @@ Il est important de mettre à jour son dépôt à chaque fois que l'on souhaite 
     [✓] Réduction des "traits bugés" lorsque l'on fait défilé une liste d'éléments (missions + planètes + aliens)
     [✓] Optimisation de petites parties de code (notament pour régler le problème des "traits bugés")
 
-#### **Desing**
+#### **Design**
 
-    [✓] Desing complet du Volet 4 : Affichage des races aliens 
-    [✓] Desing complet du Volet 5 : Affichage des planètes
-    [✓] Desing complet du tableau de bord
-    [✓] Desing complet d'une partie du Volet 7 (Affichage des cooéquipiers)  
+    [✓] Design complet du Volet 4 : Affichage des races aliens 
+    [✓] Design complet du Volet 5 : Affichage des planètes
+    [✓] Design complet du tableau de bord
+    [✓] Design complet d'une partie du Volet 7 (Affichage des cooéquipiers)  
 
 #### **Ergonomie**
 
