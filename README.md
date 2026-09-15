@@ -1,5 +1,11 @@
 # Application Stargate
 
+
+## AVANT D'OUVRIR LES DOSSIERS
+
+#### Plusieurs dossiers WinForms ont été créés pour rassembler tous les volets nécessaires puis chacuns de ces dossiers / volets ont été impoirtés dans un seul et même dossier : TdB_missions
+Ainsi, il n'y a besoin que d'ouvrir ce dossier dans Visual Studio pour parcourir l'ensemble de l'application.
+
 ## Répartition du travail
 
 ### Nathan WILHELM
